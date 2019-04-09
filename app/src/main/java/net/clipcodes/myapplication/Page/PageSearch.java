@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Notification;
+package net.clipcodes.myapplication.Page;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,15 +9,14 @@ import android.view.ViewGroup;
 
 import net.clipcodes.myapplication.R;
 
-
-public class Buyer extends Fragment {
+public class PageSearch extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View buyer = inflater.inflate(R.layout.tab_buyer, container, false);
+        View fragment_two = inflater.inflate(R.layout.fragment_search, container, false);
 
-        return buyer;
+        return fragment_two;
     }
-}
 
+}

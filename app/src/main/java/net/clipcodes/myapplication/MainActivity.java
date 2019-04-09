@@ -7,11 +7,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.widget.TextView;
 
-import net.clipcodes.myapplication.Page.PageOne;
-import net.clipcodes.myapplication.Page.PageTree;
-import net.clipcodes.myapplication.Page.PageTwo;
+import net.clipcodes.myapplication.Page.PageCategory;
+import net.clipcodes.myapplication.Page.PageHome;
+import net.clipcodes.myapplication.Page.PageSearch;
 import net.clipcodes.myapplication.PageAdapter.FragmentAdapter;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setupFm(FragmentManager fragmentManager, ViewPager viewPager){
         FragmentAdapter Adapter = new FragmentAdapter(fragmentManager);
-        Adapter.add(new PageTree(), "Page Three");
-        Adapter.add(new PageOne(), "Page One");
-        Adapter.add(new PageTwo(), "Page Two");
+        Adapter.add(new PageHome(), "Page Home");
+        Adapter.add(new PageCategory(), "Page Category");
+        Adapter.add(new PageSearch(), "Page Search");
 
 
         viewPager.setAdapter(Adapter);
@@ -51,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
+                    viewPager.setCurrentItem(0);
+                    return true;
+                case R.id.navigation_category:
                     viewPager.setCurrentItem(1);
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_search:
                     viewPager.setCurrentItem(2);
-                    return true;
-                case R.id.navigation_notifications:
-                    viewPager.setCurrentItem(0);
                     return true;
             }
             return false;
@@ -75,14 +74,14 @@ public class MainActivity extends AppCompatActivity {
         public void onPageSelected(int position) {
 
             switch (position) {
-                case 1:
+                case 0:
                     navigation.setSelectedItemId(R.id.navigation_home);
                     break;
-                case 2:
-                    navigation.setSelectedItemId(R.id.navigation_dashboard);
+                case 1:
+                    navigation.setSelectedItemId(R.id.navigation_category);
                     break;
-                case 0:
-                    navigation.setSelectedItemId(R.id.navigation_notifications);
+                case 2:
+                    navigation.setSelectedItemId(R.id.navigation_search);
                     break;
             }
         }

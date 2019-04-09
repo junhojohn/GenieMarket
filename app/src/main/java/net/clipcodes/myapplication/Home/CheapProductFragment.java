@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Page;
+package net.clipcodes.myapplication.Home;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,13 +9,15 @@ import android.view.ViewGroup;
 
 import net.clipcodes.myapplication.R;
 
-public class PageOne extends Fragment {
+
+public class CheapProductFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View fragment_one = inflater.inflate(R.layout.fragment_one, container, false);
+        View buyer = inflater.inflate(R.layout.tab_cheap_product, container, false);
 
-        return fragment_one;
+        return buyer;
     }
 }
+
