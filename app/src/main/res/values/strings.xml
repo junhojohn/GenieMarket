@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GenieMarket</string>
+    <string name="app_name">지니마켓</string>
     <string name="title_home">카테고리</string>
     <string name="title_dashboard">검색</string>
     <string name="title_notifications">홈</string>
