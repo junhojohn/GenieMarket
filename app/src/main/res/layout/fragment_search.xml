@@ -8,7 +8,7 @@
         android:layout_gravity="center"
         android:textSize="20dp"
         android:textStyle="bold"
-        android:text="DASBOARD"
+        android:text="@string/title_search"
         android:textColor="@color/gradStop"
         android:layout_height="wrap_content" />
 </FrameLayout>
