@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 import net.clipcodes.myapplication.Page.PageCategory;
 import net.clipcodes.myapplication.Page.PageHome;
+import net.clipcodes.myapplication.Page.PageMyGenie;
 import net.clipcodes.myapplication.Page.PageSearch;
 import net.clipcodes.myapplication.PageAdapter.FragmentAdapter;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
         viewPager = findViewById(R.id.viewpager);
         setupFm(getSupportFragmentManager(), viewPager);
         viewPager.setCurrentItem(0);
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         Adapter.add(new PageHome(), "Page Home");
         Adapter.add(new PageCategory(), "Page Category");
         Adapter.add(new PageSearch(), "Page Search");
-
+        Adapter.add(new PageMyGenie(), "Page MyGenie");
 
         viewPager.setAdapter(Adapter);
     }
@@ -57,6 +59,9 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 case R.id.navigation_search:
                     viewPager.setCurrentItem(2);
+                    return true;
+                case R.id.navigation_mygenie:
+                    viewPager.setCurrentItem(3);
                     return true;
             }
             return false;
@@ -82,6 +87,9 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     navigation.setSelectedItemId(R.id.navigation_search);
+                    break;
+                case 3:
+                    navigation.setSelectedItemId(R.id.navigation_mygenie);
                     break;
             }
         }

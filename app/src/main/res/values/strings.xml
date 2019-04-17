@@ -3,6 +3,8 @@
     <string name="title_category">카테고리</string>
     <string name="title_search">검색</string>
     <string name="title_home">홈</string>
+    <string name="title_mygenie">마이지니</string>
     <string name="title_best_product">베스트상품</string>
     <string name="title_cheap_product">알뜰상품</string>
+
 </resources>

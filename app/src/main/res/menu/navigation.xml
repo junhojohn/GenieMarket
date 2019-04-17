@@ -15,4 +15,9 @@
         android:icon="@drawable/ic_search_black_24dp"
         android:title="@string/title_search" />
 
+    <item
+        android:id="@+id/navigation_mygenie"
+        android:icon="@drawable/ic_mygenie_black_24dp"
+        android:title="@string/title_mygenie" />
+
 </menu>
