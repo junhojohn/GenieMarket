@@ -1,9 +1,11 @@
 package net.clipcodes.myapplication.Page;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -13,11 +15,19 @@ import net.clipcodes.myapplication.Home.CheapProductFragment;
 import net.clipcodes.myapplication.Home.BestProductFragment;
 import net.clipcodes.myapplication.R;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class PageHome extends Fragment {
 
     FrameLayout bestFragment, cheapFragment;
     View bestProductView, cheapProductView;
     TextView textBest, textCheap;
+    int NUM_PAGES = 2;
+    int currentPage = 0;
+    boolean touched = false;
+    Handler handler = new Handler();
+    Runnable update;
 
     @Nullable
     @Override
@@ -34,7 +44,7 @@ public class PageHome extends Fragment {
         //LOAD PAGE FOR FIRST
         loadPage(new BestProductFragment());
         textBest.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
-
+//        startPagerAutoSwipe();
         return fragment_three;
     }
 
@@ -47,6 +57,21 @@ public class PageHome extends Fragment {
         textCheap = v.findViewById(R.id.text_cheap);
     }
 
+    View.OnTouchListener autoMove = new View.OnTouchListener(){
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch(event.getAction()){
+                case MotionEvent.ACTION_DOWN:
+                    touched = true;
+                    return true;
+
+                case MotionEvent.ACTION_UP:
+                    touched = false;
+                    return true;
+            }
+            return false;
+        }
+    };
     //ONCLICK LISTENER
     public View.OnClickListener clik = new View.OnClickListener() {
         @Override
@@ -93,5 +118,45 @@ public class PageHome extends Fragment {
             return true;
         }
         return false;
+    }
+
+    private void startPagerAutoSwipe() {
+        update = new Runnable() {
+            public void run() {
+                if(!touched){
+                    if (currentPage == 0) {
+                        loadPage(new BestProductFragment());
+
+                        //WHEN CLICK TEXT COLOR CHANGED
+                        textBest.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                        textCheap.setTextColor(getActivity().getResources().getColor(R.color.grey));
+
+                        //VIEW VISIBILITY WHEN CLICKED
+                        bestProductView.setVisibility(View.VISIBLE);
+                        cheapProductView.setVisibility(View.INVISIBLE);
+                        currentPage++;
+                    }else if(currentPage == 1){
+                        currentPage = 0;
+                        loadPage(new CheapProductFragment());
+
+                        //WHEN CLICK TEXT COLOR CHANGED
+                        textBest.setTextColor(getActivity().getResources().getColor(R.color.grey));
+                        textCheap.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+
+                        //VIEW VISIBILITY WHEN CLICKED
+                        bestProductView.setVisibility(View.INVISIBLE);
+                        cheapProductView.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, 5000, 5000);
+        swipeTimer.cancel();
     }
 }
