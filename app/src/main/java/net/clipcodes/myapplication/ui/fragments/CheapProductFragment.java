@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Home;
+package net.clipcodes.myapplication.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

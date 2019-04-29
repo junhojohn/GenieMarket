@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Page;
+package net.clipcodes.myapplication.ui.pages;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

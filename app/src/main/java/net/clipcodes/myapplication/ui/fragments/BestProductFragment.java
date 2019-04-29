@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Home;
+package net.clipcodes.myapplication.ui.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,8 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.clipcodes.myapplication.Model.FlowerData;
-import net.clipcodes.myapplication.PageAdapter.MyAdapter;
+import net.clipcodes.myapplication.models.FlowerData;
+import net.clipcodes.myapplication.ui.adapters.MyAdapter;
 import net.clipcodes.myapplication.R;
 
 import java.util.ArrayList;

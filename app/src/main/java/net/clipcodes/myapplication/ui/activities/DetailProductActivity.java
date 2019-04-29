@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication;
+package net.clipcodes.myapplication.ui.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class DetailActivity extends AppCompatActivity {
+import net.clipcodes.myapplication.R;
+
+public class DetailProductActivity extends AppCompatActivity {
 
     ImageView mFlower;
     TextView mDescription;

@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Model;
+package net.clipcodes.myapplication.models;
 
 import java.io.Serializable;
 

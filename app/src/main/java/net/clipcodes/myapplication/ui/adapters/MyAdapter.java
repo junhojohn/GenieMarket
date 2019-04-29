@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.PageAdapter;
+package net.clipcodes.myapplication.ui.adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.clipcodes.myapplication.DetailActivity;
-import net.clipcodes.myapplication.Model.FlowerData;
+import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
+import net.clipcodes.myapplication.models.FlowerData;
 import net.clipcodes.myapplication.R;
 
 import java.util.List;
@@ -39,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mIntent = new Intent(mContext, DetailActivity.class);
+                Intent mIntent = new Intent(mContext, DetailProductActivity.class);
                 mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getFlowerName());
                 mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getFlowerDescription());
                 mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getFlowerImage());

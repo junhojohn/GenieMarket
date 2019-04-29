@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication;
+package net.clipcodes.myapplication.ui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,7 +10,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class Splashscreen extends Activity {
+import net.clipcodes.myapplication.R;
+
+public class SplashscreenActivity extends Activity {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
@@ -47,15 +49,15 @@ public class Splashscreen extends Activity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(Splashscreen.this,
+                    Intent intent = new Intent(SplashscreenActivity.this,
                             MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
-                    Splashscreen.this.finish();
+                    SplashscreenActivity.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    Splashscreen.this.finish();
+                    SplashscreenActivity.this.finish();
                 }
 
             }

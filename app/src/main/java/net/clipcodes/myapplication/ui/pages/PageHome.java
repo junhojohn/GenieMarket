@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.Page;
+package net.clipcodes.myapplication.ui.pages;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import net.clipcodes.myapplication.Home.CheapProductFragment;
-import net.clipcodes.myapplication.Home.BestProductFragment;
+import net.clipcodes.myapplication.ui.fragments.CheapProductFragment;
+import net.clipcodes.myapplication.ui.fragments.BestProductFragment;
 import net.clipcodes.myapplication.R;
 
 import java.util.Timer;

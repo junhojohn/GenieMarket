@@ -1,6 +1,5 @@
-package net.clipcodes.myapplication.Page;
+package net.clipcodes.myapplication.ui.pages;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,9 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import net.clipcodes.myapplication.Model.DummyChildDataItem;
-import net.clipcodes.myapplication.Model.DummyParentDataItem;
-import net.clipcodes.myapplication.PageAdapter.RecyclerDataAdapter;
+import net.clipcodes.myapplication.models.DummyChildDataItem;
+import net.clipcodes.myapplication.models.DummyParentDataItem;
+import net.clipcodes.myapplication.ui.adapters.RecyclerDataAdapter;
 import net.clipcodes.myapplication.R;
 
 import java.util.ArrayList;

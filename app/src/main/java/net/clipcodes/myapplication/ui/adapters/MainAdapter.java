@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication.PageAdapter;
+package net.clipcodes.myapplication.ui.adapters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -7,11 +7,11 @@ import android.support.v4.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentAdapter extends FragmentPagerAdapter {
+public class MainAdapter extends FragmentPagerAdapter {
     private List<Fragment> Fragment = new ArrayList<>();
     private List<String> NamePage = new ArrayList<>();
 
-    public FragmentAdapter(FragmentManager manager) {
+    public MainAdapter(FragmentManager manager) {
         super(manager);
     }
 

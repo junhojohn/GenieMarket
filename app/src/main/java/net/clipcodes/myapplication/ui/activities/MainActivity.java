@@ -1,4 +1,4 @@
-package net.clipcodes.myapplication;
+package net.clipcodes.myapplication.ui.activities;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,11 +8,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 
-import net.clipcodes.myapplication.Page.PageCategory;
-import net.clipcodes.myapplication.Page.PageHome;
-import net.clipcodes.myapplication.Page.PageMyGenie;
-import net.clipcodes.myapplication.Page.PageSearch;
-import net.clipcodes.myapplication.PageAdapter.FragmentAdapter;
+import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.ui.pages.PageCategory;
+import net.clipcodes.myapplication.ui.pages.PageHome;
+import net.clipcodes.myapplication.ui.pages.PageMyGenie;
+import net.clipcodes.myapplication.ui.pages.PageSearch;
+import net.clipcodes.myapplication.ui.adapters.MainAdapter;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static void setupFm(FragmentManager fragmentManager, ViewPager viewPager){
-        FragmentAdapter Adapter = new FragmentAdapter(fragmentManager);
+        MainAdapter Adapter = new MainAdapter(fragmentManager);
         Adapter.add(new PageHome(), "Page Home");
         Adapter.add(new PageCategory(), "Page Category");
         Adapter.add(new PageSearch(), "Page Search");
