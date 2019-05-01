@@ -10,7 +10,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         app:cardElevation="3dp"
-        android:layout_margin="4dp"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -28,9 +27,18 @@
                 android:id="@+id/tvTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
+                android:gravity="left"
                 android:text="TextView"
-                android:textSize="18sp"
+                android:textSize="20dp"
+                android:textStyle="italic|bold" />
+            <TextView
+                android:id="@+id/tvPriceTag"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="20,000원"
+                android:textSize="15dp"
+                android:textColor="@color/red"
                 android:textStyle="italic|bold" />
         </LinearLayout>
     </android.support.v7.widget.CardView>

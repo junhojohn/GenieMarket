@@ -43,7 +43,7 @@ public class PageHome extends Fragment {
 
         //LOAD PAGE FOR FIRST
         loadPage(new BestProductFragment());
-        textBest.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+        textBest.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
 //        startPagerAutoSwipe();
         return fragment_three;
     }
@@ -83,7 +83,7 @@ public class PageHome extends Fragment {
                     loadPage(new BestProductFragment());
 
                     //WHEN CLICK TEXT COLOR CHANGED
-                    textBest.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                    textBest.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
                     textCheap.setTextColor(getActivity().getResources().getColor(R.color.grey));
 
                     //VIEW VISIBILITY WHEN CLICKED
@@ -97,7 +97,7 @@ public class PageHome extends Fragment {
 
                     //WHEN CLICK TEXT COLOR CHANGED
                     textBest.setTextColor(getActivity().getResources().getColor(R.color.grey));
-                    textCheap.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                    textCheap.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
 
                     //VIEW VISIBILITY WHEN CLICKED
                     bestProductView.setVisibility(View.INVISIBLE);
@@ -128,7 +128,7 @@ public class PageHome extends Fragment {
                         loadPage(new BestProductFragment());
 
                         //WHEN CLICK TEXT COLOR CHANGED
-                        textBest.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                        textBest.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
                         textCheap.setTextColor(getActivity().getResources().getColor(R.color.grey));
 
                         //VIEW VISIBILITY WHEN CLICKED
@@ -141,7 +141,7 @@ public class PageHome extends Fragment {
 
                         //WHEN CLICK TEXT COLOR CHANGED
                         textBest.setTextColor(getActivity().getResources().getColor(R.color.grey));
-                        textCheap.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+                        textCheap.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
 
                         //VIEW VISIBILITY WHEN CLICKED
                         bestProductView.setVisibility(View.INVISIBLE);
