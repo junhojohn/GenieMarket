@@ -19,7 +19,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class PageHome extends Fragment {
-
+    BestProductFragment bestProductFragment = new BestProductFragment();
+    CheapProductFragment cheapProductFragment = new CheapProductFragment();
     FrameLayout bestFragment, cheapFragment;
     View bestProductView, cheapProductView;
     TextView textBest, textCheap;
@@ -42,7 +43,7 @@ public class PageHome extends Fragment {
         cheapFragment.setOnClickListener(clik);
 
         //LOAD PAGE FOR FIRST
-        loadPage(new BestProductFragment());
+        loadPage(bestProductFragment);
         textBest.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
 //        startPagerAutoSwipe();
         return fragment_three;
@@ -80,7 +81,7 @@ public class PageHome extends Fragment {
                 case R.id.best_fragment:
                     //ONSELLER CLICK
                     //LOAD SELLER FRAGMENT CLASS
-                    loadPage(new BestProductFragment());
+                    loadPage(bestProductFragment);
 
                     //WHEN CLICK TEXT COLOR CHANGED
                     textBest.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
@@ -93,7 +94,7 @@ public class PageHome extends Fragment {
                 case R.id.cheap_fragment:
                     //ONBUYER CLICK
                     //LOAD BUYER FRAGMENT CLASS
-                    loadPage(new CheapProductFragment());
+                    loadPage(cheapProductFragment);
 
                     //WHEN CLICK TEXT COLOR CHANGED
                     textBest.setTextColor(getActivity().getResources().getColor(R.color.grey));
@@ -125,7 +126,7 @@ public class PageHome extends Fragment {
             public void run() {
                 if(!touched){
                     if (currentPage == 0) {
-                        loadPage(new BestProductFragment());
+                        loadPage(bestProductFragment);
 
                         //WHEN CLICK TEXT COLOR CHANGED
                         textBest.setTextColor(getActivity().getResources().getColor(R.color.gradStop));
@@ -137,7 +138,7 @@ public class PageHome extends Fragment {
                         currentPage++;
                     }else if(currentPage == 1){
                         currentPage = 0;
-                        loadPage(new CheapProductFragment());
+                        loadPage(bestProductFragment);
 
                         //WHEN CLICK TEXT COLOR CHANGED
                         textBest.setTextColor(getActivity().getResources().getColor(R.color.grey));
