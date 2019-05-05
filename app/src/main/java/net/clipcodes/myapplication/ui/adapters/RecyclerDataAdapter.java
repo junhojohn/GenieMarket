@@ -27,7 +27,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     @Override
     public RecyclerDataAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_parent_child_listing, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_list, parent, false);
         return new MyViewHolder(itemView);
     }
 
@@ -36,22 +36,22 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
         DummyParentDataItem dummyParentDataItem = dummyParentDataItems.get(position);
         switch (position){
             case 0:
-                holder.img_category.setImageResource(R.drawable.ic_category_clothes);
+                holder.img_category.setImageResource(R.drawable.ic_category_clothes_48dp);
                 break;
             case 1:
-                holder.img_category.setImageResource(R.drawable.ic_category_shoes);
+                holder.img_category.setImageResource(R.drawable.ic_category_shoes_48dp);
                 break;
             case 2:
-                holder.img_category.setImageResource(R.drawable.ic_category_bags);
+                holder.img_category.setImageResource(R.drawable.ic_category_bags_48dp);
                 break;
             case 3:
-                holder.img_category.setImageResource(R.drawable.ic_category_accessories);
+                holder.img_category.setImageResource(R.drawable.ic_category_accessories_48dp);
                 break;
             case 4:
-                holder.img_category.setImageResource(R.drawable.ic_category_toys);
+                holder.img_category.setImageResource(R.drawable.ic_category_toys_48dp);
                 break;
             case 5:
-                holder.img_category.setImageResource(R.drawable.ic_category_electronics);
+                holder.img_category.setImageResource(R.drawable.ic_category_electronics_48dp);
                 break;
         }
         holder.textView_parentName.setText(dummyParentDataItem.getParentName());

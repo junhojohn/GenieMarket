@@ -28,7 +28,7 @@ public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
 
     @Override
     public FlowerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item_row, parent, false);
+        View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list, parent, false);
         return new FlowerViewHolder(mView);
     }
 

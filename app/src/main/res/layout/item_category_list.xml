@@ -27,7 +27,7 @@
                 android:layout_height="60dip"
                 android:layout_gravity="top"
                 android:contentDescription="@string/app_name"
-                android:src="@drawable/ic_category_clothes" />
+                android:src="@drawable/ic_category_clothes_48dp" />
 
             <TextView
                 android:id="@+id/tv_bigCategoryName"
@@ -44,7 +44,7 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/ic_category_arrow" />
+                android:src="@drawable/ic_category_arrow_48dp" />
 
         </LinearLayout>
 

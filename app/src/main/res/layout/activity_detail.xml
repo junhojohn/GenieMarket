@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
-                android:text="상품명:"
+                android:text="@string/title_product_name"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
@@ -47,7 +47,7 @@
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
                 android:background="@color/transparent"
-                android:src="@drawable/ic_share"/>
+                android:src="@drawable/ic_share_24dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
-                android:text="판매가:"
+                android:text="@string/title_product_price"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
-                android:text="판매단위:"
+                android:text="@string/title_product_selling_unit"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
@@ -108,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
-                android:text="판매자:"
+                android:text="@string/title_seller_name"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
@@ -126,14 +126,14 @@
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
                 android:background="@color/transparent"
-                android:src="@drawable/ic_contact_msg"/>
+                android:src="@drawable/ic_contact_msg_24dp"/>
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
                 android:background="@color/transparent"
-                android:src="@drawable/ic_contact_call"/>
+                android:src="@drawable/ic_contact_call_24dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -146,7 +146,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:padding="5dp"
-                android:text="상품상세설명:"
+                android:text="@string/title_product_desc"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
@@ -163,7 +163,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_purchase"
-            android:text="구매하기"
+            android:text="@string/title_purchase"
             android:textSize="30dp"
             android:textColor="@color/lightGrey"
             android:textAlignment="center" />

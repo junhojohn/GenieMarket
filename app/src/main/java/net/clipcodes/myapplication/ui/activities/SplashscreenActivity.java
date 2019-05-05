@@ -27,13 +27,13 @@ public class SplashscreenActivity extends Activity {
         StartAnimations();
     }
     private void StartAnimations() {
-        Animation anim = AnimationUtils.loadAnimation(this, R.anim.alpha);
+        Animation anim = AnimationUtils.loadAnimation(this, R.anim.anim_splash_alpha_color);
         anim.reset();
         LinearLayout l=(LinearLayout) findViewById(R.id.lin_lay);
         l.clearAnimation();
         l.startAnimation(anim);
 
-        anim = AnimationUtils.loadAnimation(this, R.anim.translate);
+        anim = AnimationUtils.loadAnimation(this, R.anim.anim_translate);
         anim.reset();
         ImageView iv = (ImageView) findViewById(R.id.splash);
         iv.clearAnimation();
