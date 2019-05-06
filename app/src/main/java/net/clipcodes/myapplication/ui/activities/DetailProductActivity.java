@@ -7,10 +7,13 @@ import android.widget.TextView;
 
 import net.clipcodes.myapplication.R;
 
+import java.util.ArrayList;
+
 public class DetailProductActivity extends AppCompatActivity {
 
     ImageView mFlower;
     TextView mDescription;
+    ArrayList<Integer> imageList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,8 @@ public class DetailProductActivity extends AppCompatActivity {
         Bundle mBundle = getIntent().getExtras();
         if (mBundle != null) {
 //            mFlower.setImageResource(mBundle.getInt("Image"));
-            mBundle.getIntegerArrayList("ImageList");
+            imageList = mBundle.getIntegerArrayList("ImageList");
+            mFlower.setImageResource(imageList.get(0));
             mDescription.setText(mBundle.getString("Description"));
         }
     }
