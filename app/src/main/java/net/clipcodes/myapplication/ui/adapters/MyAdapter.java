@@ -34,7 +34,7 @@ public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
 
     @Override
     public void onBindViewHolder(final FlowerViewHolder holder, int position) {
-        holder.mImage.setImageResource(mFlowerList.get(position).getFlowerImage());
+        holder.mImage.setImageResource(mFlowerList.get(position).getFlowerImageList().get(0));
         holder.mTitle.setText(mFlowerList.get(position).getFlowerName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +42,7 @@ public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
                 Intent mIntent = new Intent(mContext, DetailProductActivity.class);
                 mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getFlowerName());
                 mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getFlowerDescription());
-                mIntent.putExtra("Image", mFlowerList.get(holder.getAdapterPosition()).getFlowerImage());
+                mIntent.putIntegerArrayListExtra("ImageList", mFlowerList.get(holder.getAdapterPosition()).getFlowerImageList());
                 mContext.startActivity(mIntent);
             }
         });

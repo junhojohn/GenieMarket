@@ -28,35 +28,55 @@ public class BestProductFragment extends Fragment {
         View seller = inflater.inflate(R.layout.tab_best_product, container, false);
 
         mFlowerList = new ArrayList<>();
-        mFlowerData = new FlowerData("Rose", getString(R.string.description_flower_rose),
-                R.drawable.rose);
+        mFlowerData = new FlowerData("Rose", getString(R.string.description_flower_rose));
+        mFlowerData.getFlowerImageList().add(R.drawable.rose);
+        mFlowerData.getFlowerImageList().add(R.drawable.rose);
+        mFlowerData.getFlowerImageList().add(R.drawable.rose);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Carnation", getString(R.string.description_flower_carnation),
-                R.drawable.carnation);
+        mFlowerData = new FlowerData("Carnation", getString(R.string.description_flower_carnation));
+        mFlowerData.getFlowerImageList().add(R.drawable.carnation);
+        mFlowerData.getFlowerImageList().add(R.drawable.carnation);
+        mFlowerData.getFlowerImageList().add(R.drawable.carnation);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Tulip", getString(R.string.description_flower_tulip),
-                R.drawable.tulip);
+        mFlowerData = new FlowerData("Tulip", getString(R.string.description_flower_tulip));
+        mFlowerData.getFlowerImageList().add(R.drawable.tulip);
+        mFlowerData.getFlowerImageList().add(R.drawable.tulip);
+        mFlowerData.getFlowerImageList().add(R.drawable.tulip);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Daisy", getString(R.string.description_flower_daisy),
-                R.drawable.daisy);
+        mFlowerData = new FlowerData("Daisy", getString(R.string.description_flower_daisy));
+        mFlowerData.getFlowerImageList().add(R.drawable.daisy);
+        mFlowerData.getFlowerImageList().add(R.drawable.daisy);
+        mFlowerData.getFlowerImageList().add(R.drawable.daisy);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Sunflower", getString(R.string.description_flower_sunflower),
-                R.drawable.sunflower);
+        mFlowerData = new FlowerData("Sunflower", getString(R.string.description_flower_sunflower));
+        mFlowerData.getFlowerImageList().add(R.drawable.sunflower);
+        mFlowerData.getFlowerImageList().add(R.drawable.sunflower);
+        mFlowerData.getFlowerImageList().add(R.drawable.sunflower);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Daffodil", getString(R.string.description_flower_daffodil),
-                R.drawable.daffodil);
+        mFlowerData = new FlowerData("Daffodil", getString(R.string.description_flower_daffodil));
+        mFlowerData.getFlowerImageList().add(R.drawable.daffodil);
+        mFlowerData.getFlowerImageList().add(R.drawable.daffodil);
+        mFlowerData.getFlowerImageList().add(R.drawable.daffodil);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Gerbera", getString(R.string.description_flower_gerbera),
-                R.drawable.gerbera);
+        mFlowerData = new FlowerData("Gerbera", getString(R.string.description_flower_gerbera));
+        mFlowerData.getFlowerImageList().add(R.drawable.gerbera);
+        mFlowerData.getFlowerImageList().add(R.drawable.gerbera);
+        mFlowerData.getFlowerImageList().add(R.drawable.gerbera);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Orchid", getString(R.string.description_flower_orchid),
-                R.drawable.orchid);
+        mFlowerData = new FlowerData("Orchid", getString(R.string.description_flower_orchid));
+        mFlowerData.getFlowerImageList().add(R.drawable.orchid);
+        mFlowerData.getFlowerImageList().add(R.drawable.orchid);
+        mFlowerData.getFlowerImageList().add(R.drawable.orchid);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Iris", getString(R.string.description_flower_iris),
-                R.drawable.iris);
+        mFlowerData = new FlowerData("Iris", getString(R.string.description_flower_iris));
+        mFlowerData.getFlowerImageList().add(R.drawable.iris);
+        mFlowerData.getFlowerImageList().add(R.drawable.iris);
+        mFlowerData.getFlowerImageList().add(R.drawable.iris);
         mFlowerList.add(mFlowerData);
-        mFlowerData = new FlowerData("Lilac", getString(R.string.description_flower_lilac),
-                R.drawable.lilac);
+        mFlowerData = new FlowerData("Lilac", getString(R.string.description_flower_lilac));
+        mFlowerData.getFlowerImageList().add(R.drawable.lilac);
+        mFlowerData.getFlowerImageList().add(R.drawable.lilac);
+        mFlowerData.getFlowerImageList().add(R.drawable.lilac);
         mFlowerList.add(mFlowerData);
 
         mRecyclerView = seller.findViewById(R.id.recyclerview);

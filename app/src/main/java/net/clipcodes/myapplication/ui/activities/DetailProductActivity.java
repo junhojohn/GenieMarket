@@ -22,7 +22,8 @@ public class DetailProductActivity extends AppCompatActivity {
 
         Bundle mBundle = getIntent().getExtras();
         if (mBundle != null) {
-            mFlower.setImageResource(mBundle.getInt("Image"));
+//            mFlower.setImageResource(mBundle.getInt("Image"));
+            mBundle.getIntegerArrayList("ImageList");
             mDescription.setText(mBundle.getString("Description"));
         }
     }

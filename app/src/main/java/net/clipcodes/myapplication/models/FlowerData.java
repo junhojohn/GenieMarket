@@ -1,15 +1,18 @@
 package net.clipcodes.myapplication.models;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 public class FlowerData {
 
     private String flowerName;
     private String flowerDescription;
-    private int flowerImage;
+    private ArrayList<Integer> flowerImageList;
 
-    public FlowerData(String flowerName, String flowerDescription, int flowerImage) {
+    public FlowerData(String flowerName, String flowerDescription) {
         this.flowerName = flowerName;
         this.flowerDescription = flowerDescription;
-        this.flowerImage = flowerImage;
     }
 
     public String getFlowerName() {
@@ -20,7 +23,10 @@ public class FlowerData {
         return flowerDescription;
     }
 
-    public int getFlowerImage() {
-        return flowerImage;
+    public ArrayList<Integer> getFlowerImageList() {
+        if(flowerImageList == null){
+            flowerImageList = new ArrayList<Integer>();
+        }
+        return flowerImageList;
     }
 }
