@@ -11,4 +11,5 @@
     <color name="gradStop">#1B5AD7</color>
     <color name="red">#FF0000</color>
     <color name="lightGrey">#7F7F7F</color>
+    <color name="lightlightGrey">#EEEEEE</color>
 </resources>
