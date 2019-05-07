@@ -28,7 +28,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activities.DetailProductActivity" />
-        <activity android:name=".ui.activities.PurchaseActivity"></activity>
+        <activity android:name=".ui.activities.PurchaseActivity" />
+        <activity
+            android:name=".ui.activities.LoginActivity"
+            android:theme="@style/SplashTheme"></activity>
     </application>
 
 </manifest>

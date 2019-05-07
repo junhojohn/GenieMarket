@@ -1,9 +1,12 @@
 package net.clipcodes.myapplication.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,6 +21,7 @@ import java.util.TimerTask;
 public class DetailProductActivity extends AppCompatActivity {
     ViewPager viewPager;
     TabLayout indicator;
+    Button btnPurchase;
     ImageView mFlower;
     TextView mDescription;
     List<Integer> imageList;
@@ -27,7 +31,9 @@ public class DetailProductActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        viewPager = findViewById(R.id.product_image_slider);
+        btnPurchase = findViewById(R.id.btnPurchase);
+        btnPurchase.setOnClickListener(clik);
+                viewPager = findViewById(R.id.product_image_slider);
         indicator = findViewById(R.id.product_image_indicator);
         indicator.setupWithViewPager(viewPager, true);
         mFlower = findViewById(R.id.ivImage);
@@ -80,4 +86,12 @@ public class DetailProductActivity extends AppCompatActivity {
             });
         }
     }
+
+    public View.OnClickListener clik = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(DetailProductActivity.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    };
 }
