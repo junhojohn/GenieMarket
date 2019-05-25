@@ -31,7 +31,10 @@
         <activity android:name=".ui.activities.PurchaseActivity" />
         <activity
             android:name=".ui.activities.LoginActivity"
-            android:theme="@style/SplashTheme"></activity>
+            android:theme="@style/SplashTheme" />
+        <activity
+            android:name=".ui.activities.RegisterActivity"
+            android:theme="@style/NoActionBar" />
     </application>
 
 </manifest>

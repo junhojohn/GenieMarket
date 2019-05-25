@@ -1,5 +1,6 @@
 package net.clipcodes.myapplication.ui.pages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,9 +9,14 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.melnykov.fab.FloatingActionButton;
+
+import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
+import net.clipcodes.myapplication.ui.activities.RegisterActivity;
 import net.clipcodes.myapplication.ui.fragments.CheapProductFragment;
 import net.clipcodes.myapplication.ui.fragments.BestProductFragment;
 import net.clipcodes.myapplication.R;
@@ -29,6 +35,7 @@ public class PageHome extends Fragment {
     boolean touched = false;
     Handler handler = new Handler();
     Runnable update;
+    FloatingActionButton btnRegister;
 
     @Nullable
     @Override
@@ -41,6 +48,7 @@ public class PageHome extends Fragment {
         //SET TABS ONCLICK
         bestFragment.setOnClickListener(clik);
         cheapFragment.setOnClickListener(clik);
+        btnRegister.setOnClickListener(clik);
 
         //LOAD PAGE FOR FIRST
         loadPage(bestProductFragment);
@@ -56,6 +64,7 @@ public class PageHome extends Fragment {
         cheapProductView = v.findViewById(R.id.cheapProductView);
         textBest = v.findViewById(R.id.text_best);
         textCheap = v.findViewById(R.id.text_cheap);
+        btnRegister = v.findViewById(R.id.btn_register);
     }
 
     View.OnTouchListener autoMove = new View.OnTouchListener(){
@@ -103,6 +112,10 @@ public class PageHome extends Fragment {
                     //VIEW VISIBILITY WHEN CLICKED
                     bestProductView.setVisibility(View.INVISIBLE);
                     cheapProductView.setVisibility(View.VISIBLE);
+                    break;
+                case R.id.btn_register:
+                    Intent mIntent = new Intent(view.getContext(), RegisterActivity.class);
+                    view.getContext().startActivity(mIntent);
                     break;
             }
         }
