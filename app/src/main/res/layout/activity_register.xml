@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="10dp"
-                android:layout_toLeftOf="@+id/btn_registration"
+                android:layout_toLeftOf="@+id/btn_nextStep"
                 android:layout_toRightOf="@+id/btn_back"
                 android:gravity="center"
                 android:textColor="@color/white"
@@ -43,7 +43,7 @@
                 android:text="상품등록" />
 
             <Button
-                android:id="@+id/btn_registration"
+                android:id="@+id/btn_nextStep"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -53,7 +53,7 @@
 
                 android:textColor="@color/white"
                 android:background="@color/gradStop"
-                android:text="등록" />
+                android:text="다음" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
 

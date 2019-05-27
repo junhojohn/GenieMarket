@@ -11,45 +11,36 @@ import com.travijuu.numberpicker.library.NumberPicker;
 
 import net.clipcodes.myapplication.R;
 
-public class RegisterActivity extends AppCompatActivity {
+public class ChooseImagesActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    Button btnRegistration;
+    Button btnFinish;
     Button btnBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_choose_images);
 
-        toolbar = findViewById(R.id.register_toolbar);
+        toolbar = findViewById(R.id.choose_image_toolbar);
         setSupportActionBar(toolbar);
         setTheme(R.style.AppTheme_Cursor);
 
-        btnRegistration = findViewById(R.id.btn_nextStep);
-        btnBack = findViewById(R.id.btn_back);
+        btnFinish = findViewById(R.id.btn_finish);
+        btnBack = findViewById(R.id.btn_back2);
 
-        btnRegistration.setOnClickListener(clik);
+        btnFinish.setOnClickListener(clik);
         btnBack.setOnClickListener(clik);
 
-        NumberPicker numberPicker = findViewById(R.id.number_picker);
-        numberPicker.setDisplayFocusable(true);
-
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setTitle("상품등록");
-//        getSupportActionBar().setIcon(R.drawable.ic_back_button_24dp);
     }
 
     public View.OnClickListener clik = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             switch (view.getId()){
-                case R.id.btn_nextStep:
-                    Intent mIntent = new Intent(view.getContext(), ChooseImagesActivity.class);
-                    view.getContext().startActivity(mIntent);
+                case R.id.btn_finish:
                     break;
-                case R.id.btn_back:
+                case R.id.btn_back2:
                     finish();
                     break;
             }
