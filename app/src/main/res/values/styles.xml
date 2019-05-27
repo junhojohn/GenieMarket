@@ -32,4 +32,12 @@
         <item name="colorPrimaryDark">@color/gradStop</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="AppTheme.Cursor" parent="AppTheme">
+        <item name="colorAccent">@color/gradStop</item>
+    </style>
+
+    <style name="DefaultNumberPickerTheme" parent="AppTheme">
+        <item name="colorControlNormal">@color/gradStop</item>
+    </style>
 </resources>

@@ -7,7 +7,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.travijuu.numberpicker.library.NumberPicker;
+
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.ui.widgets.ClearEditText;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -22,12 +25,16 @@ public class RegisterActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.register_toolbar);
         setSupportActionBar(toolbar);
+        setTheme(R.style.AppTheme_Cursor);
 
         btnRegistration = findViewById(R.id.btn_registration);
         btnBack = findViewById(R.id.btn_back);
 
         btnRegistration.setOnClickListener(clik);
         btnBack.setOnClickListener(clik);
+
+        NumberPicker numberPicker = findViewById(R.id.number_picker);
+        numberPicker.setDisplayFocusable(true);
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
