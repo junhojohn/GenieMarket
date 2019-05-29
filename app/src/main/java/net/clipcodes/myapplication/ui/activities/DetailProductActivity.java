@@ -1,12 +1,14 @@
 package net.clipcodes.myapplication.ui.activities;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,7 +27,8 @@ public class DetailProductActivity extends AppCompatActivity {
     ImageView mFlower;
     TextView mDescription;
     List<Integer> imageList;
-
+    ImageButton btn_contact_kakaoTalk;
+    ImageButton btn_contact_phone_number;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +36,16 @@ public class DetailProductActivity extends AppCompatActivity {
 
         btnPurchase = findViewById(R.id.btnPurchase);
         btnPurchase.setOnClickListener(clik);
-                viewPager = findViewById(R.id.product_image_slider);
+        viewPager = findViewById(R.id.product_image_slider);
         indicator = findViewById(R.id.product_image_indicator);
         indicator.setupWithViewPager(viewPager, true);
         mFlower = findViewById(R.id.ivImage);
-        mDescription = findViewById(R.id.tvDescription);
+        mDescription                    = findViewById(R.id.tvDescription);
+        btn_contact_kakaoTalk       = findViewById(R.id.seller_contact_kakaotalk);
+        btn_contact_kakaoTalk.setOnClickListener(clik);
+        btn_contact_phone_number    = findViewById(R.id.seller_contact_phone_number);
+        btn_contact_phone_number.setOnClickListener(clik);
+
 
         ProductImageSliderAdapter adapter = new ProductImageSliderAdapter(this);
         Bundle mBundle = getIntent().getExtras();
@@ -90,8 +98,20 @@ public class DetailProductActivity extends AppCompatActivity {
     public View.OnClickListener clik = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent intent = new Intent(DetailProductActivity.this, LoginActivity.class);
-            startActivity(intent);
+            switch (view.getId()){
+                case R.id.btnPurchase:
+                    Intent loginIntent = new Intent(DetailProductActivity.this, LoginActivity.class);
+                    startActivity(loginIntent);
+                    break;
+                case R.id.seller_contact_kakaotalk:
+                    break;
+                case R.id.seller_contact_phone_number:
+                    Intent dialIntent = new Intent("android.intent.action.DIAL");
+                    dialIntent.setData(Uri.parse("tel:01072377056"));
+                    startActivity(dialIntent);
+                    break;
+            }
+
         }
     };
 }
