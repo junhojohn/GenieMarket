@@ -4,18 +4,61 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.models.ProductInfo;
+import net.clipcodes.myapplication.ui.widgets.ClearEditText;
 
 public class RegisterActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     Button btnRegistration;
     Button btnBack;
+    NumberPicker numberPicker;
+    ClearEditText editTextProductName;
+    ClearEditText editTextPrice;
+    EditText editTextProductDescription;
+    ProductInfo productInfo;
+
+    @Override
+    protected void onStart() {
+        productInfo = new ProductInfo();
+
+        if(editTextProductName.getText() != null && editTextProductName.getText().toString() != null && !editTextProductName.getText().toString().isEmpty()){
+            productInfo.setName(editTextProductName.getText().toString());
+        }
+
+        try{
+            productInfo.setPrice(Integer.parseInt(editTextPrice.getText().toString()));
+        }catch (Exception e){
+
+        }
+
+        if(editTextProductDescription.getText() != null && editTextProductDescription.getText().toString() != null && !editTextProductDescription.getText().toString().isEmpty()){
+            productInfo.setDescription(editTextProductDescription.getText().toString());
+        }
+
+        productInfo.setItemCount(numberPicker.getValue());
+        String checkMessage = isButtonOkValidation(productInfo);
+        if(checkMessage != null && !checkMessage.isEmpty()){
+            btnRegistration.setEnabled(false);
+        }else{
+            btnRegistration.setEnabled(true);
+        }
+
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,14 +75,126 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegistration.setOnClickListener(clik);
         btnBack.setOnClickListener(clik);
 
-        NumberPicker numberPicker = findViewById(R.id.number_picker);
+        editTextProductName = findViewById(R.id.tvProductName);
+        editTextPrice = findViewById(R.id.tvPriceTag);
+        editTextProductDescription = findViewById(R.id.tvDescription);
+        numberPicker = findViewById(R.id.number_picker);
         numberPicker.setDisplayFocusable(true);
+
+        editTextProductName.addTextChangedListener(productNameTextWatcher);
+        editTextPrice.addTextChangedListener(productPriceTextWatcher);
+        editTextProductDescription.addTextChangedListener(productDescriptionTextWatcher);
+        numberPicker.setValueChangedListener(numberPickerWatcher);
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setTitle("상품등록");
 //        getSupportActionBar().setIcon(R.drawable.ic_back_button_24dp);
     }
+
+    @Override
+    protected void onPause() {
+        productInfo = null;
+        super.onPause();
+    }
+
+    public TextWatcher productNameTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s != null){
+                productInfo.setName(s.toString());
+                String checkMessage = isButtonOkValidation(productInfo);
+                if(checkMessage != null && !checkMessage.isEmpty()){
+                    btnRegistration.setEnabled(false);
+                }else{
+                    btnRegistration.setEnabled(true);
+                }
+            }else{
+                btnRegistration.setEnabled(false);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public TextWatcher productPriceTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s != null){
+                try{
+                    productInfo.setPrice(Integer.parseInt(s.toString()));
+                }catch (Exception e){
+
+                }finally {
+                    String checkMessage = isButtonOkValidation(productInfo);
+                    if(checkMessage != null && !checkMessage.isEmpty()){
+                        btnRegistration.setEnabled(false);
+                    }else{
+                        btnRegistration.setEnabled(true);
+                    }
+                }
+            }else{
+                btnRegistration.setEnabled(false);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public TextWatcher productDescriptionTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            if(s != null){
+                productInfo.setDescription(s.toString());
+                String checkMessage = isButtonOkValidation(productInfo);
+                if(checkMessage != null && !checkMessage.isEmpty()){
+                    btnRegistration.setEnabled(false);
+                }else{
+                    btnRegistration.setEnabled(true);
+                }
+            }else{
+                btnRegistration.setEnabled(false);
+            }
+
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public ValueChangedListener numberPickerWatcher = new ValueChangedListener() {
+        @Override
+        public void valueChanged(int value, ActionEnum action) {
+            productInfo.setItemCount(value);
+            String checkMessage = isButtonOkValidation(productInfo);
+            if(checkMessage != null && !checkMessage.isEmpty()){
+                btnRegistration.setEnabled(false);
+                Toast.makeText(RegisterActivity.this, checkMessage, Toast.LENGTH_SHORT).show();
+            }else{
+                btnRegistration.setEnabled(true);
+            }
+        }
+    };
 
     public View.OnClickListener clik = new View.OnClickListener() {
         @Override
@@ -58,6 +213,29 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
+    private String isButtonOkValidation(ProductInfo productInfo){
+        if(productInfo == null){
+            return "ProducInfo 객체가 없습니다.";
+        }
+
+        if(productInfo.getName() == null || productInfo.getName().isEmpty()){
+            return "상품명을 입력해주세요.";
+        }
+
+        if(productInfo.getPrice() == -1 || productInfo.getPrice() == 0){
+            return "상품가격을 입력해주세요.";
+        }
+
+        if(productInfo.getDescription() == null || productInfo.getDescription().isEmpty()){
+            return "상품 설명을 입력해주세요.";
+        }
+
+        if(productInfo.getItemCount() == -1 || productInfo.getItemCount() == 0){
+            return "판매 단위를 입력해주세요.";
+        }
+
+        return "";
+    }
 //    @Override
 //    public boolean onOptionsItemSelected(MenuItem item) {
 //        if(item.getItemId() == android.R.id.home){
