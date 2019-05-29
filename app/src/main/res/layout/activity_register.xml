@@ -192,12 +192,20 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
-            <TextView
+            <EditText
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/tvDescription"
-                android:layout_width="wrap_content"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:minLines="10"
+                android:maxLines="100"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="20sp" />
+                android:layout_width="fill_parent"
+                android:gravity="top"
+                android:hint="상품 설명을 입력해주세요."
+                android:background="@drawable/border"
+                android:scrollbars="vertical"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>
