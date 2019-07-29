@@ -1,11 +1,16 @@
 package net.clipcodes.myapplication.ui.activities;
 
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.MenuItem;
 
 import net.clipcodes.myapplication.R;
@@ -14,6 +19,9 @@ import net.clipcodes.myapplication.ui.pages.PageHome;
 import net.clipcodes.myapplication.ui.pages.PageMyGenie;
 import net.clipcodes.myapplication.ui.pages.PageSearch;
 import net.clipcodes.myapplication.ui.adapters.MainAdapter;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,6 +41,22 @@ public class MainActivity extends AppCompatActivity {
         setupFm(getSupportFragmentManager(), viewPager);
         viewPager.setCurrentItem(0);
         viewPager.setOnPageChangeListener(new PageChange());
+    }
+
+    private void getHashKey(){
+        try {                                                        // 패키지이름을 입력해줍니다.
+            PackageInfo info = getPackageManager().getPackageInfo("com.example", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+
+
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
 

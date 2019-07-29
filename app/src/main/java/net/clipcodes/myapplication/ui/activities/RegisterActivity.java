@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
@@ -29,11 +30,14 @@ public class RegisterActivity extends AppCompatActivity {
     ClearEditText editTextProductName;
     ClearEditText editTextPrice;
     EditText editTextProductDescription;
+    TextView textViewSellerName;
     ProductInfo productInfo;
 
     @Override
     protected void onStart() {
         productInfo = new ProductInfo();
+
+        productInfo.setSellerName(textViewSellerName.getText().toString());
 
         if(editTextProductName.getText() != null && editTextProductName.getText().toString() != null && !editTextProductName.getText().toString().isEmpty()){
             productInfo.setName(editTextProductName.getText().toString());
@@ -79,6 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextPrice = findViewById(R.id.tvPriceTag);
         editTextProductDescription = findViewById(R.id.tvDescription);
         numberPicker = findViewById(R.id.number_picker);
+        textViewSellerName = findViewById(R.id.tvSellerName);
         numberPicker.setDisplayFocusable(true);
 
         editTextProductName.addTextChangedListener(productNameTextWatcher);
@@ -202,6 +207,7 @@ public class RegisterActivity extends AppCompatActivity {
             switch (view.getId()){
                 case R.id.btn_nextStep:
                     Intent mIntent = new Intent(view.getContext(), ChooseImagesActivity.class);
+                    mIntent.putExtra("productInfo", productInfo);
                     view.getContext().startActivity(mIntent);
                     break;
                 case R.id.btn_back:

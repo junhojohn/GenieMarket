@@ -1,6 +1,8 @@
 package net.clipcodes.myapplication.models;
 
-public class ProductInfo {
+import java.io.Serializable;
+
+public class ProductInfo implements Serializable {
     private String name;
     private int price = -1;
     private String description;

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ import com.travijuu.numberpicker.library.NumberPicker;
 
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.models.Picture;
+import net.clipcodes.myapplication.models.ProductInfo;
 import net.clipcodes.myapplication.ui.adapters.GalleryItemAdapter;
 import net.clipcodes.myapplication.utils.ConstantDataManager;
 import net.clipcodes.myapplication.utils.Libraries;
@@ -38,7 +40,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
     private ImageView imageViewButtonSend;
     private TextView textViewSelectedCount;
     private ConstraintLayout constraintLayout;
-
+    private ProductInfo productInfo;
     Toolbar toolbar;
     Button btnFinish;
     Button btnBack;
@@ -46,6 +48,8 @@ public class ChooseImagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        productInfo = (ProductInfo)getIntent().getSerializableExtra("productInfo");
+        Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
         setContentView(R.layout.activity_choose_images);
 
         toolbar = findViewById(R.id.choose_image_toolbar);
@@ -143,6 +147,11 @@ public class ChooseImagesActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.btn_finish:
+                    Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
+                    for(Picture picture : pictures){
+                        Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
+                    }
+
                     break;
                 case R.id.btn_back2:
                     finish();
