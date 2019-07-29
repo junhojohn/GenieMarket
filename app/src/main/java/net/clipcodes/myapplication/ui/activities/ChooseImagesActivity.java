@@ -145,7 +145,8 @@ public class ChooseImagesActivity extends AppCompatActivity {
             switch (view.getId()){
                 case R.id.btn_finish:
                     Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
-                    for(Picture picture : pictures){
+                    ArrayList<Picture> selectedPictures = adapter.getAllPictureSelected();
+                    for(Picture picture : selectedPictures){
                         Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
                     }
 
