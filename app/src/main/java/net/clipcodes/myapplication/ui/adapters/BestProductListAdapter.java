@@ -16,33 +16,33 @@ import net.clipcodes.myapplication.R;
 
 import java.util.List;
 
-public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
+public class BestProductListAdapter extends RecyclerView.Adapter<BestProductListViewHolder> {
 
     private Context mContext;
-    private List<BasicProductInfo> mFlowerList;
+    private List<BasicProductInfo> productList;
 
-    public MyAdapter(Context mContext, List<BasicProductInfo> mFlowerList) {
+    public BestProductListAdapter(Context mContext, List<BasicProductInfo> productList) {
         this.mContext = mContext;
-        this.mFlowerList = mFlowerList;
+        this.productList = productList;
     }
 
     @Override
-    public FlowerViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BestProductListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View mView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_product_list, parent, false);
-        return new FlowerViewHolder(mView);
+        return new BestProductListViewHolder(mView);
     }
 
     @Override
-    public void onBindViewHolder(final FlowerViewHolder holder, int position) {
-        holder.mImage.setImageResource(mFlowerList.get(position).getImageList().get(0));
-        holder.mTitle.setText(mFlowerList.get(position).getName());
+    public void onBindViewHolder(final BestProductListViewHolder holder, int position) {
+        holder.mImage.setImageResource(productList.get(position).getImageList().get(0));
+        holder.mTitle.setText(productList.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailProductActivity.class);
-                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getName());
-                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDescription());
-                mIntent.putIntegerArrayListExtra("ImageList", mFlowerList.get(holder.getAdapterPosition()).getImageList());
+                mIntent.putExtra("Title", productList.get(holder.getAdapterPosition()).getName());
+                mIntent.putExtra("Description", productList.get(holder.getAdapterPosition()).getDescription());
+                mIntent.putIntegerArrayListExtra("ImageList", productList.get(holder.getAdapterPosition()).getImageList());
                 mContext.startActivity(mIntent);
             }
         });
@@ -50,16 +50,16 @@ public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
 
     @Override
     public int getItemCount() {
-        return mFlowerList.size();
+        return productList.size();
     }
 }
 
-class FlowerViewHolder extends RecyclerView.ViewHolder {
+class BestProductListViewHolder extends RecyclerView.ViewHolder {
     CardView mCardView;
     ImageView mImage;
     TextView mTitle;
 
-    FlowerViewHolder(View itemView) {
+    BestProductListViewHolder(View itemView) {
         super(itemView);
 
         mImage = itemView.findViewById(R.id.ivImage);

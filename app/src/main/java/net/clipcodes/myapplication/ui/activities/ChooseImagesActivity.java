@@ -22,7 +22,7 @@ import android.widget.TextView;
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.models.Picture;
 import net.clipcodes.myapplication.models.AdditionalProductInfo;
-import net.clipcodes.myapplication.ui.adapters.GalleryItemAdapter;
+import net.clipcodes.myapplication.ui.adapters.LocalGalleryImageListAdapter;
 import net.clipcodes.myapplication.utils.ConstantDataManager;
 import net.clipcodes.myapplication.utils.Libraries;
 
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class ChooseImagesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<Picture> pictures;
-    GalleryItemAdapter adapter;
+    LocalGalleryImageListAdapter adapter;
     Handler handler;
 
     private ImageView imageViewButtonSend;
@@ -74,7 +74,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
         pictures = new ArrayList<Picture>();
         recyclerView = findViewById(R.id.recyclerViewGallery);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        adapter = new GalleryItemAdapter(this, pictures, new GalleryItemAdapter.ItemSelectedChangeListener() {
+        adapter = new LocalGalleryImageListAdapter(this, pictures, new LocalGalleryImageListAdapter.ItemSelectedChangeListener() {
             @Override
             public void onItemSelectedChange(int number) {
                 if(number > 0)     {

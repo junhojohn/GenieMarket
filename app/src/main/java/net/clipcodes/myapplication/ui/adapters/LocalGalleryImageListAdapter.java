@@ -1,35 +1,27 @@
 package net.clipcodes.myapplication.ui.adapters;
 
 import android.content.Context;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.models.Picture;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class GalleryItemAdapter extends RecyclerView.Adapter<GalleryItemAdapter.GalleryItemViewHolder> {
+public class LocalGalleryImageListAdapter extends RecyclerView.Adapter<LocalGalleryImageListAdapter.GalleryItemViewHolder> {
 
     public interface ItemSelectedChangeListener{
         void onItemSelectedChange(int number);
@@ -44,7 +36,7 @@ public class GalleryItemAdapter extends RecyclerView.Adapter<GalleryItemAdapter.
 
     int count = 0;
 
-    public GalleryItemAdapter(Context context, List<Picture> pictures,ItemSelectedChangeListener listener) {
+    public LocalGalleryImageListAdapter(Context context, List<Picture> pictures, ItemSelectedChangeListener listener) {
         this.context = context;
         this.pictures = pictures;
         this.listener=listener;

@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import net.clipcodes.myapplication.models.ChildCategoryItem;
 import net.clipcodes.myapplication.models.ParentCategoryItem;
-import net.clipcodes.myapplication.ui.adapters.RecyclerDataAdapter;
+import net.clipcodes.myapplication.ui.adapters.CategoryItemListAdapter;
 import net.clipcodes.myapplication.R;
 
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ public class PageCategory extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragment_one = inflater.inflate(R.layout.fragment_category, container, false);
         mRecyclerView = fragment_one.findViewById(R.id.recyclerView);
-        RecyclerDataAdapter recyclerDataAdapter = new RecyclerDataAdapter(getDummyDataToPass());
+        CategoryItemListAdapter categoryItemListAdapter = new CategoryItemListAdapter(getDummyDataToPass());
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mRecyclerView.setAdapter(recyclerDataAdapter);
+        mRecyclerView.setAdapter(categoryItemListAdapter);
         mRecyclerView.setHasFixedSize(true);
         return fragment_one;
     }

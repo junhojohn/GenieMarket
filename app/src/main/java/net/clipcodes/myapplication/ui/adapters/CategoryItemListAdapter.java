@@ -18,21 +18,21 @@ import net.clipcodes.myapplication.R;
 import java.util.ArrayList;
 
 
-public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.MyViewHolder> {
+public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemListAdapter.CategoryItemListViewHolder> {
     private ArrayList<ParentCategoryItem> parentCategoryItems;
 
-    public RecyclerDataAdapter(ArrayList<ParentCategoryItem> parentCategoryItems) {
+    public CategoryItemListAdapter(ArrayList<ParentCategoryItem> parentCategoryItems) {
         this.parentCategoryItems = parentCategoryItems;
     }
 
     @Override
-    public RecyclerDataAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public CategoryItemListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_category_list, parent, false);
-        return new MyViewHolder(itemView);
+        return new CategoryItemListViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerDataAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(CategoryItemListViewHolder holder, int position) {
         ParentCategoryItem parentCategoryItem = parentCategoryItems.get(position);
         switch (position){
             case 0:
@@ -86,14 +86,14 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
         return parentCategoryItems.size();
     }
 
-    class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class CategoryItemListViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private Context context;
         private TextView textView_parentName;
         private ImageView img_category;
         private ImageView img_arrow;
         private LinearLayout linearLayout_childItems;
 
-        MyViewHolder(View itemView) {
+        CategoryItemListViewHolder(View itemView) {
             super(itemView);
             context = itemView.getContext();
             textView_parentName = itemView.findViewById(R.id.tv_bigCategoryName);

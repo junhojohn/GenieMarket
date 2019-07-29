@@ -2,17 +2,16 @@ package net.clipcodes.myapplication.models;
 
 import java.io.Serializable;
 
-public class SellerInfo implements Serializable {
-    private String sellerName;
+public class AdditionalSellerInfo extends BasicSellerInfo implements Serializable {
     private String sellerID;
     private String sellerPWD;
 
-    public SellerInfo(){
+    public AdditionalSellerInfo(){
 
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public AdditionalSellerInfo(String name, String description){
+        super(name, description);
     }
 
     public String getSellerID() {
@@ -21,10 +20,6 @@ public class SellerInfo implements Serializable {
 
     public String getSellerPWD() {
         return sellerPWD;
-    }
-
-    public void setSellerName(String sellerName) {
-        this.sellerName = sellerName;
     }
 
     public void setSellerID(String sellerID) {
