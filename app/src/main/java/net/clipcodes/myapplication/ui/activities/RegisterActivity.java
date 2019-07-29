@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +17,7 @@ import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 
 import net.clipcodes.myapplication.R;
-import net.clipcodes.myapplication.models.ProductInfo;
+import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.ui.widgets.ClearEditText;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -31,11 +30,11 @@ public class RegisterActivity extends AppCompatActivity {
     ClearEditText editTextPrice;
     EditText editTextProductDescription;
     TextView textViewSellerName;
-    ProductInfo productInfo;
+    AdditionalProductInfo productInfo;
 
     @Override
     protected void onStart() {
-        productInfo = new ProductInfo();
+        productInfo = new AdditionalProductInfo();
 
         productInfo.setSellerName(textViewSellerName.getText().toString());
 
@@ -219,7 +218,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    private String isButtonOkValidation(ProductInfo productInfo){
+    private String isButtonOkValidation(AdditionalProductInfo productInfo){
         if(productInfo == null){
             return "ProducInfo 객체가 없습니다.";
         }

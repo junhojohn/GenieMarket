@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
-import net.clipcodes.myapplication.models.FlowerData;
+import net.clipcodes.myapplication.models.BasicProductInfo;
 import net.clipcodes.myapplication.R;
 
 import java.util.List;
@@ -19,9 +19,9 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
 
     private Context mContext;
-    private List<FlowerData> mFlowerList;
+    private List<BasicProductInfo> mFlowerList;
 
-    public MyAdapter(Context mContext, List< FlowerData > mFlowerList) {
+    public MyAdapter(Context mContext, List<BasicProductInfo> mFlowerList) {
         this.mContext = mContext;
         this.mFlowerList = mFlowerList;
     }
@@ -34,15 +34,15 @@ public class MyAdapter extends RecyclerView.Adapter< FlowerViewHolder > {
 
     @Override
     public void onBindViewHolder(final FlowerViewHolder holder, int position) {
-        holder.mImage.setImageResource(mFlowerList.get(position).getFlowerImageList().get(0));
-        holder.mTitle.setText(mFlowerList.get(position).getFlowerName());
+        holder.mImage.setImageResource(mFlowerList.get(position).getImageList().get(0));
+        holder.mTitle.setText(mFlowerList.get(position).getName());
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mIntent = new Intent(mContext, DetailProductActivity.class);
-                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getFlowerName());
-                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getFlowerDescription());
-                mIntent.putIntegerArrayListExtra("ImageList", mFlowerList.get(holder.getAdapterPosition()).getFlowerImageList());
+                mIntent.putExtra("Title", mFlowerList.get(holder.getAdapterPosition()).getName());
+                mIntent.putExtra("Description", mFlowerList.get(holder.getAdapterPosition()).getDescription());
+                mIntent.putIntegerArrayListExtra("ImageList", mFlowerList.get(holder.getAdapterPosition()).getImageList());
                 mContext.startActivity(mIntent);
             }
         });

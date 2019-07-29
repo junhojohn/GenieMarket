@@ -2,23 +2,17 @@ package net.clipcodes.myapplication.models;
 
 import java.io.Serializable;
 
-public class ProductInfo implements Serializable {
-    private String name;
+public class AdditionalProductInfo extends BasicProductInfo implements Serializable {
     private int price = -1;
-    private String description;
     private int itemCount = -1;
     private String sellerName;
 
-    public ProductInfo(){
+    public AdditionalProductInfo(){
 
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public AdditionalProductInfo(String name, String description){
+        super(name, description);
     }
 
     public int getPrice() {
@@ -27,14 +21,6 @@ public class ProductInfo implements Serializable {
 
     public void setPrice(int price) {
         this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public int getItemCount() {

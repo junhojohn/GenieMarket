@@ -8,11 +8,11 @@ import java.util.ArrayList;
  * <p>This class is used to </p>
  * Created by Rohit.
  */
-public class DummyParentDataItem implements Serializable {
+public class ParentCategoryItem implements Serializable {
     private String parentName;
-    private ArrayList<DummyChildDataItem> childDataItems;
+    private ArrayList<ChildCategoryItem> childDataItems;
 
-    public DummyParentDataItem(String parentName, ArrayList<DummyChildDataItem> childDataItems) {
+    public ParentCategoryItem(String parentName, ArrayList<ChildCategoryItem> childDataItems) {
         this.parentName = parentName;
         this.childDataItems = childDataItems;
     }
@@ -25,11 +25,11 @@ public class DummyParentDataItem implements Serializable {
         this.parentName = parentName;
     }
 
-    public ArrayList<DummyChildDataItem> getChildDataItems() {
+    public ArrayList<ChildCategoryItem> getChildDataItems() {
         return childDataItems;
     }
 
-    public void setChildDataItems(ArrayList<DummyChildDataItem> childDataItems) {
+    public void setChildDataItems(ArrayList<ChildCategoryItem> childDataItems) {
         this.childDataItems = childDataItems;
     }
 }

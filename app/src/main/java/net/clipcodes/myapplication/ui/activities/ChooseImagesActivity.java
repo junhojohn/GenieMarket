@@ -1,7 +1,6 @@
 package net.clipcodes.myapplication.ui.activities;
 
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
@@ -20,11 +19,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.travijuu.numberpicker.library.NumberPicker;
-
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.models.Picture;
-import net.clipcodes.myapplication.models.ProductInfo;
+import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.ui.adapters.GalleryItemAdapter;
 import net.clipcodes.myapplication.utils.ConstantDataManager;
 import net.clipcodes.myapplication.utils.Libraries;
@@ -40,7 +37,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
     private ImageView imageViewButtonSend;
     private TextView textViewSelectedCount;
     private ConstraintLayout constraintLayout;
-    private ProductInfo productInfo;
+    private AdditionalProductInfo productInfo;
     Toolbar toolbar;
     Button btnFinish;
     Button btnBack;
@@ -48,7 +45,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        productInfo = (ProductInfo)getIntent().getSerializableExtra("productInfo");
+        productInfo = (AdditionalProductInfo)getIntent().getSerializableExtra("productInfo");
         Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
         setContentView(R.layout.activity_choose_images);
 

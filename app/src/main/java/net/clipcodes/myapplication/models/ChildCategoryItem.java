@@ -7,10 +7,10 @@ import java.io.Serializable;
  * <p>This class is used to </p>
  * Created by Rohit.
  */
-public class DummyChildDataItem implements Serializable {
+public class ChildCategoryItem implements Serializable {
     private String childName;
 
-    public DummyChildDataItem(String childName) {
+    public ChildCategoryItem(String childName) {
         this.childName = childName;
     }
 

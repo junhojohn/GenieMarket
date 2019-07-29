@@ -12,17 +12,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import net.clipcodes.myapplication.models.DummyParentDataItem;
+import net.clipcodes.myapplication.models.ParentCategoryItem;
 import net.clipcodes.myapplication.R;
 
 import java.util.ArrayList;
 
 
 public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapter.MyViewHolder> {
-    private ArrayList<DummyParentDataItem> dummyParentDataItems;
+    private ArrayList<ParentCategoryItem> parentCategoryItems;
 
-    public RecyclerDataAdapter(ArrayList<DummyParentDataItem> dummyParentDataItems) {
-        this.dummyParentDataItems = dummyParentDataItems;
+    public RecyclerDataAdapter(ArrayList<ParentCategoryItem> parentCategoryItems) {
+        this.parentCategoryItems = parentCategoryItems;
     }
 
     @Override
@@ -33,7 +33,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     @Override
     public void onBindViewHolder(RecyclerDataAdapter.MyViewHolder holder, int position) {
-        DummyParentDataItem dummyParentDataItem = dummyParentDataItems.get(position);
+        ParentCategoryItem parentCategoryItem = parentCategoryItems.get(position);
         switch (position){
             case 0:
                 holder.img_category.setImageResource(R.drawable.ic_category_clothes_48dp);
@@ -54,7 +54,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
                 holder.img_category.setImageResource(R.drawable.ic_category_electronics_48dp);
                 break;
         }
-        holder.textView_parentName.setText(dummyParentDataItem.getParentName());
+        holder.textView_parentName.setText(parentCategoryItem.getParentName());
         //
         int noOfChildTextViews = holder.linearLayout_childItems.getChildCount();
         for (int index = 0; index < noOfChildTextViews; index++) {
@@ -62,7 +62,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
             currentTextView.setVisibility(View.VISIBLE);
         }
 
-        int noOfChild = dummyParentDataItem.getChildDataItems().size();
+        int noOfChild = parentCategoryItem.getChildDataItems().size();
         if (noOfChild < noOfChildTextViews) {
             for (int index = noOfChild; index < noOfChildTextViews; index++) {
                 TextView currentTextView = (TextView) holder.linearLayout_childItems.getChildAt(index);
@@ -71,7 +71,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
         }
         for (int textViewIndex = 0; textViewIndex < noOfChild; textViewIndex++) {
             TextView currentTextView = (TextView) holder.linearLayout_childItems.getChildAt(textViewIndex);
-            currentTextView.setText(dummyParentDataItem.getChildDataItems().get(textViewIndex).getChildName());
+            currentTextView.setText(parentCategoryItem.getChildDataItems().get(textViewIndex).getChildName());
                 /*currentTextView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -83,7 +83,7 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
 
     @Override
     public int getItemCount() {
-        return dummyParentDataItems.size();
+        return parentCategoryItems.size();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -102,8 +102,8 @@ public class RecyclerDataAdapter extends RecyclerView.Adapter<RecyclerDataAdapte
             linearLayout_childItems = itemView.findViewById(R.id.ll_child_items);
             linearLayout_childItems.setVisibility(View.GONE);
             int intMaxNoOfChild = 0;
-            for (int index = 0; index < dummyParentDataItems.size(); index++) {
-                int intMaxSizeTemp = dummyParentDataItems.get(index).getChildDataItems().size();
+            for (int index = 0; index < parentCategoryItems.size(); index++) {
+                int intMaxSizeTemp = parentCategoryItems.get(index).getChildDataItems().size();
                 if (intMaxSizeTemp > intMaxNoOfChild) intMaxNoOfChild = intMaxSizeTemp;
             }
             for (int indexView = 0; indexView < intMaxNoOfChild; indexView++) {
