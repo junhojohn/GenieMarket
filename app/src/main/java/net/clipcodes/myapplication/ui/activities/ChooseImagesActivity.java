@@ -1,6 +1,7 @@
 package net.clipcodes.myapplication.ui.activities;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Handler;
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.models.Picture;
@@ -26,6 +28,12 @@ import net.clipcodes.myapplication.ui.adapters.LocalGalleryImageListAdapter;
 import net.clipcodes.myapplication.utils.ConstantDataManager;
 import net.clipcodes.myapplication.utils.Libraries;
 
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 public class ChooseImagesActivity extends AppCompatActivity {
@@ -41,6 +49,13 @@ public class ChooseImagesActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button btnFinish;
     Button btnBack;
+    private int serverResponseCode = 0;
+    private ProgressDialog dialog = null;
+    private String upLoadServerUri = null;
+    final String uploadFilePath = "storage/emulated/0/DCIM/새 폴더 (6)/";//경로를 모르겠으면, 갤러리 어플리케이션 가서 메뉴->상세 정보
+
+    final String uploadFileName = "독일출장_왕복항공권_기안_와이페이모어.PNG"; //전송하고자하는 파일 이름
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,11 +160,32 @@ public class ChooseImagesActivity extends AppCompatActivity {
             switch (view.getId()){
                 case R.id.btn_finish:
                     Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
-                    ArrayList<Picture> selectedPictures = adapter.getAllPictureSelected();
+                    final ArrayList<Picture> selectedPictures = adapter.getAllPictureSelected();
                     for(Picture picture : selectedPictures){
                         Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
                     }
 
+//                    upLoadServerUri = "http://10.0.2.2:8080/UploadToServer.php";//서버컴퓨터의 ip주소
+//                    upLoadServerUri = "http://192.168.200.52/UploadToServer.php";//서버컴퓨터의 ip주소
+                    upLoadServerUri = "http://10.0.2.2/UploadToServer.php";//서버컴퓨터의 ip주소
+
+                    dialog = ProgressDialog.show(ChooseImagesActivity.this, "", "Uploading file...", true);
+                    new Thread(new Runnable() {
+
+                        public void run() {
+
+//                            runOnUiThread(new Runnable() {
+//                                public void run() {
+//                                    messageText.setText("uploading started.....");
+//                                }
+//                            });
+                            for(Picture picture : selectedPictures){
+                                Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
+                                uploadFile(uploadFilePath + "" + uploadFileName);
+                            }
+
+                        }
+                    }).start();
                     break;
                 case R.id.btn_back2:
                     finish();
@@ -167,4 +203,284 @@ public class ChooseImagesActivity extends AppCompatActivity {
 //        }
 //        return super.onOptionsItemSelected(item);
 //    }
+
+    public int uploadFile(String sourceFileUri) {
+
+
+
+        String fileName = sourceFileUri;
+
+
+
+        HttpURLConnection conn = null;
+
+        DataOutputStream dos = null;
+
+        String lineEnd = "\r\n";
+
+        String twoHyphens = "--";
+
+        String boundary = "*****";
+
+        int bytesRead, bytesAvailable, bufferSize;
+
+        byte[] buffer;
+
+        int maxBufferSize = 1 * 1024 * 1024;
+
+        File sourceFile = new File(sourceFileUri);
+
+
+
+        if (!sourceFile.isFile()) {
+
+
+
+            dialog.dismiss();
+
+
+
+            Log.e("uploadFile", "Source File not exist :"
+
+                    +uploadFilePath + "" + uploadFileName);
+
+
+
+            runOnUiThread(new Runnable() {
+
+                public void run() {
+                    Toast.makeText(ChooseImagesActivity.this, "Source File not exist :"
+
+                                    +uploadFilePath + "" + uploadFileName,
+
+                            Toast.LENGTH_SHORT).show();
+
+                }
+
+            });
+
+
+
+            return 0;
+
+
+
+        }
+
+        else
+
+        {
+
+            try {
+
+
+
+                // open a URL connection to the Servlet
+
+                FileInputStream fileInputStream = new FileInputStream(sourceFile);
+
+                URL url = new URL(upLoadServerUri);
+
+
+
+                // Open a HTTP  connection to  the URL
+
+                conn = (HttpURLConnection) url.openConnection();
+
+                conn.setDoInput(true); // Allow Inputs
+
+                conn.setDoOutput(true); // Allow Outputs
+
+                conn.setUseCaches(false); // Don't use a Cached Copy
+
+                conn.setRequestMethod("POST");
+
+                conn.setRequestProperty("Connection", "Keep-Alive");
+
+                conn.setRequestProperty("ENCTYPE", "multipart/form-data");
+
+                conn.setRequestProperty("Content-Type", "multipart/form-data;boundary=" + boundary);
+
+                conn.setRequestProperty("uploaded_file", fileName);
+
+
+
+                dos = new DataOutputStream(conn.getOutputStream());
+
+
+
+                dos.writeBytes(twoHyphens + boundary + lineEnd);
+
+                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
+
+                        + fileName + "\"" + lineEnd);
+
+
+
+                dos.writeBytes(lineEnd);
+
+
+
+                // create a buffer of  maximum size
+
+                bytesAvailable = fileInputStream.available();
+
+
+
+                bufferSize = Math.min(bytesAvailable, maxBufferSize);
+
+                buffer = new byte[bufferSize];
+
+
+
+                // read file and write it into form...
+
+                bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+
+
+                while (bytesRead > 0) {
+
+
+
+                    dos.write(buffer, 0, bufferSize);
+
+                    bytesAvailable = fileInputStream.available();
+
+                    bufferSize = Math.min(bytesAvailable, maxBufferSize);
+
+                    bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+
+
+                }
+
+
+
+                // send multipart form data necesssary after file data...
+
+                dos.writeBytes(lineEnd);
+
+                dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+
+
+
+                // Responses from the server (code and message)
+
+                serverResponseCode = conn.getResponseCode();
+
+                String serverResponseMessage = conn.getResponseMessage();
+
+
+
+                Log.i("uploadFile", "HTTP Response is : "
+
+                        + serverResponseMessage + ": " + serverResponseCode);
+
+
+
+                if(serverResponseCode == 200){
+
+
+
+                    runOnUiThread(new Runnable() {
+
+                        public void run() {
+
+
+
+                            String msg = "File Upload Completed.\n\n See uploaded file here : \n\n"
+
+                                    +uploadFileName;
+
+                            Toast.makeText(ChooseImagesActivity.this, "File Upload Complete." + msg,
+
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                    });
+
+                }
+
+
+
+                //close the streams //
+
+                fileInputStream.close();
+
+                dos.flush();
+
+                dos.close();
+
+
+
+            } catch (MalformedURLException ex) {
+
+
+
+                dialog.dismiss();
+
+                ex.printStackTrace();
+
+
+
+                runOnUiThread(new Runnable() {
+
+                    public void run() {
+
+//                        messageText.setText("MalformedURLException Exception : check script url.");
+
+                        Toast.makeText(ChooseImagesActivity.this, "MalformedURLException",
+
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+
+
+
+                Log.e("Upload file to server", "error: " + ex.getMessage(), ex);
+
+            } catch (Exception e) {
+
+
+
+                dialog.dismiss();
+
+                e.printStackTrace();
+
+
+
+                runOnUiThread(new Runnable() {
+
+                    public void run() {
+
+//                        messageText.setText("Got Exception : see logcat ");
+
+                        Toast.makeText(ChooseImagesActivity.this, "Got Exception : see logcat ",
+
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+
+                Log.e("Upload Exception", "Exception : "
+
+                        + e.getMessage(), e);
+
+            }
+
+            dialog.dismiss();
+
+            return serverResponseCode;
+
+
+
+        } // End else block
+
+    }
+
 }
