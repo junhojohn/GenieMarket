@@ -43,6 +43,9 @@
             android:theme="@style/NoActionBar" />
         <activity android:name=".ui.activities.ChooseImagesActivity"
             android:theme="@style/NoActionBar"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
     </application>
 
 </manifest>
