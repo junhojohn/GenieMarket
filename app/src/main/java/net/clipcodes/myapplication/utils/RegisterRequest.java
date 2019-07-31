@@ -26,6 +26,15 @@ public class RegisterRequest extends StringRequest {
         parameters.put("productDescription", productDescription);
     }
 
+    public RegisterRequest(String productName, int productPrice, int productItemCnt, String productDescription, String productImage1, Response.Listener<String> listener){
+        super(Method.POST, URL, listener, null);
+        parameters.put("productName",  productName);
+        parameters.put("productPrice", productPrice+"");
+        parameters.put("productItemCnt", productItemCnt+"");
+        parameters.put("productDescription", productDescription);
+        parameters.put("productImage1", productImage1);
+    }
+
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {
         return parameters;

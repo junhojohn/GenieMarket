@@ -5,9 +5,12 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.content.ContextCompat;
@@ -58,13 +61,8 @@ public class ChooseImagesActivity extends AppCompatActivity {
     Toolbar toolbar;
     Button btnFinish;
     Button btnBack;
-    private int serverResponseCode = 0;
-    private ProgressDialog dialog = null;
-    private String upLoadServerUri = null;
-    final String uploadFilePath = "storage/emulated/0/DCIM/새 폴더 (6)/";//경로를 모르겠으면, 갤러리 어플리케이션 가서 메뉴->상세 정보
-
-    final String uploadFileName = "독일출장_왕복항공권_기안_와이페이모어.PNG"; //전송하고자하는 파일 이름
-
+    private String productImage1 = null;
+    private Bitmap bitmap = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -168,11 +166,17 @@ public class ChooseImagesActivity extends AppCompatActivity {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.btn_finish:
-//                    Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
-//                    final ArrayList<Picture> selectedPictures = adapter.getAllPictureSelected();
-//                    for(Picture picture : selectedPictures){
-//                        Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
-//                    }
+                    Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
+                    final ArrayList<Picture> selectedPictures = adapter.getAllPictureSelected();
+                    for(Picture picture : selectedPictures){
+                        Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
+                        try{
+                            productImage1 = picture.getPath();
+                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), Uri.fromFile(new File(picture.getPath())));
+                        }catch (Exception e){
+                            Log.e("error:", e.getMessage());
+                        }
+                    }
 
                     Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
@@ -195,18 +199,31 @@ public class ChooseImagesActivity extends AppCompatActivity {
                         }
                     };
 
+//                    RegisterRequest registerRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), Libraries.getStringFromBitmap(bitmap), responseListener);
+//                    RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
+//                    queue.add(registerRequest);
+
                     RegisterRequest registerRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), responseListener);
                     RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
                     queue.add(registerRequest);
+
+                    new Thread(){
+                        @Override
+                        public void run() {
+                            Libraries.uploadFile(productImage1);
+                        }
+                    }.start();
+
 
                     break;
                 case R.id.btn_back2:
                     finish();
                     break;
             }
-
-
         }
+
+
+
     };
 }
 
