@@ -63,6 +63,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
     Button btnBack;
     private String productImage1 = null;
     private Bitmap bitmap = null;
+    private String fileRenamed = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,6 +203,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
 //                    RegisterRequest registerRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), Libraries.getStringFromBitmap(bitmap), responseListener);
 //                    RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
 //                    queue.add(registerRequest);
+                    fileRenamed = productInfo.getSellerName() + "_" + productInfo.getName() + "_" + System.currentTimeMillis() + Libraries.getFileExtensions(productImage1);
 
                     RegisterRequest registerRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), responseListener);
                     RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
@@ -210,7 +212,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                     new Thread(){
                         @Override
                         public void run() {
-                            Libraries.uploadFile(productImage1);
+                            Libraries.uploadFile(productImage1, fileRenamed);
                         }
                     }.start();
 

@@ -85,7 +85,7 @@ public class Libraries {
     }
 
 
-    public static int uploadFile(String sourceFileUri) {
+    public static int uploadFile(String sourceFileUri, String fileRenamed) {
 
         String upLoadServerUri = "http://geniemarketdb.cafe24.com/uploader.php";
         int serverResponseCode = -1;
@@ -129,7 +129,6 @@ public class Libraries {
                 conn.setRequestProperty("uploaded_file", fileName);
 
 
-
                 dos = new DataOutputStream(conn.getOutputStream());
 
 
@@ -138,7 +137,7 @@ public class Libraries {
 
                 dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
 
-                        + fileName + "\"" + lineEnd);
+                        + fileRenamed + "\"" + lineEnd);
 
 
 
@@ -231,6 +230,20 @@ public class Libraries {
             }
             return serverResponseCode;
         } // End else block
+
+    }
+
+    public static String getFileExtensions(String fileFullPath){
+        String ext = null;
+        if(fileFullPath == null || fileFullPath.isEmpty()){
+            return ext;
+        }
+
+        File file = new File(fileFullPath);
+        int startIdx = file.getPath().indexOf(".") - 1;
+        int endIdx = file.getPath().length();
+        ext = file.getPath().substring(startIdx, endIdx);
+        return ext;
 
     }
 }
