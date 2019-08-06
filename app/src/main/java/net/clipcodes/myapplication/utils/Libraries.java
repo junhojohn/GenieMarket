@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import net.clipcodes.myapplication.BuildConfig;
+import net.clipcodes.myapplication.ui.ConnectionConst;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
@@ -87,7 +88,7 @@ public class Libraries {
 
     public static int uploadFile(String sourceFileUri, String fileRenamed) {
 
-        String upLoadServerUri = "http://geniemarketdb.cafe24.com/uploader.php";
+
         int serverResponseCode = -1;
         String fileName = sourceFileUri;
         HttpURLConnection conn = null;
@@ -107,7 +108,7 @@ public class Libraries {
             try {
                 // open a URL connection to the Servlet
                 FileInputStream fileInputStream = new FileInputStream(sourceFile);
-                URL url = new URL(upLoadServerUri);
+                URL url = new URL(ConnectionConst.IMAGE_UPLOAD_SERVER_URL);
                 // Open a HTTP  connection to  the URL
 
                 conn = (HttpURLConnection) url.openConnection();
@@ -240,7 +241,7 @@ public class Libraries {
         }
 
         File file = new File(fileFullPath);
-        int startIdx = file.getPath().indexOf(".") - 1;
+        int startIdx = file.getPath().indexOf(".");
         int endIdx = file.getPath().length();
         ext = file.getPath().substring(startIdx, endIdx);
         return ext;
