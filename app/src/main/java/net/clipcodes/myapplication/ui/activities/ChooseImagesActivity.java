@@ -55,6 +55,8 @@ public class ChooseImagesActivity extends AppCompatActivity {
     Button btnBack;
     private String productImage1 = null;
     private String fileRenamed = null;
+    private boolean isProductRegisterSuccess = false;
+    private int serverReturnCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,15 +171,14 @@ public class ChooseImagesActivity extends AppCompatActivity {
                         }
                     }
 
-                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                    final  Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             try{
                                 JSONObject jsonResponse = new JSONObject(response);
-                                boolean isImageRegisterSuccess = jsonResponse.getBoolean(ConnectionConst.RETURN_JSON_IS_IMAGE_REGISTER_SUCCESS);
-                                boolean isProductRegisterSuccess = jsonResponse.getBoolean(ConnectionConst.RETURN_JSON_IS_PRODUCT_REGISTER_SUCCESS);
+                                isProductRegisterSuccess = jsonResponse.getBoolean(ConnectionConst.RETURN_JSON_IS_PRODUCT_REGISTER_SUCCESS);
 
-                                if(isImageRegisterSuccess && isProductRegisterSuccess){
+                                if(serverReturnCode == 200 && isProductRegisterSuccess){
                                     AlertDialog.Builder builder = new AlertDialog.Builder(ChooseImagesActivity.this);
                                     builder.setMessage("상품등록에 성공했습니다.").setPositiveButton("확인", null).create().show();
                                     Intent intent = new Intent(ChooseImagesActivity.this, MainActivity.class);
@@ -192,23 +193,17 @@ public class ChooseImagesActivity extends AppCompatActivity {
                         }
                     };
 
-                    fileRenamed = productInfo.getSellerName() + "_" + System.currentTimeMillis() + Libraries.getFileExtensions(productImage1);
-                    RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getSellerName(), responseListener);
-                    RegisterRequest imageRegisterRequest = new RegisterRequest(fileRenamed, productInfo.getName(), productInfo.getSellerName(), responseListener);
-
-                    RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
-                    queue.add(productRegisterRequest);
-                    queue.add(imageRegisterRequest);
-
-
-                    new Thread(){
+                    Thread thread = new Thread(){
                         @Override
                         public void run() {
-                            Libraries.uploadFile(productImage1, fileRenamed);
+                            fileRenamed = productInfo.getSellerName() + "_" + System.currentTimeMillis() + Libraries.getFileExtensions(productImage1);
+                            serverReturnCode = Libraries.uploadFile(productImage1, fileRenamed);
+                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getSellerName(), fileRenamed, responseListener);
+                            RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
+                            queue.add(productRegisterRequest);
                         }
-                    }.start();
-
-
+                    };
+                    thread.start();
                     break;
                 case R.id.btn_back2:
                     finish();
