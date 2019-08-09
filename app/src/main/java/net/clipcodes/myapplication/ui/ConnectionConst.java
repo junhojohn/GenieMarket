@@ -1,9 +1,10 @@
 package net.clipcodes.myapplication.ui;
 
 public class ConnectionConst {
-    public static final String IMAGE_REGISTER_SERVER_URL = "http://geniemarketdb.cafe24.com/ImageRegister.php";
-    public static final String PRODUCT_REGISTER_SERVER_URL = "http://geniemarketdb.cafe24.com/ProductRegister.php";
-    public static final String IMAGE_UPLOAD_SERVER_URL = "http://geniemarketdb.cafe24.com/ImageUploader.php";
+    public static final String IMAGE_REGISTER_SERVER_URL        = "http://geniemarketdb.cafe24.com/ImageRegister.php";
+    public static final String PRODUCT_REGISTER_SERVER_URL      = "http://geniemarketdb.cafe24.com/ProductRegister.php";
+    public static final String IMAGE_UPLOAD_SERVER_URL          = "http://geniemarketdb.cafe24.com/ImageUploader.php";
+    public static final String PRODUCT_INFO_SEARCH_SERVER_URL   = "http://geniemarketdb.cafe24.com/ProductSearch.php";
 
     public static final String PARAM_JSON_PRODUCT_IMAGE1 = "productImage1";
     public static final String PARAM_JSON_PRODUCT_NAME = "productName";

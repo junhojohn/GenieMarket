@@ -38,4 +38,5 @@ dependencies {
     compileOnly 'com.github.bumptech.glide:compiler:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
     implementation 'com.android.volley:volley:1.0.0'
+    provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 }
