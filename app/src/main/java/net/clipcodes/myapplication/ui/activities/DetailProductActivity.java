@@ -26,6 +26,10 @@ public class DetailProductActivity extends AppCompatActivity {
     Button btnPurchase;
     ImageView mFlower;
     TextView mDescription;
+    TextView tvSellerName;
+    TextView tvSellingUnit;
+    TextView tvPriceTag;
+    TextView tvProductName;
     List<Integer> imageList;
     ImageButton btn_contact_kakaoTalk;
     ImageButton btn_contact_phone_number;
@@ -41,6 +45,10 @@ public class DetailProductActivity extends AppCompatActivity {
         indicator.setupWithViewPager(viewPager, true);
         mFlower = findViewById(R.id.ivImage);
         mDescription                    = findViewById(R.id.tvDescription);
+        tvSellerName =  findViewById(R.id.tvSellerName);
+        tvSellingUnit = findViewById(R.id.tvSellingUnit);
+        tvPriceTag = findViewById(R.id.tvPriceTag);
+        tvProductName = findViewById(R.id.tvProductName);
         btn_contact_kakaoTalk       = findViewById(R.id.seller_contact_kakaotalk);
         btn_contact_kakaoTalk.setOnClickListener(clik);
         btn_contact_phone_number    = findViewById(R.id.seller_contact_phone_number);
@@ -53,8 +61,11 @@ public class DetailProductActivity extends AppCompatActivity {
             imageList = mBundle.getIntegerArrayList("ImageList");
             adapter.setImageList(imageList);
             viewPager.setAdapter(adapter);
-            mDescription.setText(mBundle.getString("Description") + "\na\na\na\na\na\na\na\na\na\na\na\na\na\na\na");
-
+            tvProductName.setText(mBundle.getString("Title"));
+            mDescription.setText(mBundle.getString("Description"));
+            tvSellerName.setText(mBundle.getString("SellerName"));
+            tvSellingUnit.setText(mBundle.getString("ItemCnt"));
+            tvPriceTag.setText(mBundle.getString("Price"));
             Timer timer = new Timer();
             timer.scheduleAtFixedRate(new SliderTimer(), 4000, 6000);
         }
