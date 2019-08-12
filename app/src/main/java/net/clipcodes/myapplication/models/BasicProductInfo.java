@@ -1,13 +1,16 @@
 package net.clipcodes.myapplication.models;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class BasicProductInfo implements Serializable {
 
     private String name;
     private String description;
-    private ArrayList<Integer> imageList;
+    private ArrayList<String> imageURLPathList;
 
     public BasicProductInfo() {
 
@@ -30,12 +33,11 @@ public class BasicProductInfo implements Serializable {
 
     public void setDescription(String description) { this.description = description; }
 
-    public ArrayList<Integer> getImageList() {
-        if(imageList == null){
-            imageList = new ArrayList<Integer>();
+    public ArrayList<String> getImageURLPathList() {
+        if(imageURLPathList == null){
+            imageURLPathList = new ArrayList<String>();
         }
-        return imageList;
+        return imageURLPathList;
     }
-
 
 }

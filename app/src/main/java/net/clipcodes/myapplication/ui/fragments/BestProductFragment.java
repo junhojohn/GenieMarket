@@ -1,5 +1,7 @@
 package net.clipcodes.myapplication.ui.fragments;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,11 +13,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+
 import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.models.BasicProductInfo;
 import net.clipcodes.myapplication.ui.ConnectionConst;
 import net.clipcodes.myapplication.ui.adapters.BestProductListAdapter;
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.utils.Libraries;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -27,6 +32,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -38,10 +45,10 @@ import java.util.List;
 
 public class BestProductFragment extends Fragment {
     RecyclerView mRecyclerView;
-    List<AdditionalProductInfo> productItemList = new ArrayList<>();
-    AdditionalProductInfo productItem;
-    String myJSON;
-    JSONArray peoples = null;
+
+
+
+
     View seller;
     private static final String TAG_RESULTS             = "result";
     private static final String TAG_PRODUCT_NAME        = "productName";
@@ -73,61 +80,71 @@ public class BestProductFragment extends Fragment {
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
-        getData(ConnectionConst.PRODUCT_INFO_SEARCH_SERVER_URL);
+        getData();
 
 
         return seller;
     }
 
-    public void getData(String url){
+    public void getData(){
 
-        class GetDataJSON extends AsyncTask<String, Void, String> {
+        class GetDataJSON extends AsyncTask<String, Void, List> {
 
             @Override
-            protected String doInBackground(String... params) {
-                String result = null;
-                DefaultHttpClient httpClient = new DefaultHttpClient(new BasicHttpParams());
-                HttpPost httpPost = new HttpPost(ConnectionConst.PRODUCT_INFO_SEARCH_SERVER_URL);
-
-                httpPost.setHeader("Content-type", "application/json");
-
-                InputStream inputStream = null;
-                try{
-                    HttpResponse response = httpClient.execute(httpPost);
-                    HttpEntity entity = response.getEntity();
-
-                    inputStream = entity.getContent();
-                    // json is UTF-8 by default
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "utf8"), 8);
-                    StringBuilder sb = new StringBuilder();
-
-                    String line = null;
-                    while ((line = reader.readLine()) != null)
-                    {
-                        sb.append(line + "\n");
-                    }
-                    result = sb.toString();
-                }catch (Exception e){
-                    e.printStackTrace();
-                }finally {
-                    try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
-                }
-
-                return result;
+            protected List<AdditionalProductInfo> doInBackground(String... params) {
+                String myJSON = getHttpJSONData(ConnectionConst.PRODUCT_INFO_SEARCH_SERVER_URL);
+                List<AdditionalProductInfo> productItemList = setJSONDataToProductItem(myJSON);
+                return productItemList;
             }
 
             @Override
-            protected void onPostExecute(String result) {
-                myJSON = result;
-                showList();
+            protected void onPostExecute(List productItemList) {
+                showList(productItemList);
             }
         }
 
         GetDataJSON getDataJSON = new GetDataJSON();
-        getDataJSON.execute(url);
+        getDataJSON.execute();
+
     }
 
-    protected  void showList(){
+    protected String getHttpJSONData(String url){
+        String result = null;
+        DefaultHttpClient httpClient = new DefaultHttpClient(new BasicHttpParams());
+        HttpPost httpPost = new HttpPost(url);
+
+        httpPost.setHeader("Content-type", "application/json");
+
+        InputStream inputStream = null;
+        try{
+            HttpResponse response = httpClient.execute(httpPost);
+            HttpEntity entity = response.getEntity();
+
+            inputStream = entity.getContent();
+            // json is UTF-8 by default
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "utf8"), 8);
+            StringBuilder sb = new StringBuilder();
+
+            String line = null;
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line + "\n");
+            }
+            result = sb.toString();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
+        }
+
+        return result;
+    }
+
+    protected List<AdditionalProductInfo> setJSONDataToProductItem(String myJSON){
+        List<AdditionalProductInfo> productItemList = new ArrayList<>();
+        AdditionalProductInfo productItem = null;
+        JSONArray peoples = null;
+
         try{
             JSONObject jsonObj = new JSONObject(myJSON);
             peoples = jsonObj.getJSONArray(TAG_RESULTS);
@@ -141,19 +158,46 @@ public class BestProductFragment extends Fragment {
                 String productImg       = productJsonData.getString(TAG_PRODUCT_IMG);
 
                 productItem = new AdditionalProductInfo(productName, productDesc);
-                productItem.getImageList().add(R.drawable.rose);
-                productItem.getImageList().add(R.drawable.rose);
-                productItem.getImageList().add(R.drawable.rose);
                 productItem.setSellerName(sellerID);
                 productItem.setItemCount(Integer.parseInt(productItemCnt));
                 productItem.setPrice(Integer.parseInt(productPrice));
+
+                Bitmap bitmap = getProductImages(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
+                Libraries.saveBitmapToJpeg(bitmap, this.getActivity().getCacheDir().toString(), productImg);
+                productItem.getImageURLPathList().add(this.getActivity().getCacheDir().toString() + "/" + productImg);
+                bitmap = null;
+
                 productItemList.add(productItem);
+
             }
 
-            BestProductListAdapter bestProductListAdapter = new BestProductListAdapter(getActivity(), productItemList);
-            mRecyclerView.setAdapter(bestProductListAdapter);
         }catch (JSONException e){
             e.printStackTrace();
         }
+        return productItemList;
+    }
+
+    protected Bitmap getProductImages(String imageFileUrl){
+        Bitmap bmImg = null;
+        try{
+            URL myFileUrl = new URL(imageFileUrl);
+            HttpURLConnection conn = (HttpURLConnection)myFileUrl.openConnection();
+            conn.setDoInput(true);
+            conn.connect();
+
+            InputStream is = conn.getInputStream();
+
+            bmImg = BitmapFactory.decodeStream(is);
+
+
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+        return  bmImg;
+    }
+
+    protected  void showList(List<AdditionalProductInfo> productItemList){
+        BestProductListAdapter bestProductListAdapter = new BestProductListAdapter(getActivity(), productItemList);
+        mRecyclerView.setAdapter(bestProductListAdapter);
     }
 }

@@ -1,6 +1,7 @@
 package net.clipcodes.myapplication.ui.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -15,7 +16,7 @@ import java.util.List;
 public class ProductImageSliderAdapter extends PagerAdapter {
     private ImageView imageView;
     private Context context;
-    private List<Integer> imageList;
+    private List<Bitmap> imageList;
 
     public ProductImageSliderAdapter(Context context) {
         this.context = context;
@@ -37,7 +38,7 @@ public class ProductImageSliderAdapter extends PagerAdapter {
         View view = inflater.inflate(R.layout.item_product_image_slider, null);
 
         imageView = view.findViewById(R.id.ivImage);
-        imageView.setImageResource(this.imageList.get(position));
+        imageView.setImageBitmap(this.imageList.get(position));
 
         ViewPager viewPager = (ViewPager) container;
         viewPager.addView(view, 0);
@@ -52,7 +53,7 @@ public class ProductImageSliderAdapter extends PagerAdapter {
         viewPager.removeView(view);
     }
 
-    public void setImageList(List<Integer> imageList){
+    public void setImageList(List<Bitmap> imageList){
         this.imageList = imageList;
     }
 }

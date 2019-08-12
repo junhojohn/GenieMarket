@@ -1,6 +1,7 @@
 package net.clipcodes.myapplication.ui.activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -14,7 +15,9 @@ import android.widget.TextView;
 
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.ui.adapters.ProductImageSliderAdapter;
+import net.clipcodes.myapplication.utils.Libraries;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -30,7 +33,7 @@ public class DetailProductActivity extends AppCompatActivity {
     TextView tvSellingUnit;
     TextView tvPriceTag;
     TextView tvProductName;
-    List<Integer> imageList;
+    List<String> imageURLPathList;
     ImageButton btn_contact_kakaoTalk;
     ImageButton btn_contact_phone_number;
     @Override
@@ -57,9 +60,11 @@ public class DetailProductActivity extends AppCompatActivity {
 
         ProductImageSliderAdapter adapter = new ProductImageSliderAdapter(this);
         Bundle mBundle = getIntent().getExtras();
+
         if (mBundle != null) {
-            imageList = mBundle.getIntegerArrayList("ImageList");
-            adapter.setImageList(imageList);
+            imageURLPathList = mBundle.getStringArrayList("ImageURLPathList");
+            adapter.setImageList(Libraries.getBitmapsFromCacheDir(getCacheDir().toString(), imageURLPathList));
+
             viewPager.setAdapter(adapter);
             tvProductName.setText(mBundle.getString("Title"));
             mDescription.setText(mBundle.getString("Description"));
@@ -96,7 +101,7 @@ public class DetailProductActivity extends AppCompatActivity {
             DetailProductActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if (viewPager.getCurrentItem() < imageList.size() - 1) {
+                    if (viewPager.getCurrentItem() < imageURLPathList.size() - 1) {
                         viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
                     } else {
                         viewPager.setCurrentItem(0);
