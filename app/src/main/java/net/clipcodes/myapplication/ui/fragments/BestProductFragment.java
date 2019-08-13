@@ -109,6 +109,7 @@ public class BestProductFragment extends Fragment {
     }
 
     protected String getHttpJSONData(String url){
+        long currTime = System.currentTimeMillis();
         String result = null;
         DefaultHttpClient httpClient = new DefaultHttpClient(new BasicHttpParams());
         HttpPost httpPost = new HttpPost(url);
@@ -136,11 +137,12 @@ public class BestProductFragment extends Fragment {
         }finally {
             try{if(inputStream != null)inputStream.close();}catch(Exception squish){}
         }
-
+        System.out.println("getHttpJSONData: " + (System.currentTimeMillis() - currTime));
         return result;
     }
 
     protected List<AdditionalProductInfo> setJSONDataToProductItem(String myJSON){
+        long currTime = System.currentTimeMillis();
         List<AdditionalProductInfo> productItemList = new ArrayList<>();
         AdditionalProductInfo productItem = null;
         JSONArray peoples = null;
@@ -170,7 +172,7 @@ public class BestProductFragment extends Fragment {
                 productItemList.add(productItem);
 
             }
-
+            System.out.println("setJSONDataToProductItem: " + (System.currentTimeMillis() - currTime));
         }catch (JSONException e){
             e.printStackTrace();
         }

@@ -37,7 +37,7 @@ public class BestProductListAdapter extends RecyclerView.Adapter<BestProductList
 
     @Override
     public void onBindViewHolder(final BestProductListViewHolder holder, int position) {
-
+        long currTime = System.currentTimeMillis();
         holder.mImage.setImageBitmap(Libraries.getBitmapFromFile(new File(productList.get(position).getImageURLPathList().get(0))));
         holder.mTitle.setText(productList.get(position).getName());
         holder.tvPriceTag.setText(String.valueOf(productList.get(position).getPrice()));
@@ -54,6 +54,7 @@ public class BestProductListAdapter extends RecyclerView.Adapter<BestProductList
         mContext.startActivity(mIntent);
             }
         });
+        System.out.println("onBindViewHolder: " + (System.currentTimeMillis() - currTime));
     }
 
     @Override
