@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.melnykov.fab.FloatingActionButton;
 
 import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
+import net.clipcodes.myapplication.ui.activities.LoginActivity;
 import net.clipcodes.myapplication.ui.activities.RegisterActivity;
 import net.clipcodes.myapplication.ui.fragments.CheapProductFragment;
 import net.clipcodes.myapplication.ui.fragments.BestProductFragment;
@@ -114,8 +115,10 @@ public class PageHome extends Fragment {
                     cheapProductView.setVisibility(View.VISIBLE);
                     break;
                 case R.id.btn_register:
-                    Intent mIntent = new Intent(view.getContext(), RegisterActivity.class);
-                    view.getContext().startActivity(mIntent);
+                    Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
+                    startActivity(loginIntent);
+//                    Intent mIntent = new Intent(view.getContext(), RegisterActivity.class);
+//                    view.getContext().startActivity(mIntent);
                     break;
             }
         }

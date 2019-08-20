@@ -19,6 +19,7 @@ import net.clipcodes.myapplication.ui.pages.PageHome;
 import net.clipcodes.myapplication.ui.pages.PageMyGenie;
 import net.clipcodes.myapplication.ui.pages.PageSearch;
 import net.clipcodes.myapplication.ui.adapters.MainAdapter;
+import net.clipcodes.myapplication.utils.Libraries;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         setupFm(getSupportFragmentManager(), viewPager);
         viewPager.setCurrentItem(0);
         viewPager.setOnPageChangeListener(new PageChange());
+
     }
 
     private void getHashKey(){

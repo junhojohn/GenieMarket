@@ -18,6 +18,7 @@ import com.travijuu.numberpicker.library.NumberPicker;
 
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.models.AdditionalProductInfo;
+import net.clipcodes.myapplication.models.AdditionalSellerInfo;
 import net.clipcodes.myapplication.ui.widgets.ClearEditText;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -31,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText editTextProductDescription;
     TextView textViewSellerName;
     AdditionalProductInfo productInfo;
-
+    AdditionalSellerInfo sellerInfo;
     @Override
     protected void onStart() {
         productInfo = new AdditionalProductInfo();
@@ -66,6 +67,8 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sellerInfo = (AdditionalSellerInfo)getIntent().getSerializableExtra("sellerInfo");
+
         setContentView(R.layout.activity_register);
 
         toolbar = findViewById(R.id.register_toolbar);
@@ -83,6 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
         editTextProductDescription = findViewById(R.id.tvDescription);
         numberPicker = findViewById(R.id.number_picker);
         textViewSellerName = findViewById(R.id.tvSellerName);
+        textViewSellerName.setText(sellerInfo.getSellerID());
         numberPicker.setDisplayFocusable(true);
 
         editTextProductName.addTextChangedListener(productNameTextWatcher);

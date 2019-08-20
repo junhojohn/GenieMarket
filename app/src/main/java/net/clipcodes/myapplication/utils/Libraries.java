@@ -2,11 +2,16 @@ package net.clipcodes.myapplication.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Base64;
@@ -27,6 +32,7 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -392,4 +398,55 @@ public class Libraries {
         return null;
     }
 
+    // 프로젝트의 해시키를 반환
+
+    @Nullable
+
+    public static String getHashKey(Context context) {
+
+        final String TAG = "KeyHash";
+
+        String keyHash = null;
+
+        try {
+
+            PackageInfo info =
+
+                    context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+
+
+
+            for (Signature signature : info.signatures) {
+
+                MessageDigest md;
+
+                md = MessageDigest.getInstance("SHA");
+
+                md.update(signature.toByteArray());
+
+                keyHash = new String(Base64.encode(md.digest(), 0));
+
+                Log.d(TAG, keyHash);
+
+            }
+
+        } catch (Exception e) {
+
+            Log.e("name not found", e.toString());
+
+        }
+
+
+
+        if (keyHash != null) {
+
+            return keyHash;
+
+        } else {
+
+            return null;
+
+        }
+
+    }
 }
