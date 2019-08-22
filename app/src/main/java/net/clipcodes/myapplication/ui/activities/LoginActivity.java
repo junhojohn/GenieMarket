@@ -184,8 +184,16 @@ public class LoginActivity extends AppCompatActivity {
                     String thumnailPath = userProfile.getThumbnailImagePath(); // https://k.kakaocdn.net/dn/bm6HH8/btqxyLLaE5g/w3NcqGlQRxzy5DXO56CQK0/profile_640x640s.jpg
 
                     String birthday = userProfile.getKakaoAccount().getBirthday(); // 0809
-                    String age = userProfile.getKakaoAccount().getAgeRange().getValue(); // 방어처리 필요 10~19, 20~29, 30~39, 40~49
-                    String gender = userProfile.getKakaoAccount().getGender().getValue(); // male, female
+                    String age = "";
+                    if(userProfile.getKakaoAccount().hasAgeRange().getBoolean()){
+                        age = userProfile.getKakaoAccount().getAgeRange().getValue(); // 방어처리 필요 10~19, 20~29, 30~39, 40~49
+                    }
+
+                    String gender = "";
+                    if(userProfile.getKakaoAccount().hasGender().getBoolean()){
+                        gender = userProfile.getKakaoAccount().getGender().getValue(); // male, female
+                    }
+
                     String email = userProfile.getKakaoAccount().getEmail(); // train1990@hanmail.net
                     String phoneNum = userProfile.getKakaoAccount().getPhoneNumber(); // null
 
