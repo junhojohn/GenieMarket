@@ -163,10 +163,10 @@ public class Libraries {
 
                 dos.writeBytes(twoHyphens + boundary + lineEnd);
 
-                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""
-
-                        + fileRenamed + "\"" + lineEnd);
-
+                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\""+ fileRenamed + "\"" + lineEnd);
+//                dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file\";filename=\"");
+//                dos.writeUTF("aaa");
+//                dos.writeBytes(currentTimePostfix + "\"" + lineEnd);
 
 
                 dos.writeBytes(lineEnd);

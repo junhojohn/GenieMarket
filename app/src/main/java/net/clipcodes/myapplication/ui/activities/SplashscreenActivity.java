@@ -4,15 +4,24 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.kakao.auth.Session;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
+
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.accounts.SessionCallback;
 
 public class SplashscreenActivity extends Activity {
+    private String TAG = "SplashscreenActivity";
+
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         Window window = getWindow();
@@ -24,8 +33,22 @@ public class SplashscreenActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
+        checkKakaoLoginSession();
+//        onClickLogout();
         StartAnimations();
     }
+
+    private void checkKakaoLoginSession(){
+        if(Session.getCurrentSession().checkAndImplicitOpen()){
+            Log.e(TAG, "토큰큰 : " + Session.getCurrentSession().getTokenInfo().getAccessToken());
+            Log.e(TAG, "토큰큰 리프레쉬토큰 : " + Session.getCurrentSession().getTokenInfo().getRefreshToken());
+            Log.e(TAG, "토큰큰 파이어데이트 : " + Session.getCurrentSession().getTokenInfo().getRemainingExpireTime());
+
+            Session.getCurrentSession().addCallback(SessionCallback.getInstance());
+            SessionCallback.getInstance().requestMe();
+        }
+    }
+
     private void StartAnimations() {
         Animation anim = AnimationUtils.loadAnimation(this, R.anim.anim_splash_alpha_color);
         anim.reset();
@@ -65,5 +88,4 @@ public class SplashscreenActivity extends Activity {
         splashTread.start();
 
     }
-
 }

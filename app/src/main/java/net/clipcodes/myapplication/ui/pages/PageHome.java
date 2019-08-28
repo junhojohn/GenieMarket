@@ -1,10 +1,12 @@
 package net.clipcodes.myapplication.ui.pages;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,8 +15,10 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.kakao.auth.Session;
 import com.melnykov.fab.FloatingActionButton;
 
+import net.clipcodes.myapplication.accounts.SessionCallback;
 import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
 import net.clipcodes.myapplication.ui.activities.LoginActivity;
 import net.clipcodes.myapplication.ui.activities.RegisterActivity;
@@ -37,6 +41,7 @@ public class PageHome extends Fragment {
     Handler handler = new Handler();
     Runnable update;
     FloatingActionButton btnRegister;
+    private String TAG = "PageHome";
 
     @Nullable
     @Override
@@ -45,7 +50,6 @@ public class PageHome extends Fragment {
 
         //INIT VIEWS
         init(fragment_three);
-
         //SET TABS ONCLICK
         bestFragment.setOnClickListener(clik);
         cheapFragment.setOnClickListener(clik);
@@ -115,10 +119,17 @@ public class PageHome extends Fragment {
                     cheapProductView.setVisibility(View.VISIBLE);
                     break;
                 case R.id.btn_register:
-                    Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
-                    startActivity(loginIntent);
-//                    Intent mIntent = new Intent(view.getContext(), RegisterActivity.class);
-//                    view.getContext().startActivity(mIntent);
+                    if(Session.getCurrentSession().checkAndImplicitOpen()){
+
+                        Intent mIntent = new Intent(view.getContext(), RegisterActivity.class);
+                        mIntent.putExtra("sellerInfo", SessionCallback.getInstance().getSellerInfo());
+                        view.getContext().startActivity(mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                    }else{
+                        Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
+                        startActivity(loginIntent);
+                    }
+
+
                     break;
             }
         }
