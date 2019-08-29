@@ -21,6 +21,8 @@ import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.models.AdditionalSellerInfo;
 import net.clipcodes.myapplication.ui.widgets.ClearEditText;
 
+import java.io.Serializable;
+
 public class RegisterActivity extends AppCompatActivity {
 
     Toolbar toolbar;

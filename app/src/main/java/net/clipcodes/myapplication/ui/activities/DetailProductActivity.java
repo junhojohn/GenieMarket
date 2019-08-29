@@ -14,16 +14,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
 import net.clipcodes.myapplication.ui.adapters.ProductImageSliderAdapter;
 import net.clipcodes.myapplication.utils.Libraries;
 
 import java.io.File;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class DetailProductActivity extends AppCompatActivity {
+public class DetailProductActivity extends AppCompatActivity implements Serializable {
     ViewPager viewPager;
     TabLayout indicator;
     Button btnPurchase;
@@ -117,6 +119,7 @@ public class DetailProductActivity extends AppCompatActivity {
             switch (view.getId()){
                 case R.id.btnPurchase:
                     Intent loginIntent = new Intent(DetailProductActivity.this, LoginActivity.class);
+                    loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.PURCHASE_ACTIVITY.getActivityName());
                     startActivity(loginIntent);
                     break;
                 case R.id.seller_contact_kakaotalk:

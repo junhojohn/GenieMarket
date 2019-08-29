@@ -19,6 +19,7 @@ import com.kakao.auth.Session;
 import com.melnykov.fab.FloatingActionButton;
 
 import net.clipcodes.myapplication.accounts.SessionCallback;
+import net.clipcodes.myapplication.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
 import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
 import net.clipcodes.myapplication.ui.activities.LoginActivity;
 import net.clipcodes.myapplication.ui.activities.RegisterActivity;
@@ -126,6 +127,7 @@ public class PageHome extends Fragment {
                         view.getContext().startActivity(mIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                     }else{
                         Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
+                        loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.REGISTER_ACTIVITY.getActivityName());
                         startActivity(loginIntent);
                     }
 

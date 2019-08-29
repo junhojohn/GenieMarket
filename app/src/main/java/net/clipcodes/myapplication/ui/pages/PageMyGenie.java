@@ -1,5 +1,6 @@
 package net.clipcodes.myapplication.ui.pages;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -18,6 +19,11 @@ import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.accounts.SessionCallback;
 import net.clipcodes.myapplication.models.AdditionalSellerInfo;
+import net.clipcodes.myapplication.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
+import net.clipcodes.myapplication.ui.activities.LoginActivity;
+import net.clipcodes.myapplication.ui.activities.RegisterActivity;
+
+import java.io.Serializable;
 
 public class PageMyGenie extends Fragment {
     private String TAG = "PageMyGenie";
@@ -69,10 +75,10 @@ public class PageMyGenie extends Fragment {
         tv_phoneNumLoggedOut       = (TextView)v.findViewById(R.id.textView_PhoneNum_logged_out);
         btnKakaoAccountLoginFromMyPage = (Button)v.findViewById(R.id.btnKakaoAccountLoginFromMyPage);
 
-        tv_nameLoggedIn.setText("null");
-        tv_idLoggedIn.setText("null");
-        tv_phoneNumLoggedIn.setText("null");
-        tv_emailLoggedIn.setText("null");
+        tv_nameLoggedOut.setText("null");
+        tv_idLoggedOut.setText("null");
+        tv_phoneNumLoggedOut.setText("null");
+        tv_emailLoggedOut.setText("null");
 
         btnKakaoAccountLoginFromMyPage.setOnClickListener(clik);
     }
@@ -113,6 +119,9 @@ public class PageMyGenie extends Fragment {
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.btnKakaoAccountLoginFromMyPage:
+                    Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
+                    loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.PAGE_MY_GENIE.getActivityName());
+                    startActivity(loginIntent);
                     break;
                 case R.id.kakaoLogoutFromMyPage:
                     onClickLogout();

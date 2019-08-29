@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import net.clipcodes.myapplication.R;
 
+import java.io.Serializable;
+
 public class PurchaseActivity extends AppCompatActivity {
 
     @Override
