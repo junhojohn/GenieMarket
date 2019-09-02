@@ -199,7 +199,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                             String currentTime = "_" + System.currentTimeMillis() + Libraries.getFileExtensions(productImage1);
                             fileRenamed = currentTime;
                             serverReturnCode = Libraries.uploadFile(productImage1, fileRenamed, getCacheDir().toString());
-                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getSellerName(), fileRenamed, responseListener);
+                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getBigCategory(), productInfo.getSellerName(), fileRenamed, responseListener);
                             RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
                             queue.add(productRegisterRequest);
                         }

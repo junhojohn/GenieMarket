@@ -6,6 +6,7 @@ public class AdditionalProductInfo extends BasicProductInfo implements Serializa
     private int price = -1;
     private int itemCount = -1;
     private String sellerName;
+    private String bigCategory;
 
     public AdditionalProductInfo(){
 
@@ -38,4 +39,8 @@ public class AdditionalProductInfo extends BasicProductInfo implements Serializa
     public void setSellerName(String sellerName) {
         this.sellerName = sellerName;
     }
+
+    public String getBigCategory() { return bigCategory; }
+
+    public void setBigCategory(String bigCategory) { this.bigCategory = bigCategory; }
 }

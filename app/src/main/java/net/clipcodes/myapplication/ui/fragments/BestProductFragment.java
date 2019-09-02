@@ -56,6 +56,7 @@ public class BestProductFragment extends Fragment {
     private static final String TAG_PRODUCT_ITEM_CNT    = "productItemCnt";
     private static final String TAG_PRODUCT_PRICE       = "productPrice";
     private static final String TAG_PRODUCT_DESC        = "productDescription";
+    private static final String TAG_PRODUCT_BIG_CATEGORY= "bigCategory";
     private static final String TAG_PRODUCT_IMG         = "imageFilePath";
     private static final int IDX_TAG_PRODUCT_NAME        = 0;
     private static final int IDX_TAG_SELLER_ID           = 1;
@@ -157,20 +158,23 @@ public class BestProductFragment extends Fragment {
                 String productPrice     = productJsonData.getString(TAG_PRODUCT_PRICE);
                 String productItemCnt   = productJsonData.getString(TAG_PRODUCT_ITEM_CNT);
                 String productDesc      = productJsonData.getString(TAG_PRODUCT_DESC);
+                String bigCategory      = productJsonData.getString(TAG_PRODUCT_BIG_CATEGORY);
                 String productImg       = productJsonData.getString(TAG_PRODUCT_IMG);
 
-                productItem = new AdditionalProductInfo(productName, productDesc);
-                productItem.setSellerName(sellerID);
-                productItem.setItemCount(Integer.parseInt(productItemCnt));
-                productItem.setPrice(Integer.parseInt(productPrice));
+                if(bigCategory.equals(getString(R.string.title_best_product))){
+                    productItem = new AdditionalProductInfo(productName, productDesc);
+                    productItem.setSellerName(sellerID);
+                    productItem.setItemCount(Integer.parseInt(productItemCnt));
+                    productItem.setPrice(Integer.parseInt(productPrice));
+                    productItem.setBigCategory(bigCategory);
 
-                Bitmap bitmap = getProductImages(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
-                Libraries.saveBitmapToJpeg(bitmap, this.getActivity().getCacheDir().toString(), productImg);
-                productItem.getImageURLPathList().add(this.getActivity().getCacheDir().toString() + "/" + productImg);
-                bitmap = null;
+                    Bitmap bitmap = getProductImages(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
+                    Libraries.saveBitmapToJpeg(bitmap, this.getActivity().getCacheDir().toString(), productImg);
+                    productItem.getImageURLPathList().add(this.getActivity().getCacheDir().toString() + "/" + productImg);
+                    bitmap = null;
 
-                productItemList.add(productItem);
-
+                    productItemList.add(productItem);
+                }
             }
             System.out.println("setJSONDataToProductItem: " + (System.currentTimeMillis() - currTime));
         }catch (JSONException e){

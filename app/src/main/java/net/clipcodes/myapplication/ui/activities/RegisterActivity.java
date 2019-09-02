@@ -7,8 +7,11 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,8 +36,11 @@ public class RegisterActivity extends AppCompatActivity {
     ClearEditText editTextPrice;
     EditText editTextProductDescription;
     TextView textViewSellerName;
+    Spinner spinner;
     AdditionalProductInfo productInfo;
     AdditionalSellerInfo sellerInfo;
+
+
     @Override
     protected void onStart() {
         productInfo = new AdditionalProductInfo();
@@ -63,6 +69,7 @@ public class RegisterActivity extends AppCompatActivity {
             btnRegistration.setEnabled(true);
         }
 
+        productInfo.setBigCategory(spinner.getSelectedItem().toString());
         super.onStart();
     }
 
@@ -90,11 +97,16 @@ public class RegisterActivity extends AppCompatActivity {
         textViewSellerName = findViewById(R.id.tvSellerName);
         textViewSellerName.setText(sellerInfo.getSellerID());
         numberPicker.setDisplayFocusable(true);
+        spinner = (Spinner)findViewById(R.id.tv_bigCategoryName);
+        ArrayAdapter bigCategorySpinnerAdapater = ArrayAdapter.createFromResource(this, R.array.bigCategorySpinner, android.R.layout.simple_spinner_item);
+        bigCategorySpinnerAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(bigCategorySpinnerAdapater);
 
         editTextProductName.addTextChangedListener(productNameTextWatcher);
         editTextPrice.addTextChangedListener(productPriceTextWatcher);
         editTextProductDescription.addTextChangedListener(productDescriptionTextWatcher);
         numberPicker.setValueChangedListener(numberPickerWatcher);
+        spinner.setOnItemSelectedListener(spinnerListener);
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -161,6 +173,19 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            productInfo.setBigCategory(parent.getSelectedItem().toString());
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
 
         }
     };

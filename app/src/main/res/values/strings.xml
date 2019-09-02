@@ -10,6 +10,9 @@
     <string name="title_product_price">판매가:</string>
     <string name="title_product_selling_unit">판매단위:</string>
     <string name="title_seller_name">판매자:</string>
+    <string name="title_big_category">상품구색:</string>
+    <string name="title_middle_cateogry">중분류:</string>
+    <string name="title_little_category">소분류:</string>
     <string name="title_product_desc">상품상세설명:</string>
     <string name="title_purchase">구매하기</string>
     <!--At Suresoft-->
