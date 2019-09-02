@@ -57,7 +57,7 @@ public class BestProductFragment extends Fragment {
     private static final int IDX_TAG_PRODUCT_ITEM_CNT    = 2;
     private static final int IDX_TAG_PRODUCT_PRICE       = 3;
     private static final int IDX_TAG_PRODUCT_DESC        = 4;
-
+    private List<AdditionalProductInfo> productItemList  = null;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +77,6 @@ public class BestProductFragment extends Fragment {
 
         getData();
 
-
         return seller;
     }
 
@@ -87,8 +86,11 @@ public class BestProductFragment extends Fragment {
 
             @Override
             protected List<AdditionalProductInfo> doInBackground(String... params) {
-                String myJSON = getHttpJSONData(ConnectionConst.PRODUCT_INFO_SEARCH_SERVER_URL);
-                List<AdditionalProductInfo> productItemList = setJSONDataToProductItem(myJSON);
+                if(productItemList == null || productItemList.size() == 0){
+                    String myJSON = getHttpJSONData(ConnectionConst.PRODUCT_INFO_SEARCH_SERVER_URL);
+                    productItemList = setJSONDataToProductItem(myJSON);
+                }
+
                 return productItemList;
             }
 
