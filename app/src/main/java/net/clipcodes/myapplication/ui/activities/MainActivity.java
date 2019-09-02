@@ -30,6 +30,19 @@ public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     BottomNavigationView navigation;
+    private static MainAdapter Adapter;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refresh();
+    }
+
+    public void refresh(){
+        if(Adapter != null){
+            Adapter.notifyDataSetChanged();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static void setupFm(FragmentManager fragmentManager, ViewPager viewPager){
-        MainAdapter Adapter = new MainAdapter(fragmentManager);
+        Adapter = new MainAdapter(fragmentManager);
         Adapter.add(new PageHome(), "Page Home");
         Adapter.add(new PageCategory(), "Page Category");
         Adapter.add(new PageSearch(), "Page Search");

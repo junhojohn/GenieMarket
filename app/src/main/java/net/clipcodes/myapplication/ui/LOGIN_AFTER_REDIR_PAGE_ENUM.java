@@ -3,7 +3,8 @@ package net.clipcodes.myapplication.ui;
 public enum LOGIN_AFTER_REDIR_PAGE_ENUM {
     REGISTER_ACTIVITY("RegisterActivity", 1),
     PURCHASE_ACTIVITY("PurchaseActivity", 2),
-    PAGE_MY_GENIE("PageMyGenie", 3);
+    PAGE_MY_GENIE("PageMyGenie", 3),
+    MAIN_ACTIVITY("MainActivity", 4);
 
     private String activityName;
     private int activityIndex;

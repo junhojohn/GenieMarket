@@ -21,6 +21,7 @@ import net.clipcodes.myapplication.accounts.SessionCallback;
 import net.clipcodes.myapplication.models.AdditionalSellerInfo;
 import net.clipcodes.myapplication.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
 import net.clipcodes.myapplication.ui.activities.LoginActivity;
+import net.clipcodes.myapplication.ui.activities.MainActivity;
 import net.clipcodes.myapplication.ui.activities.RegisterActivity;
 
 import java.io.Serializable;
@@ -51,7 +52,8 @@ public class PageMyGenie extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        if(Session.getCurrentSession().checkAndImplicitOpen()){
+//        if(Session.getCurrentSession().checkAndImplicitOpen()){
+        if(SessionCallback.getInstance().isLoginSuccess()){
             View fragment_myGenieLoggedInView = inflater.inflate(R.layout.fragment_mygenie_loggedin, container, false);
             initLoggedInView(fragment_myGenieLoggedInView);
             return fragment_myGenieLoggedInView;
@@ -120,11 +122,12 @@ public class PageMyGenie extends Fragment {
             switch (view.getId()){
                 case R.id.btnKakaoAccountLoginFromMyPage:
                     Intent loginIntent = new Intent(view.getContext(), LoginActivity.class);
-                    loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.PAGE_MY_GENIE.getActivityName());
+                    loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.MAIN_ACTIVITY.getActivityName());
                     startActivity(loginIntent);
                     break;
                 case R.id.kakaoLogoutFromMyPage:
                     onClickLogout();
+
                     break;
             }
         }
@@ -145,7 +148,8 @@ public class PageMyGenie extends Fragment {
             @Override
             public void onSuccess(Long result) {
                 Log.e(TAG, "카카오 로그아웃 onSuccess");
-                    SessionCallback.getInstance().setLoginSuccess(false);
+                SessionCallback.getInstance().setLoginSuccess(false);
+                ((MainActivity)getActivity()).refresh();
 //                tvName.setText(null);
 //                tvAge.setText(null);
 //                tvBirth.setText(null);

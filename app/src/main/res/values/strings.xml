@@ -13,7 +13,7 @@
     <string name="title_product_desc">상품상세설명:</string>
     <string name="title_purchase">구매하기</string>
     <!--At Suresoft-->
-    <!--<string name="kakao_app_key">367786002717697e3d5c8bee29585f8b</string>-->
+    <string name="kakao_app_key">367786002717697e3d5c8bee29585f8b</string>
     <!--At Home-->
-    <string name="kakao_app_key">dbb6beff81d6cb53bfebc539ab3a635f</string>
+    <!--<string name="kakao_app_key">dbb6beff81d6cb53bfebc539ab3a635f</string>-->
 </resources>
