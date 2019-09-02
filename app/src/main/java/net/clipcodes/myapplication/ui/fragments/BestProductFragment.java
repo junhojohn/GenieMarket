@@ -8,15 +8,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bumptech.glide.Glide;
-
 import net.clipcodes.myapplication.models.AdditionalProductInfo;
-import net.clipcodes.myapplication.models.BasicProductInfo;
 import net.clipcodes.myapplication.ui.ConnectionConst;
 import net.clipcodes.myapplication.ui.adapters.BestProductListAdapter;
 import net.clipcodes.myapplication.R;
@@ -32,13 +28,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.nio.Buffer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,7 +71,7 @@ public class BestProductFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         seller = inflater.inflate(R.layout.tab_best_product, container, false);
-        mRecyclerView = seller.findViewById(R.id.recyclerview);
+        mRecyclerView = seller.findViewById(R.id.recyclerviewForBestProduct);
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(getActivity(), 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
 
