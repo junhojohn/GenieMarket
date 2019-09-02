@@ -1,10 +1,12 @@
 package net.clipcodes.myapplication.ui.activities;
 
+import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -32,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 앱 해시키 얻기
+//        getHashKey(getApplicationContext());
         setContentView(R.layout.activity_main);
 
         navigation = findViewById(R.id.navigation);
@@ -45,22 +49,31 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void getHashKey(){
-        try {                                                        // 패키지이름을 입력해줍니다.
-            PackageInfo info = getPackageManager().getPackageInfo("com.example", PackageManager.GET_SIGNATURES);
+    @Nullable
+    public static String getHashKey(Context context) {
+        final String TAG = "KeyHash";
+        String keyHash = null;
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+
             for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
+
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-
-
+                keyHash = new String(Base64.encode(md.digest(), 0));
+                Log.d(TAG, keyHash);
             }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            Log.e("name not found", e.toString());
+        }
+
+        if (keyHash != null) {
+            return keyHash;
+        } else {
+            return null;
         }
     }
-
 
     public static void setupFm(FragmentManager fragmentManager, ViewPager viewPager){
         MainAdapter Adapter = new MainAdapter(fragmentManager);
