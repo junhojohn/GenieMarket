@@ -2,6 +2,7 @@ package net.clipcodes.myapplication.ui.activities;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -180,12 +181,22 @@ public class ChooseImagesActivity extends AppCompatActivity {
 
                                 if(serverReturnCode == 200 && isProductRegisterSuccess){
                                     AlertDialog.Builder builder = new AlertDialog.Builder(ChooseImagesActivity.this);
-                                    builder.setMessage("상품등록에 성공했습니다.").setPositiveButton("확인", null).create().show();
-                                    Intent intent = new Intent(ChooseImagesActivity.this, MainActivity.class);
-                                    ChooseImagesActivity.this.startActivity(intent);
+                                    builder.setMessage("상품등록에 성공했습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(ChooseImagesActivity.this, MainActivity.class);
+                                            ChooseImagesActivity.this.startActivity(intent);
+                                        }
+                                    }).create().show();
                                 }else{
                                     AlertDialog.Builder builder = new AlertDialog.Builder(ChooseImagesActivity.this);
-                                    builder.setMessage("상품등록에 실패했습니다.").setNegativeButton("다시 시도", null).create().show();
+                                    builder.setMessage("상품등록에 실패했습니다.").setNegativeButton("다시 시도", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            Intent intent = new Intent(ChooseImagesActivity.this, MainActivity.class);
+                                            ChooseImagesActivity.this.startActivity(intent);
+                                        }
+                                    }).create().show();
                                 }
                             }catch (Exception e){
                                 Log.d("http protocol:", e.getMessage());
