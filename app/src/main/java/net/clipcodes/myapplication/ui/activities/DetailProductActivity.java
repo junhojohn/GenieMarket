@@ -13,6 +13,8 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kakao.auth.Session;
+
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
 import net.clipcodes.myapplication.ui.adapters.ProductImageSliderAdapter;
@@ -118,9 +120,16 @@ public class DetailProductActivity extends AppCompatActivity implements Serializ
         public void onClick(View view) {
             switch (view.getId()){
                 case R.id.btnPurchase:
-                    Intent loginIntent = new Intent(DetailProductActivity.this, LoginActivity.class);
-                    loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.PURCHASE_ACTIVITY.getActivityName());
-                    startActivity(loginIntent);
+                    if(Session.getCurrentSession().checkAndImplicitOpen()){
+                        Intent mIntent = new Intent(DetailProductActivity.this, PurchaseActivity.class);
+                        startActivity(mIntent);
+
+                    }else{
+                        Intent loginIntent = new Intent(DetailProductActivity.this, LoginActivity.class);
+                        loginIntent.putExtra("nextActivityToMove", LOGIN_AFTER_REDIR_PAGE_ENUM.PURCHASE_ACTIVITY.getActivityName());
+                        startActivity(loginIntent);
+                    }
+
                     break;
                 case R.id.seller_contact_kakaotalk:
                     break;
