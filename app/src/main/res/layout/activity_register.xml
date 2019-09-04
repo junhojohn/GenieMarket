@@ -27,6 +27,7 @@
                 android:gravity="center_vertical"
                 android:textColor="@color/white"
                 android:background="@color/gradStop"
+                android:textSize="20dp"
                 android:text="뒤로" />
 
             <TextView
@@ -53,6 +54,7 @@
 
                 android:textColor="@color/white"
                 android:background="@color/gradStop"
+                android:textSize="20dp"
                 android:text="상품사진선택" />
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
