@@ -40,6 +40,8 @@ import net.clipcodes.myapplication.utils.RegisterRequest;
 import org.json.JSONObject;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ChooseImagesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -57,7 +59,16 @@ public class ChooseImagesActivity extends AppCompatActivity {
     private String productImage1 = null;
     private String fileRenamed = null;
     private boolean isProductRegisterSuccess = false;
+    private boolean isProductImageUploadSuccess = true;
+    private Map<String, String> productImageMap;
     private int serverReturnCode = 0;
+
+    public Map<String, String> getProductImageMap() {
+        if(productImageMap == null){
+            productImageMap = new LinkedHashMap<String, String>();
+        }
+        return productImageMap;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,14 +174,14 @@ public class ChooseImagesActivity extends AppCompatActivity {
                 case R.id.btn_finish:
                     Log.e("RESULT", "productInfo : " + productInfo.getName() + ", "  + productInfo.getPrice() + ", " + productInfo.getSellerName() + ", " + productInfo.getItemCount() + ", " + productInfo.getDescription());
                     final ArrayList<Picture> selectedPictures = adapter.getAllPictureSelected();
-                    for(Picture picture : selectedPictures){
-                        Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
-                        try{
-                            productImage1 = picture.getPath();
-                        }catch (Exception e){
-                            Log.e("error:", e.getMessage());
-                        }
-                    }
+//                    for(Picture picture : selectedPictures){
+//                        Log.e("RESULT", "picuture: " + picture.getPath() + ", "  + picture.getPosition() + ", " + picture.getSelectCount());
+//                        try{
+//                            productImage1 = picture.getPath();
+//                        }catch (Exception e){
+//                            Log.e("error:", e.getMessage());
+//                        }
+//                    }
 
                     final  Response.Listener<String> responseListener = new Response.Listener<String>() {
                         @Override
@@ -179,7 +190,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                                 JSONObject jsonResponse = new JSONObject(response);
                                 isProductRegisterSuccess = jsonResponse.getBoolean(ConnectionConst.RETURN_JSON_IS_PRODUCT_REGISTER_SUCCESS);
 
-                                if(serverReturnCode == 200 && isProductRegisterSuccess){
+                                if(isProductRegisterSuccess){
                                     AlertDialog.Builder builder = new AlertDialog.Builder(ChooseImagesActivity.this);
                                     builder.setMessage("상품등록에 성공했습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         @Override
@@ -204,18 +215,37 @@ public class ChooseImagesActivity extends AppCompatActivity {
                         }
                     };
 
-                    Thread thread = new Thread(){
+                    Thread imageUploadThread = new Thread(){
                         @Override
                         public void run() {
-                            String currentTime = "_" + System.currentTimeMillis() + Libraries.getFileExtensions(productImage1);
-                            fileRenamed = currentTime;
-                            serverReturnCode = Libraries.uploadFile(productImage1, fileRenamed, getCacheDir().toString());
-                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getBigCategory(), productInfo.getSellerName(), fileRenamed, responseListener);
+                            for(int i = 0 ; i < selectedPictures.size() ; i ++){
+                                productImage1 = selectedPictures.get(i).getPath();
+                                String currentTime = "_" + System.currentTimeMillis() + Libraries.getFileExtensions(productImage1);
+                                fileRenamed = currentTime;
+                                serverReturnCode = Libraries.uploadFile(productImage1, fileRenamed, getCacheDir().toString());
+                                if(serverReturnCode == 200){
+                                    getProductImageMap().put("productImage"+(i+1), fileRenamed);
+                                }else{
+                                    isProductImageUploadSuccess = false;
+                                }
+                            }
+
+                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getBigCategory(), productInfo.getSellerName(), getProductImageMap(), responseListener);
                             RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
                             queue.add(productRegisterRequest);
                         }
                     };
-                    thread.start();
+                    imageUploadThread.start();
+
+//                    Thread thread = new Thread(){
+//                        @Override
+//                        public void run() {
+//                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getBigCategory(), productInfo.getSellerName(), getProductImageMap(), responseListener);
+//                            RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
+//                            queue.add(productRegisterRequest);
+//                        }
+//                    };
+//                    thread.start();
                     break;
                 case R.id.btn_back2:
                     finish();
