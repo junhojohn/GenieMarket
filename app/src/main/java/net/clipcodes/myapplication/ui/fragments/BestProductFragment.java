@@ -164,7 +164,10 @@ public class BestProductFragment extends Fragment {
                     }
 
                     Bitmap bitmap = getProductImages(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
+                    int orientDegree = Libraries.getOrientationOfImage(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
+                    bitmap = Libraries.getRotatedBitmap(bitmap, orientDegree);
                     Libraries.saveBitmapToJpeg(bitmap, this.getActivity().getCacheDir().toString(), productImg);
+
                     productItem.getImageURLPathList().add(this.getActivity().getCacheDir().toString() + "/" + productImg);
                     bitmap = null;
 
@@ -173,6 +176,8 @@ public class BestProductFragment extends Fragment {
             }
             System.out.println("setJSONDataToProductItem: " + (System.currentTimeMillis() - currTime));
         }catch (JSONException e){
+            e.printStackTrace();
+        }catch (Exception e){
             e.printStackTrace();
         }
         return productItemList;

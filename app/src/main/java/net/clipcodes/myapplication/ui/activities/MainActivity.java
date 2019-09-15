@@ -106,15 +106,23 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
                     viewPager.setCurrentItem(0);
+                    ((MainAdapter)viewPager.getAdapter()).notifyDataSetChanged();
                     return true;
                 case R.id.navigation_category:
                     viewPager.setCurrentItem(1);
+                    Bundle bundle = new Bundle();
+//                    bundle.putParcelableArrayList();
+                    bundle.putString("testParam", "testParam");
+                    ((MainAdapter)viewPager.getAdapter()).getItem(1).setArguments(bundle);
+                    ((MainAdapter)viewPager.getAdapter()).notifyDataSetChanged();
                     return true;
                 case R.id.navigation_search:
                     viewPager.setCurrentItem(2);
+                    ((MainAdapter)viewPager.getAdapter()).notifyDataSetChanged();
                     return true;
                 case R.id.navigation_mygenie:
                     viewPager.setCurrentItem(3);
+                    ((MainAdapter)viewPager.getAdapter()).notifyDataSetChanged();
                     return true;
             }
             return false;

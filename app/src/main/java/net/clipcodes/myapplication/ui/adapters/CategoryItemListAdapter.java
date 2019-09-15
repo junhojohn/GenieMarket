@@ -1,6 +1,7 @@
 package net.clipcodes.myapplication.ui.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -14,15 +15,21 @@ import android.widget.Toast;
 
 import net.clipcodes.myapplication.models.ParentCategoryItem;
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.ui.CategoryUIConst;
+import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
+import net.clipcodes.myapplication.ui.activities.ShowSelectedCategoryActivity;
 
 import java.util.ArrayList;
 
 
 public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemListAdapter.CategoryItemListViewHolder> {
     private ArrayList<ParentCategoryItem> parentCategoryItems;
-
-    public CategoryItemListAdapter(ArrayList<ParentCategoryItem> parentCategoryItems) {
+    private Context mContext;
+    private String testParam;
+    public CategoryItemListAdapter(Context mContext, ArrayList<ParentCategoryItem> parentCategoryItems, String testParam) {
+        this.mContext = mContext;
         this.parentCategoryItems = parentCategoryItems;
+        this.testParam = testParam;
     }
 
     @Override
@@ -135,6 +142,80 @@ public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemLi
             } else {
                 TextView textViewClicked = (TextView) view;
                 Toast.makeText(context, "" + textViewClicked.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                Intent mIntent = new Intent(mContext, ShowSelectedCategoryActivity.class);
+//                mIntent.putStringArrayListExtra("productList", productList);
+                mIntent.putExtra("testParam", testParam);
+
+                mContext.startActivity(mIntent);
+
+                if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_PANTS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SHIRT)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COAT)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HAT)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SOCKS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_GLOVE)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_CLOTHES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLOTHES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HIGH_HEELS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALKER)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_FLAT_SHOES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SNEAKERS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SLIPPERS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_KIDS_SHOES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_SHOES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SHOES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TODBACK)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALLET)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLUTCH_BAGS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BACKPACK)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COIN_WALLET)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_MERCHANDISE)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WATCH)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BRACELET)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ACCESSARIES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ACCESSARIES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_DOLL)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BLOCKS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_TOYS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TOYS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CELLPHONE_ACCESSARIES)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ELECTRONICS)){
+
+                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ELECTRONICS)){
+
+                }
             }
         }
     }
