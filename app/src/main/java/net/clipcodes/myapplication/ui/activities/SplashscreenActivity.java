@@ -215,8 +215,8 @@ public class SplashscreenActivity extends Activity {
                     }
 
                     Bitmap bitmap = getProductImages(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
-                    int orientDegree = Libraries.getOrientationOfImage(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
-                    bitmap = Libraries.getRotatedBitmap(bitmap, orientDegree);
+//                    int orientDegree = Libraries.getOrientationOfImage(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
+//                    bitmap = Libraries.getRotatedBitmap(bitmap, orientDegree);
                     Libraries.saveBitmapToJpeg(bitmap, this.getCacheDir().toString(), productImg);
 
                     productItem.getImageURLPathList().add(this.getCacheDir().toString() + "/" + productImg);

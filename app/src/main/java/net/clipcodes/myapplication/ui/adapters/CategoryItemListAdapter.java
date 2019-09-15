@@ -151,73 +151,73 @@ public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemLi
 
                 mContext.startActivity(mIntent);
 
-                if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_PANTS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SHIRT)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COAT)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HAT)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SOCKS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_GLOVE)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_CLOTHES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLOTHES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HIGH_HEELS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALKER)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_FLAT_SHOES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SNEAKERS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SLIPPERS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_KIDS_SHOES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_SHOES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SHOES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TODBACK)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALLET)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLUTCH_BAGS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BACKPACK)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COIN_WALLET)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_MERCHANDISE)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WATCH)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BRACELET)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ACCESSARIES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ACCESSARIES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_DOLL)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BLOCKS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_TOYS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TOYS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CELLPHONE_ACCESSARIES)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ELECTRONICS)){
-
-                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ELECTRONICS)){
-
-                }
+//                if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_PANTS)){
+//
+//                }else if(textViewClicked.getText().equals(getString(R.string.title_best_product))){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COAT)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HAT)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SOCKS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_GLOVE)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_CLOTHES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLOTHES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HIGH_HEELS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALKER)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_FLAT_SHOES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SNEAKERS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SLIPPERS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_KIDS_SHOES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_SHOES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SHOES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TODBACK)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALLET)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLUTCH_BAGS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BACKPACK)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COIN_WALLET)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_MERCHANDISE)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WATCH)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BRACELET)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ACCESSARIES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ACCESSARIES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_DOLL)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BLOCKS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_TOYS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TOYS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CELLPHONE_ACCESSARIES)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ELECTRONICS)){
+//
+//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ELECTRONICS)){
+//
+//                }
             }
         }
     }

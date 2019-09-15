@@ -4,5 +4,43 @@
         <item>@string/title_best_product</item>
         <item>@string/title_cheap_product</item>
     </string-array>
+    <string-array name="smallCategorySpinner">
+        <item>@string/title_category_shirt</item>
+        <item>@string/title_category_pants</item>
+        <item>@string/title_category_coat</item>
+        <item>@string/title_category_hat</item>
+        <item>@string/title_category_socks</item>
+        <item>@string/title_category_glove</item>
+        <item>@string/title_category_etc_clothes</item>
+        <item>@string/spinner_separator</item>
 
+        <item>@string/title_category_high_heels</item>
+        <item>@string/title_category_walker</item>
+        <item>@string/title_category_flat_shoes</item>
+        <item>@string/title_category_sneakers</item>
+        <item>@string/title_category_slippers</item>
+        <item>@string/title_category_kids_shoes</item>
+        <item>@string/title_category_etc_shoes</item>
+        <item>@string/spinner_separator</item>
+
+        <item>@string/title_category_todback</item>
+        <item>@string/title_category_wallet</item>
+        <item>@string/title_category_clutch_bags</item>
+        <item>@string/title_category_backpack</item>
+        <item>@string/title_category_coin_wallet</item>
+        <item>@string/spinner_separator</item>
+
+        <item>@string/title_category_watch</item>
+        <item>@string/title_category_bracelet</item>
+        <item>@string/title_category_etc_accessaries</item>
+        <item>@string/spinner_separator</item>
+
+        <item>@string/title_category_doll</item>
+        <item>@string/title_category_blocks</item>
+        <item>@string/title_category_etc_toys</item>
+        <item>@string/spinner_separator</item>
+
+        <item>@string/title_category_cellphone_accessaries</item>
+        <item>@string/title_category_etc_electronics</item>
+    </string-array>
 </resources>

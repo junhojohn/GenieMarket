@@ -230,7 +230,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                                 }
                             }
 
-                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getBigCategory(), productInfo.getSellerName(), getProductImageMap(), responseListener);
+                            RegisterRequest productRegisterRequest = new RegisterRequest(productInfo.getName(), productInfo.getPrice(), productInfo.getItemCount(), productInfo.getDescription(), productInfo.getBigCategory(), productInfo.getMidCategory(), productInfo.getSmallCategory(), productInfo.getSellerName(), getProductImageMap(), responseListener);
                             RequestQueue queue = Volley.newRequestQueue(ChooseImagesActivity.this);
                             queue.add(productRegisterRequest);
                         }

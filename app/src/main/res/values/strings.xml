@@ -15,6 +15,47 @@
     <string name="title_little_category">소분류:</string>
     <string name="title_product_desc">상품상세설명:</string>
     <string name="title_purchase">구매하기</string>
+    <string name="title_category_shirt">상의</string>
+    <string name="title_category_pants">하의</string>
+    <string name="title_category_coat">코트</string>
+    <string name="title_category_hat">모자</string>
+    <string name="title_category_socks">양말</string>
+    <string name="title_category_glove">장갑</string>
+    <string name="title_category_etc_clothes">기타의류</string>
+    <string name="title_category_clothes">의류</string>
+
+    <string name="title_category_high_heels">구두</string>
+    <string name="title_category_walker">워커</string>
+    <string name="title_category_flat_shoes">단화</string>
+    <string name="title_category_sneakers">운동화</string>
+    <string name="title_category_slippers">슬리퍼</string>
+    <string name="title_category_kids_shoes">어린이신발</string>
+    <string name="title_category_etc_shoes">기타신발</string>
+    <string name="title_category_shoes">신발</string>
+
+    <string name="title_category_todback">토드백</string>
+    <string name="title_category_wallet">지갑</string>
+    <string name="title_category_clutch_bags">클러치백</string>
+    <string name="title_category_backpack">백팩</string>
+    <string name="title_category_coin_wallet">동전지갑</string>
+    <string name="title_category_merchandise">잡화</string>
+
+    <string name="title_category_watch">손목시계</string>
+    <string name="title_category_bracelet">팔찌</string>
+    <string name="title_category_etc_accessaries">기타악세서리</string>
+    <string name="title_category_accessaries">악세서리</string>
+
+    <string name="title_category_doll">인형</string>
+    <string name="title_category_blocks">블럭</string>
+    <string name="title_category_etc_toys">기타장난감</string>
+    <string name="title_category_toys">장난감</string>
+
+    <string name="title_category_cellphone_accessaries">휴대폰주변기기</string>
+    <string name="title_category_etc_electronics">기타전자제품</string>
+    <string name="title_category_electronics">전자제품</string>
+
+    <string name="spinner_separator">-------------------</string>
+
     <!--At Suresoft-->
     <!--<string name="kakao_app_key">367786002717697e3d5c8bee29585f8b</string>-->
     <!--At Home-->

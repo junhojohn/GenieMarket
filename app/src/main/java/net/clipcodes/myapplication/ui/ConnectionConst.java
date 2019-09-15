@@ -14,6 +14,8 @@ public class ConnectionConst {
     public static final String PARAM_JSON_PRODUCT_ITEM_CNT = "productItemCnt";
     public static final String PARAM_JSON_PRODUCT_DESC = "productDescription";
     public static final String PARAM_JSON_BIG_CATEGORY = "bigCategory";
+    public static final String PARAM_JSON_MID_CATEGORY = "midCategory";
+    public static final String PARAM_JSON_SMALL_CATEGORY = "smallCategory";
 
     public static final String RETURN_JSON_IS_IMAGE_REGISTER_SUCCESS = "isImageRegisterSuccess";
     public static final String RETURN_JSON_IS_PRODUCT_REGISTER_SUCCESS = "isProductRegisterSuccess";

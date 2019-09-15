@@ -53,7 +53,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // 앱 해시키 얻기
 //        getHashKey(getApplicationContext());
-        productItemList = (ArrayList<AdditionalProductInfo>)getIntent().getSerializableExtra("productItemList");
+        if(productItemList == null){
+            productItemList = (ArrayList<AdditionalProductInfo>)getIntent().getSerializableExtra("productItemList");
+        }
+
         setContentView(R.layout.activity_main);
 
         navigation = findViewById(R.id.navigation);

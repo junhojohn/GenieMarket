@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -36,7 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
     ClearEditText editTextPrice;
     EditText editTextProductDescription;
     TextView textViewSellerName;
-    Spinner spinner;
+    Spinner spinner_BigCategory;
+    Spinner spinner_SmallCategory;
     AdditionalProductInfo productInfo;
     AdditionalSellerInfo sellerInfo;
 
@@ -69,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
             btnRegistration.setEnabled(true);
         }
 
-        productInfo.setBigCategory(spinner.getSelectedItem().toString());
+        productInfo.setBigCategory(spinner_BigCategory.getSelectedItem().toString());
         super.onStart();
     }
 
@@ -97,16 +99,23 @@ public class RegisterActivity extends AppCompatActivity {
         textViewSellerName = findViewById(R.id.tvSellerName);
         textViewSellerName.setText(sellerInfo.getSellerID());
         numberPicker.setDisplayFocusable(true);
-        spinner = (Spinner)findViewById(R.id.tv_bigCategoryName);
+
+        spinner_BigCategory = (Spinner)findViewById(R.id.tv_bigCategoryName);
         ArrayAdapter bigCategorySpinnerAdapater = ArrayAdapter.createFromResource(this, R.array.bigCategorySpinner, android.R.layout.simple_spinner_item);
         bigCategorySpinnerAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(bigCategorySpinnerAdapater);
+        spinner_BigCategory.setAdapter(bigCategorySpinnerAdapater);
+
+        spinner_SmallCategory = (Spinner)findViewById(R.id.tv_SmallCategoryName);
+        ArrayAdapter smallCategorySpinnerAdapater = ArrayAdapter.createFromResource(this, R.array.smallCategorySpinner, android.R.layout.simple_spinner_item);
+        smallCategorySpinnerAdapater.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_SmallCategory.setAdapter(smallCategorySpinnerAdapater);
 
         editTextProductName.addTextChangedListener(productNameTextWatcher);
         editTextPrice.addTextChangedListener(productPriceTextWatcher);
         editTextProductDescription.addTextChangedListener(productDescriptionTextWatcher);
         numberPicker.setValueChangedListener(numberPickerWatcher);
-        spinner.setOnItemSelectedListener(spinnerListener);
+        spinner_BigCategory.setOnItemSelectedListener(bigSpinnerListener);
+        spinner_SmallCategory.setOnItemSelectedListener(smallSpinnerListener);
 
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -177,7 +186,7 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
-    public AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener() {
+    public AdapterView.OnItemSelectedListener bigSpinnerListener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             productInfo.setBigCategory(parent.getSelectedItem().toString());
@@ -190,6 +199,63 @@ public class RegisterActivity extends AppCompatActivity {
         }
     };
 
+    public AdapterView.OnItemSelectedListener smallSpinnerListener = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            productInfo.setSmallCategory(parent.getSelectedItem().toString());
+
+            if(parent.getSelectedItem().toString().equals(getString(R.string.title_category_shirt)) ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_pants))    ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_coat))     ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_hat))      ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_socks))    ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_glove))    ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_etc_clothes))){
+                productInfo.setMidCategory(getString(R.string.title_category_clothes));
+            }
+
+            if(parent.getSelectedItem().toString().equals(getString(R.string.title_category_high_heels))    ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_walker))           ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_flat_shoes))       ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_sneakers))         ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_slippers))         ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_kids_shoes))       ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_etc_shoes))){
+                productInfo.setMidCategory(getString(R.string.title_category_shoes));
+            }
+
+            if(parent.getSelectedItem().toString().equals(getString(R.string.title_category_todback))   ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_wallet))       ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_clutch_bags))  ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_backpack))     ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_coin_wallet))){
+                productInfo.setMidCategory(getString(R.string.title_category_merchandise));
+            }
+
+            if(parent.getSelectedItem().toString().equals(getString(R.string.title_category_watch)) ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_bracelet)) ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_etc_accessaries))){
+                productInfo.setMidCategory(getString(R.string.title_category_accessaries));
+            }
+
+            if(parent.getSelectedItem().toString().equals(getString(R.string.title_category_doll))  ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_blocks))   ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_etc_toys))) {
+                productInfo.setMidCategory(getString(R.string.title_category_toys));
+            }
+
+            if(parent.getSelectedItem().toString().equals(getString(R.string.title_category_cellphone_accessaries)) ||
+            parent.getSelectedItem().toString().equals(getString(R.string.title_category_etc_electronics))){
+                productInfo.setMidCategory(getString(R.string.title_category_electronics));
+            }
+            System.out.print(productInfo);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+
+        }
+    };
     public TextWatcher productDescriptionTextWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
