@@ -19,6 +19,7 @@ import com.kakao.auth.Session;
 import com.melnykov.fab.FloatingActionButton;
 
 import net.clipcodes.myapplication.accounts.SessionCallback;
+import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
 import net.clipcodes.myapplication.ui.activities.DetailProductActivity;
 import net.clipcodes.myapplication.ui.activities.LoginActivity;
@@ -27,6 +28,8 @@ import net.clipcodes.myapplication.ui.fragments.CheapProductFragment;
 import net.clipcodes.myapplication.ui.fragments.BestProductFragment;
 import net.clipcodes.myapplication.R;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,18 +46,35 @@ public class PageHome extends Fragment {
     Runnable update;
     FloatingActionButton btnRegister;
     private String TAG = "PageHome";
+    private ArrayList<AdditionalProductInfo> productItemList  = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragment_three = inflater.inflate(R.layout.fragment_home, container, false);
-
+        productItemList = (ArrayList<AdditionalProductInfo>)getArguments().getSerializable("productItemList");
         //INIT VIEWS
         init(fragment_three);
         //SET TABS ONCLICK
         bestFragment.setOnClickListener(clik);
         cheapFragment.setOnClickListener(clik);
         btnRegister.setOnClickListener(clik);
+
+        // pass parameters
+        ArrayList<AdditionalProductInfo> bestProductList = new ArrayList<AdditionalProductInfo>();
+        ArrayList<AdditionalProductInfo> cheapProductList = new ArrayList<AdditionalProductInfo>();
+        for(AdditionalProductInfo additionalProductInfo : productItemList){
+            if(additionalProductInfo.getBigCategory().equals(getString(R.string.title_best_product))){
+                bestProductList.add(additionalProductInfo);
+            }else if(additionalProductInfo.getBigCategory().equals(getString(R.string.title_cheap_product))){
+                cheapProductList.add(additionalProductInfo);
+            }
+        }
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("bestProductList", bestProductList);
+        bestProductFragment.setArguments(bundle);
+        bundle.putSerializable("cheapProductList", cheapProductList);
+        cheapProductFragment.setArguments(bundle);
 
         //LOAD PAGE FOR FIRST
         loadPage(bestProductFragment);

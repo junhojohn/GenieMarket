@@ -237,7 +237,7 @@ public class RegisterActivity extends AppCompatActivity {
             switch (view.getId()){
                 case R.id.btn_nextStep:
                     Intent mIntent = new Intent(view.getContext(), ChooseImagesActivity.class);
-                    mIntent.putExtra("productInfo", productInfo);
+                    mIntent.putExtra("productInfo", (Serializable)productInfo);
                     view.getContext().startActivity(mIntent);
                     break;
                 case R.id.btn_back:

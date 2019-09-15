@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.models.ParentCategoryItem;
 import net.clipcodes.myapplication.R;
 import net.clipcodes.myapplication.ui.CategoryUIConst;
@@ -25,11 +26,12 @@ import java.util.ArrayList;
 public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemListAdapter.CategoryItemListViewHolder> {
     private ArrayList<ParentCategoryItem> parentCategoryItems;
     private Context mContext;
-    private String testParam;
-    public CategoryItemListAdapter(Context mContext, ArrayList<ParentCategoryItem> parentCategoryItems, String testParam) {
+    private ArrayList<AdditionalProductInfo> productItemList  = null;
+
+    public CategoryItemListAdapter(Context mContext, ArrayList<ParentCategoryItem> parentCategoryItems, ArrayList<AdditionalProductInfo> productItemList) {
         this.mContext = mContext;
         this.parentCategoryItems = parentCategoryItems;
-        this.testParam = testParam;
+        this.productItemList = productItemList;
     }
 
     @Override
@@ -145,7 +147,7 @@ public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemLi
 
                 Intent mIntent = new Intent(mContext, ShowSelectedCategoryActivity.class);
 //                mIntent.putStringArrayListExtra("productList", productList);
-                mIntent.putExtra("testParam", testParam);
+                mIntent.putExtra("productItemList", productItemList);
 
                 mContext.startActivity(mIntent);
 

@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 
 import net.clipcodes.myapplication.R;
+import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.ui.pages.PageCategory;
 import net.clipcodes.myapplication.ui.pages.PageHome;
 import net.clipcodes.myapplication.ui.pages.PageMyGenie;
@@ -25,12 +26,15 @@ import net.clipcodes.myapplication.utils.Libraries;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     BottomNavigationView navigation;
     private static MainAdapter Adapter;
+    private static ArrayList<AdditionalProductInfo> productItemList  = null;
 
     @Override
     protected void onResume() {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // 앱 해시키 얻기
 //        getHashKey(getApplicationContext());
+        productItemList = (ArrayList<AdditionalProductInfo>)getIntent().getSerializableExtra("productItemList");
         setContentView(R.layout.activity_main);
 
         navigation = findViewById(R.id.navigation);
@@ -90,9 +95,21 @@ public class MainActivity extends AppCompatActivity {
 
     public static void setupFm(FragmentManager fragmentManager, ViewPager viewPager){
         Adapter = new MainAdapter(fragmentManager);
-        Adapter.add(new PageHome(), "Page Home");
-        Adapter.add(new PageCategory(), "Page Category");
-        Adapter.add(new PageSearch(), "Page Search");
+        PageHome pageHome = new PageHome();
+        PageCategory pageCategory = new PageCategory();
+        PageSearch pageSearch = new PageSearch();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("productItemList", productItemList);
+//        bundle.putParcelableArrayList("", productItemList);
+
+        pageHome.setArguments(bundle);
+        pageCategory.setArguments(bundle);
+        pageSearch.setArguments(bundle);
+
+        Adapter.add(pageHome, "Page Home");
+        Adapter.add(pageCategory, "Page Category");
+        Adapter.add(pageSearch, "Page Search");
         Adapter.add(new PageMyGenie(), "Page MyGenie");
 
         viewPager.setAdapter(Adapter);
@@ -111,8 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_category:
                     viewPager.setCurrentItem(1);
                     Bundle bundle = new Bundle();
-//                    bundle.putParcelableArrayList();
-                    bundle.putString("testParam", "testParam");
+                    bundle.putSerializable("productItemList", productItemList);
                     ((MainAdapter)viewPager.getAdapter()).getItem(1).setArguments(bundle);
                     ((MainAdapter)viewPager.getAdapter()).notifyDataSetChanged();
                     return true;

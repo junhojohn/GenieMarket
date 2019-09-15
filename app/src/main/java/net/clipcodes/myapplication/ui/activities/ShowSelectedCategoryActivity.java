@@ -11,21 +11,23 @@ import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.ui.adapters.BestProductListAdapter;
 import net.clipcodes.myapplication.ui.adapters.ShowSelectedCategoryProductListAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ShowSelectedCategoryActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
+    private static ArrayList<AdditionalProductInfo> productItemList  = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("testParam", getIntent().getStringExtra("testParam"));
+        productItemList = (ArrayList<AdditionalProductInfo>)getIntent().getSerializableExtra("productItemList");
         setContentView(R.layout.activity_show_selected_category);
         mRecyclerView = (RecyclerView)findViewById(R.id.recyclerviewForSelectedCategory) ;
 
         GridLayoutManager mGridLayoutManager = new GridLayoutManager(this, 2);
         mRecyclerView.setLayoutManager(mGridLayoutManager);
-//        showList();
+        showList(productItemList);
     }
 
     protected  void showList(List<AdditionalProductInfo> productItemList){

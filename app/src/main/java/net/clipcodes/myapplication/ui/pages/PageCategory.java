@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.clipcodes.myapplication.models.AdditionalProductInfo;
 import net.clipcodes.myapplication.models.ChildCategoryItem;
 import net.clipcodes.myapplication.models.ParentCategoryItem;
 import net.clipcodes.myapplication.ui.CategoryUIConst;
@@ -19,17 +20,16 @@ import java.util.ArrayList;
 
 public class PageCategory extends Fragment {
     private RecyclerView mRecyclerView;
+    private ArrayList<AdditionalProductInfo> productItemList  = null;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View fragment_one = inflater.inflate(R.layout.fragment_category, container, false);
+        productItemList = (ArrayList<AdditionalProductInfo>)getArguments().getSerializable("productItemList");
         mRecyclerView = fragment_one.findViewById(R.id.recyclerView);
-        String testParam = null;
-        if(getArguments() != null){
-            testParam = getArguments().getString("testParam");
-        }
-        CategoryItemListAdapter categoryItemListAdapter = new CategoryItemListAdapter(getContext(), getDummyDataToPass(), testParam);
+
+        CategoryItemListAdapter categoryItemListAdapter = new CategoryItemListAdapter(getContext(), getDummyDataToPass(), productItemList);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(categoryItemListAdapter);
         mRecyclerView.setHasFixedSize(true);
