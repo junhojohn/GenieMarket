@@ -52,6 +52,8 @@ public class SplashscreenActivity extends Activity {
     private static final String TAG_PRODUCT_PRICE       = "productPrice";
     private static final String TAG_PRODUCT_DESC        = "productDescription";
     private static final String TAG_PRODUCT_BIG_CATEGORY= "bigCategory";
+    private static final String TAG_PRODUCT_MID_CATEGORY= "midCategory";
+    private static final String TAG_PRODUCT_SMALL_CATEGORY= "smallCategory";
     private static final String TAG_PRODUCT_IMG         = "imageFilePath";
     private ArrayList<AdditionalProductInfo> productItemList  = null;
 
@@ -201,6 +203,8 @@ public class SplashscreenActivity extends Activity {
                 String productItemCnt   = productJsonData.getString(TAG_PRODUCT_ITEM_CNT);
                 String productDesc      = productJsonData.getString(TAG_PRODUCT_DESC);
                 String bigCategory      = productJsonData.getString(TAG_PRODUCT_BIG_CATEGORY);
+                String midCategory      = productJsonData.getString(TAG_PRODUCT_MID_CATEGORY);
+                String smallCategory    = productJsonData.getString(TAG_PRODUCT_SMALL_CATEGORY);
                 String productImg       = productJsonData.getString(TAG_PRODUCT_IMG);
 
 //                if(bigCategory.equals(getString(R.string.title_best_product))){
@@ -211,6 +215,8 @@ public class SplashscreenActivity extends Activity {
                         productItem.setItemCount(Integer.parseInt(productItemCnt));
                         productItem.setPrice(Integer.parseInt(productPrice));
                         productItem.setBigCategory(bigCategory);
+                        productItem.setMidCategory(midCategory);
+                        productItem.setSmallCategory(smallCategory);
                         productItemList.add(productItem);
                     }
 
