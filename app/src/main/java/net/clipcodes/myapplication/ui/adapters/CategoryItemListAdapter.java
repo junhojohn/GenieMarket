@@ -145,77 +145,80 @@ public class CategoryItemListAdapter extends RecyclerView.Adapter<CategoryItemLi
                 TextView textViewClicked = (TextView) view;
                 Toast.makeText(context, "" + textViewClicked.getText().toString(), Toast.LENGTH_SHORT).show();
 
+                ArrayList<AdditionalProductInfo> selectedCategoryItemList = new ArrayList<AdditionalProductInfo>();
+                for(AdditionalProductInfo item : productItemList){
+                    if(item.getSmallCategory().equals(textViewClicked.getText())){
+                        selectedCategoryItemList.add(item);
+                    }
+                }
                 Intent mIntent = new Intent(mContext, ShowSelectedCategoryActivity.class);
-//                mIntent.putStringArrayListExtra("productList", productList);
-                mIntent.putExtra("productItemList", productItemList);
-
+                mIntent.putExtra("productItemList", selectedCategoryItemList);
                 mContext.startActivity(mIntent);
-
-//                if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_PANTS)){
+//                if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_shirt))){
 //
-//                }else if(textViewClicked.getText().equals(getString(R.string.title_best_product))){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_pants))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COAT)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_coat))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HAT)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_hat))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SOCKS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_socks))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_GLOVE)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_glove))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_CLOTHES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_etc_clothes))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLOTHES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_clothes))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_HIGH_HEELS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_high_heels))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALKER)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_walker))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_FLAT_SHOES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_flat_shoes))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SNEAKERS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_sneakers))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SLIPPERS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_slippers))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_KIDS_SHOES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_kids_shoes))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_SHOES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_etc_shoes))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_SHOES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_shoes))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TODBACK)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_todback))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WALLET)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_wallet))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CLUTCH_BAGS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_clutch_bags))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BACKPACK)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_backpack))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_COIN_WALLET)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_coin_wallet))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_MERCHANDISE)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_merchandise))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_WATCH)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_watch))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BRACELET)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_bracelet))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ACCESSARIES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_etc_accessaries))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ACCESSARIES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_accessaries))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_DOLL)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_doll))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_BLOCKS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_blocks))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_TOYS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_etc_toys))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_TOYS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_toys))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_CELLPHONE_ACCESSARIES)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_cellphone_accessaries))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ETC_ELECTRONICS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_etc_electronics))){
 //
-//                }else if(textViewClicked.getText().equals(CategoryUIConst.CATEGORY_ELECTRONICS)){
+//                }else if(textViewClicked.getText().equals(mContext.getString(R.string.title_category_electronics))){
 //
 //                }
             }
