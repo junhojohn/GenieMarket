@@ -13,12 +13,12 @@
         android:gravity="center"
         android:layout_gravity="center">
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/product_image_slider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <android.support.design.widget.TabLayout
+        <com.google.android.material.tabs.TabLayout
             android:id="@+id/product_image_indicator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,30 +28,29 @@
             app:tabGravity="center"
             app:tabIndicatorHeight="0dp" />
     </RelativeLayout>
-    <RelativeLayout
-        android:id="@+id/footer"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
-        android:background="#689F38"
-        android:gravity="center"
-        android:layout_gravity="center">
-        <Button
-            android:id="@+id/btnPurchase"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_purchase"
-            android:text="@string/title_purchase"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:textColor="@color/lightGrey"
-            android:textAlignment="center" />
-    </RelativeLayout>
+<!--    <RelativeLayout-->
+<!--        android:id="@+id/footer"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:background="#689F38"-->
+<!--        android:gravity="center"-->
+<!--        android:layout_gravity="center">-->
+<!--        <Button-->
+<!--            android:id="@+id/btnPurchase"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@drawable/btn_purchase"-->
+<!--            android:text="@string/title_purchase"-->
+<!--            android:gravity="center"-->
+<!--            android:textSize="30dp"-->
+<!--            android:textColor="@color/lightGrey"-->
+<!--            android:textAlignment="center" />-->
+<!--    </RelativeLayout>-->
     <ScrollView
         android:id="@+id/scroll_view"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/footer"
         android:layout_below="@+id/header"
         android:fillViewport="true">
         <LinearLayout
@@ -163,14 +162,14 @@
                     android:padding="5dp"
                     android:text="JFamily"
                     android:textSize="25sp" />
-                <ImageButton
-                    android:id="@+id/seller_contact_kakaotalk"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:padding="5dp"
-                    android:background="@color/transparent"
-                    android:src="@drawable/ic_contact_msg_24dp"/>
+<!--                <ImageButton-->
+<!--                    android:id="@+id/seller_contact_kakaotalk"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:padding="5dp"-->
+<!--                    android:background="@color/transparent"-->
+<!--                    android:src="@drawable/ic_contact_msg_24dp"/>-->
                 <ImageButton
                     android:id="@+id/seller_contact_phone_number"
                     android:layout_width="wrap_content"

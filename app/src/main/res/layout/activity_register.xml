@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context=".ui.activities.RegisterActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/register_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 android:textSize="20dp"
                 android:text="상품사진선택" />
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/registerlayout"
@@ -81,7 +81,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
-            <net.clipcodes.myapplication.ui.widgets.ClearEditText
+            <kr.co.geniemarket.ui.widgets.ClearEditText
                 android:id="@+id/tvProductName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -107,7 +107,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp" />
-            <net.clipcodes.myapplication.ui.widgets.ClearEditText
+            <kr.co.geniemarket.ui.widgets.ClearEditText
                 android:id="@+id/tvPriceTag"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"

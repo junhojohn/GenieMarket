@@ -1,60 +1,187 @@
 apply plugin: 'com.android.application'
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+ext.sdkVersionMajor = properties["sdkVersionMajor"]
+ext.sdkVersionMinor = properties["sdkVersionMinor"]
+ext.sdkVersionPatch = properties["sdkVersionPatch"]
+ext.sdkVersionCode = Integer.valueOf((Integer.parseInt(sdkVersionMajor)*10000) + (Integer.parseInt(sdkVersionMinor)*100) + sdkVersionPatch)
+ext.sdkVersion = "${sdkVersionMajor}.${sdkVersionMinor}.${sdkVersionPatch}"
+
+ext.uatServerProtocol = properties["uat_server_protocol"]
+ext.uatServerDomain = properties["uat_server_domain"]
+
+ext.realServerProtocol = properties["real_server_protocol"]
+ext.realServerDomain = properties["real_server_domain"]
+
 android {
-    compileSdkVersion 28
-    defaultConfig {
-        applicationId "net.clipcodes.myapplication"
-        minSdkVersion 17
-        targetSdkVersion 28
-        versionCode 2
-        versionName "2.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    namespace "kr.co.geniemarket"
+    compileSdk 34
+    buildToolsVersion "30.0.3"
+
+    flavorDimensions "default"
+
+    //"Build Type 'release' contains custom BuildConfig fields, but the feature is disabled. 에러 해결을 위한 임시방편
+    //참고: https://daryeou.tistory.com/324
+    buildFeatures {
+        buildConfig = true
     }
+
+    // ButterKnife JDK 17 지원하지 않아 강제로 해결책 적용함
+    // 참고: https://stackoverflow.com/questions/76216854/butterknife-issue-after-updating-to-latest-version-of-android-studio-with-lates
+    // enable internal JDK API access at runtime
+    tasks.withType(JavaCompile).configureEach {
+        options.fork = true
+        options.forkOptions.jvmArgs += [
+                // essential for butterknife
+                '--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
+
+                // if you need Glide or LomBok
+                // these may not be the exact list, but it works for me
+                '--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED',
+                '--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED',
+        ]
+    }
+
+    productFlavors {
+        real {
+            applicationId "kr.co.geniemarket"
+            dimension "default"
+            minSdk 24
+            targetSdk 34
+            versionCode sdkVersionCode
+            versionName "${sdkVersion}"
+            multiDexEnabled true
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            consumerProguardFiles "consumer-rules.pro"
+            buildConfigField "String", "GENIEMARKET_VERSION", "\"${sdkVersion}\""
+
+            buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${realServerProtocol}\""
+            buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${realServerDomain}\""
+        }
+
+        uat {
+            applicationId "kr.co.geniemarket"
+            dimension "default"
+            minSdk 24
+            targetSdk 34
+            versionCode sdkVersionCode
+            versionName "${sdkVersion}"
+            multiDexEnabled false
+            testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+            consumerProguardFiles "consumer-rules.pro"
+            buildConfigField "String", "GENIEMARKET_VERSION", "\"${sdkVersion}\""
+
+            buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${uatServerProtocol}\""
+            buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${uatServerDomain}\""
+        }
+    }
+
+    signingConfigs{
+        release{
+            storeFile file(properties["keystore"])
+            storePassword properties["keystore_pass"]
+            keyAlias properties["keystore_alias"]
+            keyPassword properties["key_pass"]
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules-debug.pro'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
 dependencies {
+    implementation 'androidx.appcompat:appcompat:1.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    // 롬복 디펜던시
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+
+    // ButterKnife 디펜던시.
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+
+    // RecyclerView 디펜던시.
+    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    // RecyclerView 디펜던시. For control over item selection of both touch and mouse driven selection
+    implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
+
+    // CardView 디펜던시.
+    implementation "androidx.cardview:cardview:1.0.0"
+
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:appcompat-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:support-vector-drawable:28.0.0'
-    implementation 'com.google.android:flexbox:0.3.2'
-    implementation 'com.android.support:support-v4:28.0.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.support:recyclerview-v7:28.0.0'
-    implementation 'com.android.support:cardview-v7:28.0.0'
-    implementation 'com.android.support:design:28.0.0'
+
+    implementation 'com.google.android.flexbox:flexbox:3.0.0'
+
     implementation 'com.melnykov:floatingactionbutton:1.3.0'
     implementation 'com.github.travijuu:numberpicker:1.0.7'
+
+    // Glide 디펜던시
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+
+    implementation 'com.android.volley:volley:1.2.1'
+
+    // Glide 디펜던시
     implementation 'com.github.bumptech.glide:glide:4.9.0'
-    compileOnly 'com.github.bumptech.glide:compiler:4.9.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.9.0'
-    implementation 'com.android.volley:volley:1.1.0'
-    provided 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
 
-    // 카카오 로그인 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    // Retrofit2 디펜던시.
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    // Retrofit2-JSON Converter 디펜던시.
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    // Retrofit-RxJava 디펜던시.
+    implementation 'com.squareup.retrofit2:adapter-rxjava3:2.9.0'
+    // Http Logging 디펜던시.
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 
-    // 카카오링크 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'kakaolink', version: project.KAKAO_SDK_VERSION
+    // rx Java 디펜던시.
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
-    // 카카오톡 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'kakaotalk', version: project.KAKAO_SDK_VERSION
+//    // Kakao 디펜던시.
+//    implementation "com.kakao.sdk:v2-all:2.20.3" // 전체 모듈 설치, 2.11.0 버전부터 지원
+//    implementation "com.kakao.sdk:v2-user:2.20.3" // 카카오 로그인 API 모듈
+//    implementation "com.kakao.sdk:v2-share:2.20.3" // 카카오톡 공유 API 모듈
+//    implementation "com.kakao.sdk:v2-talk:2.20.3" // 카카오톡 채널, 카카오톡 소셜, 카카오톡 메시지 API 모듈
+//    implementation "com.kakao.sdk:v2-friend:2.20.3" // 피커 API 모듈
+//    implementation "com.kakao.sdk:v2-cert:2.20.3" // 카카오톡 인증 서비스 API 모듈
 
-//    // 카카오내비 sdk를 사용하기 위해 필요.
-//    implementation group: 'com.kakao.sdk', name: 'kakaonavi', version: project.KAKAO_SDK_VERSION
 
-    // 카카오스토리 sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'kakaostory', version: project.KAKAO_SDK_VERSION
-
-    // push sdk를 사용하기 위해 필요.
-    implementation group: 'com.kakao.sdk', name: 'push', version: project.KAKAO_SDK_VERSION
+    // 테스트용 디펜던시.
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    implementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
 }
