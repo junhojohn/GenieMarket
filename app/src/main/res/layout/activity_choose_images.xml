@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.activities.ChooseImagesActivity">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/choose_image_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -56,11 +56,11 @@
                 android:text="상품등록완료"
                 android:textSize="20dp"/>
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <include layout="@layout/content_main" />
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/layoutSend"
         android:layout_width="50dp"
         android:layout_height="wrap_content"
@@ -75,7 +75,8 @@
             android:background="@drawable/background_button_send"
             android:padding="4dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:srcCompat="@android:drawable/ic_menu_send" />
+            app:srcCompat="@android:drawable/ic_menu_send"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textViewSeletedCount"
@@ -93,6 +94,6 @@
             app:layout_constraintDimensionRatio="H,1:1"
             app:layout_constraintRight_toRightOf="@id/button_send"
             app:layout_constraintTop_toTopOf="@id/button_send" />
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

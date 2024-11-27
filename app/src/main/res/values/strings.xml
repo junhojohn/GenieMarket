@@ -56,10 +56,5 @@
 
     <string name="spinner_separator">-------------------</string>
 
-    <!--At Suresoft-->
-    <!--<string name="kakao_app_key">367786002717697e3d5c8bee29585f8b</string>-->
-    <!--At Home-->
-    <!--<string name="kakao_app_key">dbb6beff81d6cb53bfebc539ab3a635f</string>-->
-    <!--At Laptop-->
     <string name="kakao_app_key">5eb1f83e928b1eb215d6d0ed82850df6</string>
 </resources>
