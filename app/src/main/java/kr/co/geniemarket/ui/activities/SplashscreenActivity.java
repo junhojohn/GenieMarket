@@ -3,6 +3,7 @@ package kr.co.geniemarket.ui.activities;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
+import kr.co.geniemarket.BuildConfig;
 import kr.co.geniemarket.R;
 import kr.co.geniemarket.models.AdditionalProductInfo;
 import lombok.Getter;
@@ -38,7 +40,7 @@ public class SplashscreenActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splashscreen);
-
+        Log.i(TAG, "GenieMarket version: " + BuildConfig.GENIEMARKET_VERSION);
         viewModelProvider =
                 new ViewModelProvider(
                         (ViewModelStoreOwner) this,
