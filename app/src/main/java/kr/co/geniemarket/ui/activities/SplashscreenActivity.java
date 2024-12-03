@@ -46,15 +46,8 @@ public class SplashscreenActivity extends AppCompatActivity {
                         (ViewModelStoreOwner) this,
                         new ViewModelProvider.NewInstanceFactory());
 
-        checkKakaoLoginSession();
         getData();
-    }
-
-    private void checkKakaoLoginSession(){
-//        if(Session.getCurrentSession().checkAndImplicitOpen()){
-//            Session.getCurrentSession().addCallback(SessionCallback.getInstance());
-//            SessionCallback.getInstance().requestMe();
-//        }
+        StartAnimations();
     }
 
     private void StartAnimations() {
@@ -205,69 +198,6 @@ public class SplashscreenActivity extends AppCompatActivity {
         productItemList.add(additionalProductInfo05);
         productItemList.add(additionalProductInfo06);
         productItemList.add(additionalProductInfo07);
-
-        StartAnimations();
-
-//        try {
-//            getViewModelProvider().get(GenieMarketViewModel.class)
-//                    .requestProductInfo(this, 10000)
-//                    .observe((LifecycleOwner) this, newResProductInfo -> {
-//                        if (newResProductInfo != null &&
-//                                newResProductInfo.getAdditionalProductInfo() != null) {
-//                            productItemList.addAll(newResProductInfo.getAdditionalProductInfo());
-//
-//                            for (AdditionalProductInfo additionalProductInfo : productItemList) {
-//                                String productImg = additionalProductInfo.getProductImg();
-//                                getProductImages(
-//                                        additionalProductInfo,
-//                                        "https://images.app.goo.gl/gF3LtnWA2ypG99oE9",
-//                                        this.getCacheDir().toString(),
-//                                        productImg);
-//                            }
-//                        }else{
-//                            productItemList = new ArrayList<>();
-//                            AdditionalProductInfo additionalProductInfo01 = new AdditionalProductInfo();
-//                            additionalProductInfo01.setName("Test Name01");
-//                            additionalProductInfo01.setDescription("Test Desc01");
-//                            additionalProductInfo01.setSellerName("Test Seller01");
-//                            additionalProductInfo01.setProductImg("productimg01.jpg");
-//                            additionalProductInfo01.setPrice(12345);
-//                            additionalProductInfo01.setBigCategory(getString(R.string.title_best_product));
-//                            additionalProductInfo01.setMidCategory(getString(R.string.title_category_clothes));
-//                            additionalProductInfo01.setSmallCategory(getString(R.string.title_category_shirt));
-//                            additionalProductInfo01.setItemCount(1);
-//
-//                            AdditionalProductInfo additionalProductInfo02 = new AdditionalProductInfo();
-//                            additionalProductInfo02.setName("Test Name02");
-//                            additionalProductInfo02.setDescription("Test Desc02");
-//                            additionalProductInfo02.setSellerName("Test Seller02");
-//                            additionalProductInfo02.setProductImg("productimg02.jpg");
-//                            additionalProductInfo02.setPrice(7890);
-//                            additionalProductInfo02.setBigCategory(getString(R.string.title_cheap_product));
-//                            additionalProductInfo02.setMidCategory(getString(R.string.title_category_toys));
-//                            additionalProductInfo02.setSmallCategory(getString(R.string.title_category_blocks));
-//                            additionalProductInfo02.setItemCount(2);
-//
-//                            productItemList.add(additionalProductInfo01);
-//                            productItemList.add(additionalProductInfo02);
-//
-//                            for (AdditionalProductInfo additionalProductInfo : productItemList) {
-//                                String productImg = additionalProductInfo.getProductImg();
-////                                Bitmap bitmap = getProductImages(ConnectionConst.IMAGE_DOWNLOAD_SERVER_URL + productImg);
-//                                getProductImages(
-//                                        additionalProductInfo,
-//                                        "https://images.app.goo.gl/gF3LtnWA2ypG99oE9",
-//                                        this.getCacheDir().toString(),
-//                                        productImg);
-//
-//                            }
-//
-//                        }
-//                        StartAnimations();
-//                    });
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
     }
 
 }
