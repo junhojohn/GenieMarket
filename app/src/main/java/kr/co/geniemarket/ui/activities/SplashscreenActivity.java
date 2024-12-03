@@ -22,18 +22,10 @@ import lombok.Getter;
 import java.util.ArrayList;
 
 public class SplashscreenActivity extends AppCompatActivity {
-    private String TAG = "SplashscreenActivity";
+    private final static String TAG = SplashscreenActivity.class.getSimpleName();
 
     private ArrayList<AdditionalProductInfo> productItemList  = null;
 
-    @Getter
-    private ViewModelProvider viewModelProvider;
-
-    public void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        Window window = getWindow();
-        window.setFormat(PixelFormat.RGBA_8888);
-    }
     /** Called when the activity is first created. */
     Thread splashTread;
     @Override
@@ -200,4 +192,12 @@ public class SplashscreenActivity extends AppCompatActivity {
         productItemList.add(additionalProductInfo07);
     }
 
+    @Getter
+    private ViewModelProvider viewModelProvider;
+
+    public void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        Window window = getWindow();
+        window.setFormat(PixelFormat.RGBA_8888);
+    }
 }
