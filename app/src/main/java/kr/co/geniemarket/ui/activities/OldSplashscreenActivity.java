@@ -21,8 +21,8 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 
-public class SplashscreenActivity extends AppCompatActivity {
-    private final static String TAG = SplashscreenActivity.class.getSimpleName();
+public class OldSplashscreenActivity extends AppCompatActivity {
+    private final static String TAG = OldSplashscreenActivity.class.getSimpleName();
 
     private ArrayList<AdditionalProductInfo> productItemList  = null;
 
@@ -31,7 +31,7 @@ public class SplashscreenActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splashscreen);
+        setContentView(R.layout.activity_old_splashscreen);
         Log.i(TAG, "GenieMarket version: " + BuildConfig.GENIEMARKET_VERSION);
         viewModelProvider =
                 new ViewModelProvider(
@@ -65,17 +65,17 @@ public class SplashscreenActivity extends AppCompatActivity {
                         sleep(100);
                         waited += 100;
                     }
-                    Intent intent = new Intent(SplashscreenActivity.this,
-                            MainActivity.class);
+                    Intent intent = new Intent(OldSplashscreenActivity.this,
+                            OldMainActivity.class);
 
                     intent.putExtra("productItemList", productItemList);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(intent);
-                    SplashscreenActivity.this.finish();
+                    OldSplashscreenActivity.this.finish();
                 } catch (InterruptedException e) {
                     // do nothing
                 } finally {
-                    SplashscreenActivity.this.finish();
+                    OldSplashscreenActivity.this.finish();
                 }
 
             }

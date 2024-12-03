@@ -8,32 +8,26 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import kr.co.geniemarket.R;
+import kr.co.geniemarket.core.GMLog;
 import kr.co.geniemarket.models.AdditionalProductInfo;
 import kr.co.geniemarket.ui.pages.PageCategory;
 import kr.co.geniemarket.ui.pages.PageHome;
-import kr.co.geniemarket.ui.pages.PageMyGenie;
-import kr.co.geniemarket.ui.pages.PageSearch;
 import kr.co.geniemarket.ui.adapters.MainAdapter;
-import kr.co.geniemarket.utils.Libraries;
 
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class OldMainActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     BottomNavigationView navigation;
@@ -55,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        GMLog.i("this is ui app MainActivity.");
         // 앱 해시키 얻기
 //        getHashKey(getApplicationContext());
         if(productItemList == null){
             productItemList = (ArrayList<AdditionalProductInfo>)getIntent().getSerializableExtra("productItemList");
         }
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_old_main);
 
         navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

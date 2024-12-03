@@ -3,8 +3,13 @@
 
     <application>
         <activity
+            android:name=".MainActivity"
+            android:exported="true" >
+        </activity>
+        <activity
             android:name=".SplashscreenActivity"
-            android:exported="true" />
+            android:exported="true" >
+        </activity>
     </application>
 
 </manifest>

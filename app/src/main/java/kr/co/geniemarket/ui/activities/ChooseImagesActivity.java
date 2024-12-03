@@ -5,12 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
-import android.provider.MediaStore;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +37,7 @@ import kr.co.geniemarket.utils.ConstantDataManager;
 import kr.co.geniemarket.utils.Libraries;
 import kr.co.geniemarket.utils.RegisterRequest;
 import org.json.JSONObject;
-import java.io.File;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -197,7 +194,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                                     builder.setMessage("상품등록에 성공했습니다.").setPositiveButton("확인", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(ChooseImagesActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(ChooseImagesActivity.this, OldMainActivity.class);
                                             ChooseImagesActivity.this.startActivity(intent);
                                         }
                                     }).create().show();
@@ -206,7 +203,7 @@ public class ChooseImagesActivity extends AppCompatActivity {
                                     builder.setMessage("상품등록에 실패했습니다.").setNegativeButton("다시 시도", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {
-                                            Intent intent = new Intent(ChooseImagesActivity.this, MainActivity.class);
+                                            Intent intent = new Intent(ChooseImagesActivity.this, OldMainActivity.class);
                                             ChooseImagesActivity.this.startActivity(intent);
                                         }
                                     }).create().show();
