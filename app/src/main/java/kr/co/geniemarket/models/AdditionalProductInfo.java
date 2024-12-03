@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-import kr.co.geniemarket.Const;
+import kr.co.geniemarket.core.Const;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

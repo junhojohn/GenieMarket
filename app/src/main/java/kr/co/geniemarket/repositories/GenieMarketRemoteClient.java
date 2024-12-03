@@ -13,9 +13,9 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import kr.co.geniemarket.BuildConfig;
-import kr.co.geniemarket.Const;
+import kr.co.geniemarket.core.Const;
+import kr.co.geniemarket.core.GMLog;
 import kr.co.geniemarket.models.ProductInfo;
-import kr.co.geniemarket.utils.GMLog;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;

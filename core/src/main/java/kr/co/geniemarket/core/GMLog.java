@@ -1,10 +1,7 @@
-package kr.co.geniemarket.utils;
+package kr.co.geniemarket.core;
 
 
 import android.util.Log;
-
-import kr.co.geniemarket.BuildConfig;
-import kr.co.geniemarket.Const;
 
 /**
  * 로그 처리 클래스

@@ -15,7 +15,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.ShowSelectedCategoryActivity"></activity>
+        <activity
+            android:name=".ui.activities.ShowSelectedCategoryActivity"
+            android:exported="true"/>
 
         <activity
             android:name=".ui.activities.MainActivity"
@@ -37,17 +39,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.DetailProductActivity" />
-        <activity android:name=".ui.activities.PurchaseActivity" />
+        <activity
+            android:name=".ui.activities.DetailProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.PurchaseActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.activities.LoginActivity"
-            android:theme="@style/SplashTheme" />
+            android:theme="@style/SplashTheme"
+            android:exported="true"/>
         <activity
             android:name=".ui.activities.RegisterActivity"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            android:exported="true"/>
         <activity
             android:name=".ui.activities.ChooseImagesActivity"
-            android:theme="@style/NoActionBar" />
+            android:theme="@style/NoActionBar"
+            android:exported="true"/>
 
         <uses-library
             android:name="org.apache.http.legacy"

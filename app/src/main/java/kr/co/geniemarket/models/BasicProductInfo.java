@@ -1,15 +1,12 @@
 package kr.co.geniemarket.models;
 
-import android.graphics.Bitmap;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import kr.co.geniemarket.Const;
+import kr.co.geniemarket.core.Const;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
