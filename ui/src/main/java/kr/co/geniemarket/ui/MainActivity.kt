@@ -10,7 +10,6 @@ import kr.co.geniemarket.core.GMLog
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         GMLog.i("this is ui module MainActivity.")
     }

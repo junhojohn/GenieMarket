@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -11,9 +12,17 @@ ext.sdkVersion = "${sdkVersionMajor}.${sdkVersionMinor}.${sdkVersionPatch}"
 
 ext.uatServerProtocol = properties["uat_server_protocol"]
 ext.uatServerDomain = properties["uat_server_domain"]
+ext.uatAdmobAppIdKey = properties["uat_admob_app_id_key"]
+ext.uatAdmobAppId = properties["uat_admob_app_id"]
+ext.uatAdmobMainActivityBanner1AdUnitId = properties["uat_admob_main_activity_banner1_ad_unit_id"]
+ext.uatAdmobTestDeviceId = properties["uat_admob_test_device_id_junhojohn_zflip4"]
 
 ext.realServerProtocol = properties["real_server_protocol"]
 ext.realServerDomain = properties["real_server_domain"]
+ext.realAdmobAppIdKey = properties["real_admob_app_id_key"]
+ext.realAdmobAppId = properties["real_admob_app_id"]
+ext.realAdmobMainActivityBanner1AdUnitId = properties["real_admob_main_activity_banner1_ad_unit_id"]
+ext.realAdmobTestDeviceId = properties["real_admob_test_device_id_junhojohn_zflip4"]
 
 android {
     namespace "kr.co.geniemarket"
@@ -44,6 +53,11 @@ android {
 
             buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${realServerProtocol}\""
             buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${realServerDomain}\""
+            buildConfigField "String", "GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${realAdmobMainActivityBanner1AdUnitId}\""
+            buildConfigField "String", "GENIEMARKET_TEST_DEVICE_ID", "\"${realAdmobTestDeviceId}\""
+
+            // manifestPlaceholders로 AndroidManifest.xml에 값 전달
+            manifestPlaceholders = [ADMOB_APP_ID: realAdmobAppId, ADMOB_APP_ID_KEY: realAdmobAppIdKey]
         }
 
         uat {
@@ -60,6 +74,11 @@ android {
 
             buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${uatServerProtocol}\""
             buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${uatServerDomain}\""
+            buildConfigField "String", "GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${uatAdmobMainActivityBanner1AdUnitId}\""
+            buildConfigField "String", "GENIEMARKET_TEST_DEVICE_ID", "\"${uatAdmobTestDeviceId}\""
+
+            // manifestPlaceholders로 AndroidManifest.xml에 값 전달
+            manifestPlaceholders = [ADMOB_APP_ID: uatAdmobAppId, ADMOB_APP_ID_KEY: uatAdmobAppIdKey]
         }
     }
 
@@ -113,6 +132,9 @@ dependencies {
     // RecyclerView 디펜던시. For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
 
+    // google admob
+    implementation 'com.google.android.gms:play-services-ads:23.6.0'
+
     // CardView 디펜던시.
     implementation "androidx.cardview:cardview:1.0.0"
 
@@ -146,11 +168,10 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
     // 테스트용 디펜던시.
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    implementation 'androidx.test.espresso:espresso-contrib:3.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    // 기존 테스트 라이브러리 제거 후 최신 버전으로 교체
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
 }

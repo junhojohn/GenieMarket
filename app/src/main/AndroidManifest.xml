@@ -18,12 +18,12 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activities.ShowSelectedCategoryActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/app_name"
-            android:exported="true">
+            android:name=".ui.activities.OldMainActivity"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,9 +31,9 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SplashscreenActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:name=".ui.activities.OldSplashscreenActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,20 +48,24 @@
             android:exported="true" />
         <activity
             android:name=".ui.activities.LoginActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@style/SplashTheme" />
         <activity
             android:name=".ui.activities.RegisterActivity"
-            android:theme="@style/NoActionBar"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.activities.ChooseImagesActivity"
-            android:theme="@style/NoActionBar"
-            android:exported="true"/>
+            android:exported="true"
+            android:theme="@style/NoActionBar" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <meta-data
+            android:name="${ADMOB_APP_ID_KEY}"
+            android:value="${ADMOB_APP_ID}" />
     </application>
 
 </manifest>
