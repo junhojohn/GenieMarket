@@ -129,7 +129,7 @@ public class PageHome extends Fragment {
     private boolean loadPage(Fragment fragment) {
 
         if (fragment != null) {
-            getActivity().getSupportFragmentManager()
+            getChildFragmentManager()
                     .beginTransaction()
                     .replace(R.id.containerpage, fragment)
                     .commit();
