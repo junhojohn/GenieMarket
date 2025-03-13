@@ -10,7 +10,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:8.0.2'
-        classpath 'com.jakewharton:butterknife-gradle-plugin:10.2.3'
+        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.24'
+        classpath 'com.google.gms:google-services:4.4.2' // 최신 버전 확인 후 적용
     }
 }
 

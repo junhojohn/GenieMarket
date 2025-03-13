@@ -1,4 +1,4 @@
-package kr.co.geniemarket;
+package kr.co.geniemarket.core;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;

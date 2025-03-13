@@ -13,9 +13,9 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import kr.co.geniemarket.BuildConfig;
-import kr.co.geniemarket.Const;
+import kr.co.geniemarket.core.Const;
+import kr.co.geniemarket.core.GMLog;
 import kr.co.geniemarket.models.ProductInfo;
-import kr.co.geniemarket.utils.LogUtils;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
@@ -99,7 +99,7 @@ public class GenieMarketRemoteClient {
         // 6. Http Body Logger 설정
 //        builder.addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY));
         builder.addInterceptor(new HttpLoggingInterceptor(bodyLogMessage -> {
-            LogUtils.i(bodyLogMessage);
+            GMLog.i(bodyLogMessage);
             responseMessage.append(bodyLogMessage);
             Matcher m = pattern.matcher(bodyLogMessage);
             while(m.find()) {
@@ -164,8 +164,7 @@ public class GenieMarketRemoteClient {
             return sslContext.getSocketFactory();
 
         }catch (Exception e){
-            LogUtils.e(e.getMessage(), e);
-            e.printStackTrace();
+            GMLog.e(e.getMessage(), e);
             return null;
         }
     }

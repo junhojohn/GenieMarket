@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         }else if(param.equals(LOGIN_AFTER_REDIR_PAGE_ENUM.PAGE_MY_GENIE.getActivityName())){
             nextActivityToMove = PageMyGenie.class;
         }else if(param.equals(LOGIN_AFTER_REDIR_PAGE_ENUM.MAIN_ACTIVITY.getActivityName())){
-            nextActivityToMove = MainActivity.class;
+            nextActivityToMove = OldMainActivity.class;
         }
 
         mContext = getApplicationContext();

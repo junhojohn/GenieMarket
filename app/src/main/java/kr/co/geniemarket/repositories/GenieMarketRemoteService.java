@@ -1,7 +1,7 @@
 package kr.co.geniemarket.repositories;
 
 import io.reactivex.rxjava3.core.Single;
-import kr.co.geniemarket.Const;
+import kr.co.geniemarket.core.Const;
 import kr.co.geniemarket.models.ProductInfo;
 import retrofit2.Response;
 import retrofit2.http.POST;
