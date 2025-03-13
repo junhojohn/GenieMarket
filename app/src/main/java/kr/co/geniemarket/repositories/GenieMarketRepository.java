@@ -14,10 +14,10 @@ import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-import kr.co.geniemarket.Const;
+import kr.co.geniemarket.core.Const;
+import kr.co.geniemarket.core.GMLog;
 import kr.co.geniemarket.models.ProductInfo;
 import kr.co.geniemarket.ui.ConnectionConst;
-import kr.co.geniemarket.utils.LogUtils;
 import lombok.Getter;
 import lombok.Setter;
 import retrofit2.Response;
@@ -60,7 +60,7 @@ public class GenieMarketRepository {
                 response.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnError(throwable -> {
-                            LogUtils.e("[QA] ", throwable);
+                            GMLog.e("[QA] ", throwable);
                             Handler handler = new Handler(Looper.getMainLooper());
                             handler.postDelayed(() -> {
                                 Toast.makeText(context, throwable.toString(), Toast.LENGTH_SHORT).show();
@@ -72,7 +72,7 @@ public class GenieMarketRepository {
                         .subscribe(jsonResult -> {
                             String errorMessage = "처리 중 에러가 발생하였습니다.";
                             if(jsonResult == null) {
-                                LogUtils.e("[QA] ");
+                                GMLog.e("[QA] ");
                                 Handler handler = new Handler(Looper.getMainLooper());
                                 handler.postDelayed(() -> {
                                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
@@ -90,7 +90,7 @@ public class GenieMarketRepository {
                                     newResProductInfo.setValue(
                                             (ProductInfo) GenieMarketRemoteClient.errorResponseConverter.convert(jsonResult.errorBody()));
                                 }catch (Exception ex){
-                                    LogUtils.e("[QA] ", ex);
+                                    GMLog.e("[QA] ", ex);
                                     Handler handler = new Handler(Looper.getMainLooper());
                                     handler.postDelayed(() -> {
                                         Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
@@ -101,7 +101,7 @@ public class GenieMarketRepository {
                         }, error -> {
                             // RxJava에서는 error 핸들링을 try~catch로 잡을 수 없다.
                             // subscriber의 onError()를 통해 잡아야 한다.
-                            LogUtils.e("[QA] ", error);
+                            GMLog.e("[QA] ", error);
                             Handler handler = new Handler(Looper.getMainLooper());
                             handler.postDelayed(() -> {
                                 Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
@@ -120,14 +120,14 @@ public class GenieMarketRepository {
             // Using dispose() will
             // clear all and set isDisposed = true, so it will not accept any new disposable.
             // Thus, when restart the app after finish the app, you can't receive stream data.
-            LogUtils.d("AdCompositDisposable.size() 는? " + disposable.size());
+            GMLog.d("AdCompositDisposable.size() 는? " + disposable.size());
             disposable.dispose();
             // Using clear() will
             // clear all, but can accept new disposable.
             // Thus, when restart the app after finish the app, you can receive stream data.
 //            disposable.clear();
-            LogUtils.d("[hey] AdCompositDisposable.size() 는? " + disposable.size());
-            LogUtils.e("[QA] All of Ad Observer objects subscribed were disposed successfully.");
+            GMLog.d("[hey] AdCompositDisposable.size() 는? " + disposable.size());
+            GMLog.e("[QA] All of Ad Observer objects subscribed were disposed successfully.");
         }
         setCompositeDisposable(null);
         setCompositeDisposable(new CompositeDisposable());

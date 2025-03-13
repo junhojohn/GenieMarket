@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
@@ -11,9 +12,17 @@ ext.sdkVersion = "${sdkVersionMajor}.${sdkVersionMinor}.${sdkVersionPatch}"
 
 ext.uatServerProtocol = properties["uat_server_protocol"]
 ext.uatServerDomain = properties["uat_server_domain"]
+ext.uatAdmobAppIdKey = properties["uat_admob_app_id_key"]
+ext.uatAdmobAppId = properties["uat_admob_app_id"]
+ext.uatAdmobMainActivityBanner1AdUnitId = properties["uat_admob_main_activity_banner1_ad_unit_id"]
+ext.uatAdmobTestDeviceId = properties["uat_admob_test_device_id_junhojohn_zflip4"]
 
 ext.realServerProtocol = properties["real_server_protocol"]
 ext.realServerDomain = properties["real_server_domain"]
+ext.realAdmobAppIdKey = properties["real_admob_app_id_key"]
+ext.realAdmobAppId = properties["real_admob_app_id"]
+ext.realAdmobMainActivityBanner1AdUnitId = properties["real_admob_main_activity_banner1_ad_unit_id"]
+ext.realAdmobTestDeviceId = properties["real_admob_test_device_id_junhojohn_zflip4"]
 
 android {
     namespace "kr.co.geniemarket"
@@ -26,29 +35,7 @@ android {
     //참고: https://daryeou.tistory.com/324
     buildFeatures {
         buildConfig = true
-    }
-
-    // ButterKnife JDK 17 지원하지 않아 강제로 해결책 적용함
-    // 참고: https://stackoverflow.com/questions/76216854/butterknife-issue-after-updating-to-latest-version-of-android-studio-with-lates
-    // enable internal JDK API access at runtime
-    tasks.withType(JavaCompile).configureEach {
-        options.fork = true
-        options.forkOptions.jvmArgs += [
-                // essential for butterknife
-                '--add-opens=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED',
-
-                // if you need Glide or LomBok
-                // these may not be the exact list, but it works for me
-                '--add-opens=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.comp=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.main=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.model=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.processing=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED',
-                '--add-opens=jdk.compiler/com.sun.tools.javac.jvm=ALL-UNNAMED',
-        ]
+        viewBinding = true
     }
 
     productFlavors {
@@ -66,6 +53,11 @@ android {
 
             buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${realServerProtocol}\""
             buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${realServerDomain}\""
+            buildConfigField "String", "GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${realAdmobMainActivityBanner1AdUnitId}\""
+            buildConfigField "String", "GENIEMARKET_TEST_DEVICE_ID", "\"${realAdmobTestDeviceId}\""
+
+            // manifestPlaceholders로 AndroidManifest.xml에 값 전달
+            manifestPlaceholders = [ADMOB_APP_ID: realAdmobAppId, ADMOB_APP_ID_KEY: realAdmobAppIdKey]
         }
 
         uat {
@@ -82,6 +74,11 @@ android {
 
             buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${uatServerProtocol}\""
             buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${uatServerDomain}\""
+            buildConfigField "String", "GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${uatAdmobMainActivityBanner1AdUnitId}\""
+            buildConfigField "String", "GENIEMARKET_TEST_DEVICE_ID", "\"${uatAdmobTestDeviceId}\""
+
+            // manifestPlaceholders로 AndroidManifest.xml에 값 전달
+            manifestPlaceholders = [ADMOB_APP_ID: uatAdmobAppId, ADMOB_APP_ID_KEY: uatAdmobAppIdKey]
         }
     }
 
@@ -118,22 +115,25 @@ android {
 }
 
 dependencies {
+    implementation project(':core')
+    implementation project(':ui')
+
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
 
     // 롬복 디펜던시
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-    // ButterKnife 디펜던시.
-    implementation 'com.jakewharton:butterknife:10.2.3'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
-
     // RecyclerView 디펜던시.
     implementation "androidx.recyclerview:recyclerview:1.1.0"
     // RecyclerView 디펜던시. For control over item selection of both touch and mouse driven selection
     implementation "androidx.recyclerview:recyclerview-selection:1.1.0-rc03"
+
+    // google admob
+    implementation 'com.google.android.gms:play-services-ads:23.6.0'
 
     // CardView 디펜던시.
     implementation "androidx.cardview:cardview:1.0.0"
@@ -167,21 +167,11 @@ dependencies {
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
     implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
-//    // Kakao 디펜던시.
-//    implementation "com.kakao.sdk:v2-all:2.20.3" // 전체 모듈 설치, 2.11.0 버전부터 지원
-//    implementation "com.kakao.sdk:v2-user:2.20.3" // 카카오 로그인 API 모듈
-//    implementation "com.kakao.sdk:v2-share:2.20.3" // 카카오톡 공유 API 모듈
-//    implementation "com.kakao.sdk:v2-talk:2.20.3" // 카카오톡 채널, 카카오톡 소셜, 카카오톡 메시지 API 모듈
-//    implementation "com.kakao.sdk:v2-friend:2.20.3" // 피커 API 모듈
-//    implementation "com.kakao.sdk:v2-cert:2.20.3" // 카카오톡 인증 서비스 API 모듈
-
-
     // 테스트용 디펜던시.
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    implementation 'androidx.test.espresso:espresso-contrib:3.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test:rules:1.2.0'
-    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.2'
+    // 기존 테스트 라이브러리 제거 후 최신 버전으로 교체
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test:core:1.5.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
 }

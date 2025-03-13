@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="kr.co.geniemarket">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,12 +16,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activities.ShowSelectedCategoryActivity"></activity>
-
         <activity
-            android:name=".ui.activities.MainActivity"
-            android:label="@string/app_name"
-            android:exported="true">
+            android:name=".ui.activities.ShowSelectedCategoryActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.OldMainActivity"
+            android:exported="true"
+            android:hardwareAccelerated="true"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,30 +31,41 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.SplashscreenActivity"
-            android:theme="@style/SplashTheme"
-            android:exported="true">
+            android:name=".ui.activities.OldSplashscreenActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activities.DetailProductActivity" />
-        <activity android:name=".ui.activities.PurchaseActivity" />
+        <activity
+            android:name=".ui.activities.DetailProductActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.activities.PurchaseActivity"
+            android:exported="true" />
         <activity
             android:name=".ui.activities.LoginActivity"
+            android:exported="true"
             android:theme="@style/SplashTheme" />
         <activity
             android:name=".ui.activities.RegisterActivity"
+            android:exported="true"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.activities.ChooseImagesActivity"
+            android:exported="true"
             android:theme="@style/NoActionBar" />
 
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <meta-data
+            android:name="${ADMOB_APP_ID_KEY}"
+            android:value="${ADMOB_APP_ID}" />
     </application>
 
 </manifest>

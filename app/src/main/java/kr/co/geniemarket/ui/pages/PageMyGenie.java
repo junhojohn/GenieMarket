@@ -2,7 +2,6 @@ package kr.co.geniemarket.ui.pages;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +17,8 @@ import androidx.fragment.app.Fragment;
 //import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 
 import kr.co.geniemarket.R;
-import kr.co.geniemarket.models.AdditionalSellerInfo;
 import kr.co.geniemarket.ui.LOGIN_AFTER_REDIR_PAGE_ENUM;
 import kr.co.geniemarket.ui.activities.LoginActivity;
-import kr.co.geniemarket.ui.activities.MainActivity;
 
 public class PageMyGenie extends Fragment {
     private String TAG = "PageMyGenie";
