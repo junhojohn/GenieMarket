@@ -20,11 +20,13 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activities.ShowSelectedCategoryActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ui.activities.OldMainActivity"
             android:exported="true"
             android:hardwareAccelerated="true"
+            android:screenOrientation="portrait"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,6 +37,7 @@
         <activity
             android:name=".ui.activities.OldSplashscreenActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,20 +47,25 @@
         </activity>
         <activity
             android:name=".ui.activities.DetailProductActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ui.activities.PurchaseActivity"
+            android:screenOrientation="portrait"
             android:exported="true" />
         <activity
             android:name=".ui.activities.LoginActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme" />
         <activity
             android:name=".ui.activities.RegisterActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.activities.ChooseImagesActivity"
+            android:screenOrientation="portrait"
             android:exported="true"
             android:theme="@style/NoActionBar" />
 
