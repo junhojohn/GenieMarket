@@ -202,5 +202,24 @@
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>
+
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightGrey"
+        android:layout_alignBottom="@id/scroll_view"
+        android:gravity="center"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:id="@+id/rootView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:background="@color/black"
+            android:gravity="center"
+            android:layout_gravity="center"/>
+    </RelativeLayout>
 </RelativeLayout>
