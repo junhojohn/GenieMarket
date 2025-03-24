@@ -109,24 +109,6 @@ public class DetailProductActivity extends AppCompatActivity implements Serializ
         });
     }
 
-    // previouse code.
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_detail);
-//
-//        mFlower = findViewById(R.id.ivImage);
-//        mDescription = findViewById(R.id.tvDescription);
-//
-//        Bundle mBundle = getIntent().getExtras();
-//        if (mBundle != null) {
-////            mFlower.setImageResource(mBundle.getInt("Image"));
-//            imageList = mBundle.getIntegerArrayList("ImageList");
-//            mFlower.setImageResource(imageList.get(0));
-//            mDescription.setText(mBundle.getString("Description"));
-//        }
-//    }
-
     private void registerTestDevice() {
         if(kr.co.geniemarket.BuildConfig.DEBUG){
             RequestConfiguration configuration = new RequestConfiguration.Builder()
@@ -140,7 +122,7 @@ public class DetailProductActivity extends AppCompatActivity implements Serializ
         GMLog.e("APP_ID: " + getMetaData());
         // Create a new ad view.
         adView = new AdView(this);
-        adView.setAdUnitId(BuildConfig.GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID);
+        adView.setAdUnitId(BuildConfig.GENIEMARKET_ADMOB_DETAIL_ACTIVITY_BANNER1_AD_UNIT_ID);
         adView.setAdSize(getAdSize());
         adView.setAdListener(new AdListener() {
             @Override

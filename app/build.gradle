@@ -15,6 +15,7 @@ ext.uatServerDomain = properties["uat_server_domain"]
 ext.uatAdmobAppIdKey = properties["uat_admob_app_id_key"]
 ext.uatAdmobAppId = properties["uat_admob_app_id"]
 ext.uatAdmobMainActivityBanner1AdUnitId = properties["uat_admob_main_activity_banner1_ad_unit_id"]
+ext.uatAdmobDetailActivityBanner1AdUnitId = properties["uat_admob_detail_activity_banner1_ad_unit_id"]
 ext.uatAdmobTestDeviceId = properties["uat_admob_test_device_id_junhojohn_zflip4"]
 
 ext.realServerProtocol = properties["real_server_protocol"]
@@ -22,6 +23,7 @@ ext.realServerDomain = properties["real_server_domain"]
 ext.realAdmobAppIdKey = properties["real_admob_app_id_key"]
 ext.realAdmobAppId = properties["real_admob_app_id"]
 ext.realAdmobMainActivityBanner1AdUnitId = properties["real_admob_main_activity_banner1_ad_unit_id"]
+ext.realAdmobDetailActivityBanner1AdUnitId = properties["real_admob_detail_activity_banner1_ad_unit_id"]
 ext.realAdmobTestDeviceId = properties["real_admob_test_device_id_junhojohn_zflip4"]
 
 android {
@@ -54,6 +56,7 @@ android {
             buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${realServerProtocol}\""
             buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${realServerDomain}\""
             buildConfigField "String", "GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${realAdmobMainActivityBanner1AdUnitId}\""
+            buildConfigField "String", "GENIEMARKET_ADMOB_DETAIL_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${realAdmobDetailActivityBanner1AdUnitId}\""
             buildConfigField "String", "GENIEMARKET_TEST_DEVICE_ID", "\"${realAdmobTestDeviceId}\""
 
             // manifestPlaceholders로 AndroidManifest.xml에 값 전달
@@ -75,6 +78,7 @@ android {
             buildConfigField "String", "GENIEMARKET_SERVER_PROTOCOL", "\"${uatServerProtocol}\""
             buildConfigField "String", "GENIEMARKET_SERVER_DOMAIN", "\"${uatServerDomain}\""
             buildConfigField "String", "GENIEMARKET_ADMOB_MAIN_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${uatAdmobMainActivityBanner1AdUnitId}\""
+            buildConfigField "String", "GENIEMARKET_ADMOB_DETAIL_ACTIVITY_BANNER1_AD_UNIT_ID", "\"${uatAdmobDetailActivityBanner1AdUnitId}\""
             buildConfigField "String", "GENIEMARKET_TEST_DEVICE_ID", "\"${uatAdmobTestDeviceId}\""
 
             // manifestPlaceholders로 AndroidManifest.xml에 값 전달
